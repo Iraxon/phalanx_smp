@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "phalanx_smp:block/claim_totem"
+    }
+  }
+}

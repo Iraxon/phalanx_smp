@@ -1,0 +1,53 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "java",
+      "request": "launch",
+      "name": "Client",
+      "presentation": {
+        "group": "Mod Development - phalanx_smp",
+        "order": 0
+      },
+      "projectName": "phalanx_smp",
+      "mainClass": "net.neoforged.devlaunch.Main",
+      "args": [
+        "@C:\\Users\\98kev\\MCreatorWorkspaces\\phalanx_smp\\build\\moddev\\clientRunProgramArgs.txt"
+      ],
+      "vmArgs": [
+        "@C:\\Users\\98kev\\MCreatorWorkspaces\\phalanx_smp\\build\\moddev\\clientRunVmArgs.txt",
+        "-Dfml.modFolders\u003dmcreator%%C:\\Users\\98kev\\MCreatorWorkspaces\\phalanx_smp\\bin\\main"
+      ],
+      "cwd": "${workspaceFolder}\\run",
+      "env": {
+        "MOD_CLASSES": "mcreator%%C:\\Users\\98kev\\MCreatorWorkspaces\\phalanx_smp\\bin\\main"
+      },
+      "console": "internalConsole",
+      "shortenCommandLine": "none"
+    },
+    {
+      "type": "java",
+      "request": "launch",
+      "name": "Server",
+      "presentation": {
+        "group": "Mod Development - phalanx_smp",
+        "order": 1
+      },
+      "projectName": "phalanx_smp",
+      "mainClass": "net.neoforged.devlaunch.Main",
+      "args": [
+        "@C:\\Users\\98kev\\MCreatorWorkspaces\\phalanx_smp\\build\\moddev\\serverRunProgramArgs.txt"
+      ],
+      "vmArgs": [
+        "@C:\\Users\\98kev\\MCreatorWorkspaces\\phalanx_smp\\build\\moddev\\serverRunVmArgs.txt",
+        "-Dfml.modFolders\u003dmcreator%%C:\\Users\\98kev\\MCreatorWorkspaces\\phalanx_smp\\bin\\main"
+      ],
+      "cwd": "${workspaceFolder}\\run",
+      "env": {
+        "MOD_CLASSES": "mcreator%%C:\\Users\\98kev\\MCreatorWorkspaces\\phalanx_smp\\bin\\main"
+      },
+      "console": "internalConsole",
+      "shortenCommandLine": "none"
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "_fv": 79,
+  "_type": "gamerule",
+  "definition": {
+    "type": "Logic",
+    "displayName": "Internal Phalanx Variable",
+    "description": "Does nothing",
+    "category": "MISC",
+    "defaultValueLogic": false,
+    "defaultValueNumber": 0
+  }
+}

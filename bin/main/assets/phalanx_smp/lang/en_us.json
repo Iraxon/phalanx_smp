@@ -1,0 +1,14 @@
+{
+  "block.phalanx_smp.claim_totem.description_1": "gets much more insistent and loud if you are offline;",
+  "block.phalanx_smp.claim_totem.description_2": "",
+  "block.phalanx_smp.claim_totem.description_0": "Claims land; warns nearby players that the land is yours, with more insistence if you are offline",
+  "gamerule.phalanxVarOnline": "Internal Phalanx Variable",
+  "item.phalanx_smp.staff_of_command": "Staff Of Command",
+  "gamerule.phalanxVarOnline.description": "Does nothing",
+  "gamerule.offlineProtectionDebuffs": "Offline Protection Debuffs",
+  "block.phalanx_smp.claim_totem": "Claim Block",
+  "entity.phalanx_smp.mercenary": "Mercenary",
+  "item.phalanx_smp.mercenary_spawn_egg": "Mercenary Spawn Egg",
+  "gamerule.offlineProtectionDebuffs.description": "Whether debuffs should be inflicted on players walking on claimed land of offline players",
+  "block.phalanx_smp.claim_totem.description_3": ""
+}

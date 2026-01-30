@@ -1,0 +1,12 @@
+{
+  "_fv": 79,
+  "_type": "gamerule",
+  "definition": {
+    "type": "Logic",
+    "displayName": "Offline Protection Debuffs",
+    "description": "Whether debuffs should be inflicted on players walking on claimed land of offline players",
+    "category": "PLAYER",
+    "defaultValueLogic": true,
+    "defaultValueNumber": 0
+  }
+}
