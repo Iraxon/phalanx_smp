@@ -266,120 +266,90 @@
       }
     },
     {
-      "name": "Mercenary",
+      "name": "DeepslateGolem",
       "type": "livingentity",
       "compiles": true,
       "locked_code": false,
-      "registry_name": "mercenary",
+      "registry_name": "deepslate_golem",
       "metadata": {
         "files": [
-          "src/main/java/com/github/iraxon/entity/MercenaryEntity.java",
-          "src/main/java/com/github/iraxon/client/renderer/MercenaryRenderer.java",
-          "src/main/resources/assets/phalanx_smp/models/item/mercenary_spawn_egg.json"
+          "src/main/java/com/github/iraxon/client/renderer/DeepslateGolemRenderer.java",
+          "src/main/resources/data/phalanx_smp/forge/biome_modifier/deepslate_golem_biome_modifier.json",
+          "src/main/java/com/github/iraxon/entity/DeepslateGolemEntity.java"
         ]
       }
     },
     {
-      "name": "MercenaryAI",
-      "type": "command",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "mercenary_ai",
-      "metadata": {
-        "files": [
-          "src/main/java/com/github/iraxon/command/MercenaryAICommand.java"
-        ]
-      }
-    },
-    {
-      "name": "MercenaryOnEntityTickUpdate",
+      "name": "DeepslateGolemAI",
       "type": "procedure",
       "compiles": true,
       "locked_code": false,
-      "registry_name": "mercenary_on_entity_tick_update",
+      "registry_name": "deepslate_golem_ai",
       "metadata": {
-        "files": [
-          "src/main/java/com/github/iraxon/procedures/MercenaryOnEntityTickUpdateProcedure.java"
-        ],
         "dependencies": [
           {
             "name": "entity",
             "type": "entity"
-          }
-        ]
-      }
-    },
-    {
-      "name": "StaffOfCommand",
-      "type": "tool",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "staff_of_command",
-      "metadata": {
-        "files": [
-          "src/main/resources/assets/phalanx_smp/models/item/staff_of_command.json",
-          "src/main/java/com/github/iraxon/item/StaffOfCommandItem.java"
-        ]
-      }
-    },
-    {
-      "name": "StaffOfCommandProc",
-      "type": "procedure",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "staff_of_command_proc",
-      "metadata": {
-        "files": [
-          "src/main/java/com/github/iraxon/procedures/StaffOfCommandProcProcedure.java"
-        ],
-        "dependencies": []
-      }
-    },
-    {
-      "name": "MakeFollow",
-      "type": "command",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "make_follow",
-      "metadata": {
-        "files": [
-          "src/main/java/com/github/iraxon/command/MakeFollowCommand.java"
-        ]
-      }
-    },
-    {
-      "name": "MakeFollowProc",
-      "type": "procedure",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "make_follow_proc",
-      "metadata": {
-        "files": [
-          "src/main/java/com/github/iraxon/procedures/MakeFollowProcProcedure.java"
-        ],
-        "dependencies": [
-          {
-            "name": "arguments",
-            "type": "cmdcontext"
           },
           {
-            "name": "entity",
-            "type": "entity"
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
           }
+        ],
+        "return_type": "logic",
+        "files": [
+          "src/main/java/com/github/iraxon/procedures/DeepslateGolemAIProcedure.java"
         ]
       }
     },
     {
-      "name": "MercenaryAIProc",
+      "name": "EntityFromUUID",
       "type": "procedure",
       "compiles": true,
       "locked_code": false,
-      "registry_name": "mercenary_ai_proc",
+      "registry_name": "entity_from_uuid",
+      "metadata": {
+        "dependencies": [],
+        "files": [
+          "src/main/java/com/github/iraxon/procedures/EntityFromUUIDProcedure.java"
+        ]
+      }
+    },
+    {
+      "name": "StoreEntity",
+      "type": "command",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "store_entity",
       "metadata": {
         "files": [
-          "src/main/java/com/github/iraxon/procedures/MercenaryAIProcProcedure.java"
-        ],
-        "dependencies": []
+          "src/main/java/com/github/iraxon/command/StoreEntityCommand.java"
+        ]
+      }
+    },
+    {
+      "name": "StoreEntityProc",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "store_entity_proc",
+      "metadata": {
+        "dependencies": [],
+        "files": [
+          "src/main/java/com/github/iraxon/procedures/StoreEntityProcProcedure.java"
+        ]
       }
     }
   ],
@@ -422,9 +392,6 @@
     ],
     "BLOCKS:minecraft:needs_stone_tool": [
       "~CUSTOM:ClaimTotem"
-    ],
-    "ITEMS:minecraft:swords": [
-      "~CUSTOM:StaffOfCommand"
     ]
   },
   "tab_element_order": {},
@@ -434,14 +401,12 @@
       "block.phalanx_smp.claim_totem.description_2": "",
       "block.phalanx_smp.claim_totem.description_0": "Claims land; warns nearby players that the land is yours, with more insistence if you are offline",
       "gamerule.phalanxVarOnline": "Internal Phalanx Variable",
-      "item.phalanx_smp.staff_of_command": "Staff Of Command",
       "gamerule.phalanxVarOnline.description": "Does nothing",
       "gamerule.offlineProtectionDebuffs": "Offline Protection Debuffs",
       "block.phalanx_smp.claim_totem": "Claim Block",
-      "entity.phalanx_smp.mercenary": "Mercenary",
-      "item.phalanx_smp.mercenary_spawn_egg": "Mercenary Spawn Egg",
       "gamerule.offlineProtectionDebuffs.description": "Whether debuffs should be inflicted on players walking on claimed land of offline players",
-      "block.phalanx_smp.claim_totem.description_3": ""
+      "block.phalanx_smp.claim_totem.description_3": "",
+      "entity.phalanx_smp.deepslate_golem": "Deepslate Golem"
     }
   },
   "metadata": {

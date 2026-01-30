@@ -313,6 +313,41 @@
           "src/main/java/com/github/iraxon/procedures/DeepslateGolemAIProcedure.java"
         ]
       }
+    },
+    {
+      "name": "EntityFromUUID",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "entity_from_uuid",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "uuid",
+            "type": "string"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "return_type": "entity",
+        "files": [
+          "src/main/java/com/github/iraxon/procedures/EntityFromUUIDProcedure.java"
+        ]
+      }
     }
   ],
   "variable_elements": [

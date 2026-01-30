@@ -8,6 +8,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Entity;
 
 import com.github.iraxon.entity.DeepslateGolemEntity;
+import com.github.iraxon.PhalanxSmpMod;
 
 public class DeepslateGolemAIProcedure {
 	public static boolean execute(LevelAccessor world, double x, double y, double z, Entity entity) {
@@ -39,6 +40,9 @@ public class DeepslateGolemAIProcedure {
 			if (entity instanceof Mob _entity && newAtkTarget instanceof LivingEntity _ent)
 				_entity.setTarget(_ent);
 		}
+		entity.getPersistentData().putString("tagName", "tagValue");
+		entity.getPersistentData().putDouble("tagName", 0);
+		PhalanxSmpMod.LOGGER.info(entity.getPersistentData().getString("tagName"));
 		return true;
 	}
 }
