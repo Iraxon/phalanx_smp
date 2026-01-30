@@ -318,7 +318,7 @@
       "name": "EntityFromUUID",
       "type": "procedure",
       "compiles": true,
-      "locked_code": false,
+      "locked_code": true,
       "registry_name": "entity_from_uuid",
       "metadata": {
         "dependencies": [
