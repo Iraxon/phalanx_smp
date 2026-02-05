@@ -1,48 +1,115 @@
 package com.github.iraxon.procedures;
 
-import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.Entity;
 
 import com.github.iraxon.entity.DeepslateGolemEntity;
-import com.github.iraxon.PhalanxSmpMod;
+
+import java.util.Objects;
+import java.util.UUID;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 public class DeepslateGolemAIProcedure {
-	public static boolean execute(LevelAccessor world, double x, double y, double z, Entity entity) {
-		if (entity == null)
-			return false;
-		Entity oldAtkTarget = null;
-		Entity newAtkTarget = null;
-		String team = "";
-		String teamIterator = "";
-		double currentDistanceToNewTarget = 0;
-		if (!(entity instanceof DeepslateGolemEntity)) {
-			return false;
+
+	private static final String UNIT_TYPE_COMMANDER = "";
+	private static final String UNIT_TYPE_HEAVY_INFANTRY = "heavy_infantry";
+
+	public static void execute(LevelAccessor world, double x, double y, double z, @Nullable Entity entity) {
+		if (!world.isClientSide() && entity instanceof DeepslateGolemEntity golem)
+			inner_execute(golem);
+	}
+
+	private static void inner_execute(@Nonnull DeepslateGolemEntity entity) {
+
+		@Nonnull
+		final DeepslateGolemNBTWrapper nbt = DeepslateGolemNBTWrapper.of(entity);
+
+		// Data commmon to all golems
+		final String type = nbt.type();
+		final String player = nbt.playerUUID();
+
+		Utils.update_team(entity, player);
+
+		if (type.equals(UNIT_TYPE_COMMANDER)) {
+			AI.commander_ai(nbt, entity);
+
+		} else if (type.equals(UNIT_TYPE_HEAVY_INFANTRY)) {
+
 		}
-		oldAtkTarget = entity instanceof Mob _mobEnt ? (Entity) _mobEnt.getTarget() : null;
-		if (!(oldAtkTarget instanceof LivingEntity && (entity.position()).distanceTo((oldAtkTarget.position())) <= 0)) {
-			team = entity instanceof LivingEntity _teamEnt && _teamEnt.level().getScoreboard().getPlayersTeam(_teamEnt instanceof Player _pl ? _pl.getGameProfile().getName() : _teamEnt.getStringUUID()) != null
-					? _teamEnt.level().getScoreboard().getPlayersTeam(_teamEnt instanceof Player _pl ? _pl.getGameProfile().getName() : _teamEnt.getStringUUID()).getName()
-					: "";
-			currentDistanceToNewTarget = 5;
-			for (Entity entityiterator : world.getEntities(entity, new AABB(x, y, z, x, y, z))) {
-				teamIterator = entityiterator instanceof LivingEntity _teamEnt && _teamEnt.level().getScoreboard().getPlayersTeam(_teamEnt instanceof Player _pl ? _pl.getGameProfile().getName() : _teamEnt.getStringUUID()) != null
-						? _teamEnt.level().getScoreboard().getPlayersTeam(_teamEnt instanceof Player _pl ? _pl.getGameProfile().getName() : _teamEnt.getStringUUID()).getName()
-						: "";
-				if (!(teamIterator).isEmpty() && (team).equals(teamIterator) && (entity.position()).distanceTo((entityiterator.position())) <= currentDistanceToNewTarget) {
-					newAtkTarget = entityiterator;
-					currentDistanceToNewTarget = (entity.position()).distanceTo((entityiterator.position()));
-				}
+	}
+
+	private static class AI {
+
+		private static void commander_ai(@Nonnull DeepslateGolemNBTWrapper nbt, @Nonnull DeepslateGolemEntity commander) {
+			final var formation = nbt.commanderFormation();
+			final var order = nbt.commanderOrder();
+		}
+
+		private static void heavy_infantry_ai(@Nonnull DeepslateGolemNBTWrapper nbt, @Nonnull DeepslateGolemEntity soldier) {
+			final var commander = nbt.getCommander();
+		}
+
+		/**
+		 * Selects the best attack target for this soldier
+		 *
+		 * @param entity
+		 * @param size       Size of cubic search area for targets
+		 * @param target_pos The location the soldier is "supposed to" be at; useful
+		 *                   option to make sure formation is kept
+		 * @return
+		 */
+		private static LivingEntity getAttackTarget(@Nonnull DeepslateGolemEntity entity, double size,
+				@Nonnull Vec3 target_pos) {
+			final LivingEntity oldAtkTarget = entity.getTarget();
+			return PhalanxUtils.getNearestEntityWithPredicate(
+					Objects.requireNonNull(entity.level()),
+					LivingEntity.class,
+					target_pos,
+					size,
+					(LivingEntity e) -> (e == oldAtkTarget) // To allow retaliation, the golem's current target is
+															// always a
+															// valid next target
+							|| should_target(entity, e));
+		}
+
+		/**
+		 * Tells whether the soldier should consider the other entity
+		 * an enemy to be targeted
+		 *
+		 * @param subject
+		 * @param possible_target
+		 * @return
+		 */
+		private static boolean should_target(@Nonnull DeepslateGolemEntity subject,
+				@Nonnull LivingEntity possible_target) {
+			// Needs to be improved
+			var team = possible_target.getTeam();
+			if (team != null && !team.isAlliedTo(subject.getTeam())) {
+				return true;
 			}
-			if (entity instanceof Mob _entity && newAtkTarget instanceof LivingEntity _ent)
-				_entity.setTarget(_ent);
+			return false;
 		}
-		entity.getPersistentData().putString("tagName", "tagValue");
-		entity.getPersistentData().putDouble("tagName", 0);
-		PhalanxSmpMod.LOGGER.info(entity.getPersistentData().getString("tagName"));
-		return true;
+
+	}
+
+	private class Utils {
+
+		private static void update_team(@Nonnull DeepslateGolemEntity entity, String playerUUIDString) {
+			if (playerUUIDString.equals("")) {
+				return;
+			}
+
+			final var player = PhalanxUtils.getEntityByUUID(Objects.requireNonNull(entity.level()), Player.class,
+					Objects.requireNonNull(entity.position()), 64,
+					playerUUIDString);
+			AlignTeamProcedure.execute(entity, player);
+		}
+
 	}
 }

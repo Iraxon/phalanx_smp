@@ -1,0 +1,18 @@
+--------------------------------------------------------------------------------
+
+Command-Line:
+ - C:\Users\98kev\.vscode\extensions\redhat.java-1.52.0-win32-x64\jre\21.0.9-win32-x86_64\bin\java.exe
+ - -jar
+ - C:\Users\98kev\.gradle\caches\modules-2\files-2.1\net.minecraftforge\mergetool\1.1.7\3d41564f78f123d64573cae7948014baf3aaba3f\mergetool-1.1.7-fatjar.jar
+ - --strip
+ - --input
+ - C:\Users\98kev\.gradle\caches\neoformruntime\intermediate_results\rename_e1fec40adea3b0a8cde6c32397fcb366d491256e_output.jar
+ - --output
+ - ./output.jar
+ - --data
+ - sas\forge.sas
+--------------------------------------------------------------------------------
+
+Input:  C:\Users\98kev\.gradle\caches\neoformruntime\intermediate_results\rename_e1fec40adea3b0a8cde6c32397fcb366d491256e_output.jar
+Output: C:\Users\98kev\MCreatorWorkspaces\phalanx_smp\build\tmp\neoformruntime\20260201-152430_stripSideAnnotations\.\output.jar
+Data:   C:\Users\98kev\MCreatorWorkspaces\phalanx_smp\build\tmp\neoformruntime\20260201-152430_stripSideAnnotations\sas\forge.sas

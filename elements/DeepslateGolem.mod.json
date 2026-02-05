@@ -100,7 +100,7 @@
     "immuneToExplosion": false,
     "immuneToTrident": false,
     "immuneToAnvil": false,
-    "immuneToWither": true,
+    "immuneToWither": false,
     "immuneToDragonBreath": false,
     "mobDrop": {
       "value": ""
@@ -121,6 +121,9 @@
       "value": ""
     },
     "entityDataEntries": [],
+    "onMobTickUpdate": {
+      "name": "DeepslateGolemAI"
+    },
     "hasAI": true,
     "aiBase": "(none)",
     "aixml": "<xml xmlns=\"https://developers.google.com/blockly/xml\"><block type=\"aitasks_container\" deletable=\"false\" x=\"-267\" y=\"-19\"><next><block type=\"attack_with_range\"><field name=\"range\">2</field><field name=\"speed\">1</field><field name=\"longmemory\">FALSE</field><field name=\"condition\">null,null</field><next><block type=\"attack_action\"><field name=\"callhelp\">FALSE</field><field name=\"condition\">null,null</field></block></next></block></next></block></xml>",

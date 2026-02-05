@@ -283,7 +283,7 @@
       "name": "DeepslateGolemAI",
       "type": "procedure",
       "compiles": true,
-      "locked_code": false,
+      "locked_code": true,
       "registry_name": "deepslate_golem_ai",
       "metadata": {
         "dependencies": [
@@ -346,6 +346,28 @@
         "return_type": "entity",
         "files": [
           "src/main/java/com/github/iraxon/procedures/EntityFromUUIDProcedure.java"
+        ]
+      }
+    },
+    {
+      "name": "AlignTeam",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "align_team",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "sourceentity",
+            "type": "entity"
+          }
+        ],
+        "files": [
+          "src/main/java/com/github/iraxon/procedures/AlignTeamProcedure.java"
         ]
       }
     }
@@ -434,6 +456,7 @@
     "websiteURL": "https://github.com/iraxon",
     "license": "GNU General Public License version 3 (GPLv3)",
     "serverSideOnly": false,
+    "modPicture": "phalanx_smp",
     "requiredMods": [],
     "dependencies": [],
     "dependants": [],

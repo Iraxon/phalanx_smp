@@ -22,6 +22,7 @@ import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.core.BlockPos;
 
+import com.github.iraxon.procedures.DeepslateGolemAIProcedure;
 import com.github.iraxon.init.PhalanxSmpModEntities;
 
 public class DeepslateGolemEntity extends Monster {
@@ -84,9 +85,13 @@ public class DeepslateGolemEntity extends Monster {
 			return false;
 		if (damagesource.is(DamageTypes.LIGHTNING_BOLT))
 			return false;
-		if (damagesource.is(DamageTypes.WITHER) || damagesource.is(DamageTypes.WITHER_SKULL))
-			return false;
 		return super.hurt(damagesource, amount);
+	}
+
+	@Override
+	public void baseTick() {
+		super.baseTick();
+		DeepslateGolemAIProcedure.execute(this.level(), this.getX(), this.getY(), this.getZ(), this);
 	}
 
 	@Override
