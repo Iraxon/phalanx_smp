@@ -23,16 +23,15 @@ public record DeepslateGolemNBTWrapper(@Nonnull DeepslateGolemEntity golem, @Non
      * @param golem
      * @return
      */
-    public static DeepslateGolemNBTWrapper of(DeepslateGolemEntity golem) {
+    public static DeepslateGolemNBTWrapper of(@Nonnull DeepslateGolemEntity golem) {
 
-        final String uuid = golem.getStringUUID();
+        final String uuid = Objects.requireNonNull(golem).getStringUUID();
 
-        return Objects.requireNonNullElseGet(cache.get(uuid), () -> {
-            final var rVal = new DeepslateGolemNBTWrapper(golem, golem.getPersistentData());
-            cache.put(uuid, rVal);
-            return rVal;
-        });
+        return cache.computeIfAbsent(uuid,
+                (String u) -> new DeepslateGolemNBTWrapper(golem, golem.getPersistentData()));
     }
+
+    private static final String UNIT_COMMANDER_NBT_KEY = "phalanx_golem_commander";
 
     @Nullable
     /**
@@ -40,11 +39,9 @@ public record DeepslateGolemNBTWrapper(@Nonnull DeepslateGolemEntity golem, @Non
      *
      * @param data
      * @param golem
-     * @return Commander entity or null if none found
+     * @return Commander entity or this unit itself if none found
      */
     public DeepslateGolemEntity getCommander() {
-
-        final String UNIT_COMMANDER_NBT_KEY = "phalanx_golem_commander";
 
         if (data().getString(UNIT_COMMANDER_NBT_KEY).equals("")) {
             return golem;
@@ -55,14 +52,18 @@ public record DeepslateGolemNBTWrapper(@Nonnull DeepslateGolemEntity golem, @Non
                 Objects.requireNonNull(golem.position()), 64, commanderUUID);
     }
 
+    public static final String GOLEM_TYPE_KEY = "phalanx_golem_type";
+
     @Nonnull
     public String type() {
-        return Objects.requireNonNull(data.getString("phalanx_golem_type"));
+        return Objects.requireNonNull(data.getString(GOLEM_TYPE_KEY));
 
     }
 
+    public static final String GOLEM_PLAYER_KEY = "phalanx_golem_player";
+
     @Nonnull
     public String playerUUID() {
-        return Objects.requireNonNull(data.getString("phalanx_golem_player"));
+        return Objects.requireNonNull(data.getString(GOLEM_PLAYER_KEY));
     }
 }
