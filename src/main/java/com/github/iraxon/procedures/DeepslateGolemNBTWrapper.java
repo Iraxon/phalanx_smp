@@ -57,7 +57,6 @@ public record DeepslateGolemNBTWrapper(@Nonnull DeepslateGolemEntity golem, @Non
     @Nonnull
     public String type() {
         return Objects.requireNonNull(data.getString(GOLEM_TYPE_KEY));
-
     }
 
     public static final String GOLEM_PLAYER_KEY = "phalanx_golem_player";
