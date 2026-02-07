@@ -83,8 +83,7 @@
       "fixedValue": true
     },
     "flyingMob": false,
-    "guiBoundTo": "CommanderScreen",
-    "inventorySize": 9,
+    "inventorySize": 0,
     "inventoryStackSize": 99,
     "disableCollisions": false,
     "ridable": false,

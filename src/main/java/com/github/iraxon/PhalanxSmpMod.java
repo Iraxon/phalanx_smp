@@ -26,7 +26,6 @@ import java.util.Collection;
 import java.util.ArrayList;
 import java.util.AbstractMap;
 
-import com.github.iraxon.init.PhalanxSmpModMenus;
 import com.github.iraxon.init.PhalanxSmpModEntities;
 
 @Mod("phalanx_smp")
@@ -40,7 +39,6 @@ public class PhalanxSmpMod {
 		MinecraftForge.EVENT_BUS.register(this);
 		IEventBus bus = context.getModEventBus();
 		PhalanxSmpModEntities.REGISTRY.register(bus);
-		PhalanxSmpModMenus.REGISTRY.register(bus);
 		// Start of user code block mod init
 		// End of user code block mod init
 	}
