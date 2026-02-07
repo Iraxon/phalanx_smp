@@ -16,7 +16,7 @@ public record FormationStateNBTWrapper(CompoundTag data) {
      *
      * @return
      */
-    public FormationStateNBTWrapper of(@Nonnull CompoundTag data) {
+    public static FormationStateNBTWrapper of(@Nonnull CompoundTag data) {
         return new FormationStateNBTWrapper(Objects.requireNonNull(data));
     }
 
