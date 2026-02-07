@@ -7,7 +7,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.Entity;
 
 import com.github.iraxon.entity.DeepslateGolemEntity;
-import com.github.iraxon.procedures.DeepslateGolemNBTWrapper.GolemType;
 
 import java.util.Objects;
 
@@ -15,9 +14,6 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public class DeepslateGolemAIProcedure {
-
-	private static final String UNIT_TYPE_COMMANDER = "";
-	private static final String UNIT_TYPE_HEAVY_INFANTRY = "heavy_infantry";
 
 	public static void execute(LevelAccessor world, double x, double y, double z, @Nullable Entity entity) {
 		if (!world.isClientSide() && entity instanceof DeepslateGolemEntity golem)
