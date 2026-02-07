@@ -165,19 +165,6 @@
       }
     },
     {
-      "name": "CommanderScreen",
-      "type": "gui",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "commander_screen",
-      "metadata": {
-        "files": [
-          "src/main/java/com/github/iraxon/world/inventory/CommanderScreenMenu.java",
-          "src/main/java/com/github/iraxon/client/gui/CommanderScreenScreen.java"
-        ]
-      }
-    },
-    {
       "name": "GetOwnerOfTamed",
       "type": "procedure",
       "compiles": true,
@@ -244,9 +231,6 @@
   },
   "metadata": {
     "files": [
-      "src/main/java/com/github/iraxon/network/MenuStateUpdateMessage.java",
-      "src/main/java/com/github/iraxon/init/PhalanxSmpModMenus.java",
-      "src/main/java/com/github/iraxon/init/PhalanxSmpModScreens.java",
       "src/main/java/com/github/iraxon/init/PhalanxSmpModGameRules.java",
       "src/main/java/com/github/iraxon/init/PhalanxSmpModEntityRenderers.java",
       "src/main/java/com/github/iraxon/init/PhalanxSmpModEntities.java",
