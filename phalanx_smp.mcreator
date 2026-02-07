@@ -370,6 +370,38 @@
           "src/main/java/com/github/iraxon/procedures/AlignTeamProcedure.java"
         ]
       }
+    },
+    {
+      "name": "CommanderScreen",
+      "type": "gui",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "commander_screen",
+      "metadata": {
+        "files": [
+          "src/main/java/com/github/iraxon/world/inventory/CommanderScreenMenu.java",
+          "src/main/java/com/github/iraxon/client/gui/CommanderScreenScreen.java"
+        ]
+      }
+    },
+    {
+      "name": "GetOwnerOfTamed",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "get_owner_of_tamed",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ],
+        "return_type": "entity",
+        "files": [
+          "src/main/java/com/github/iraxon/procedures/GetOwnerOfTamedProcedure.java"
+        ]
+      }
     }
   ],
   "variable_elements": [
@@ -430,6 +462,9 @@
   },
   "metadata": {
     "files": [
+      "src/main/java/com/github/iraxon/network/MenuStateUpdateMessage.java",
+      "src/main/java/com/github/iraxon/init/PhalanxSmpModMenus.java",
+      "src/main/java/com/github/iraxon/init/PhalanxSmpModScreens.java",
       "src/main/java/com/github/iraxon/init/PhalanxSmpModGameRules.java",
       "src/main/java/com/github/iraxon/init/PhalanxSmpModBlocks.java",
       "src/main/java/com/github/iraxon/init/PhalanxSmpModBlockEntities.java",

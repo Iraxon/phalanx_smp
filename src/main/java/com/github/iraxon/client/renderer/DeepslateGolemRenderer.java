@@ -11,7 +11,7 @@ import com.github.iraxon.entity.DeepslateGolemEntity;
 
 public class DeepslateGolemRenderer extends HumanoidMobRenderer<DeepslateGolemEntity, HumanoidModel<DeepslateGolemEntity>> {
 	public DeepslateGolemRenderer(EntityRendererProvider.Context context) {
-		super(context, new HumanoidModel<DeepslateGolemEntity>(context.bakeLayer(ModelLayers.PLAYER)), 0.5f);
+		super(context, new HumanoidModel<DeepslateGolemEntity>(context.bakeLayer(ModelLayers.PLAYER)), 0.7f);
 		this.addLayer(new HumanoidArmorLayer(this, new HumanoidModel(context.bakeLayer(ModelLayers.PLAYER_INNER_ARMOR)), new HumanoidModel(context.bakeLayer(ModelLayers.PLAYER_OUTER_ARMOR)), context.getModelManager()));
 	}
 

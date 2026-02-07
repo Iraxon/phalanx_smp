@@ -283,7 +283,7 @@
       "name": "DeepslateGolemAI",
       "type": "procedure",
       "compiles": true,
-      "locked_code": false,
+      "locked_code": true,
       "registry_name": "deepslate_golem_ai",
       "metadata": {
         "dependencies": [
@@ -348,6 +348,41 @@
           "src/main/java/com/github/iraxon/procedures/EntityFromUUIDProcedure.java"
         ]
       }
+    },
+    {
+      "name": "AlignTeam",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "align_team",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "sourceentity",
+            "type": "entity"
+          }
+        ],
+        "files": [
+          "src/main/java/com/github/iraxon/procedures/AlignTeamProcedure.java"
+        ]
+      }
+    },
+    {
+      "name": "CommanderScreen",
+      "type": "gui",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "commander_screen",
+      "metadata": {
+        "files": [
+          "src/main/java/com/github/iraxon/world/inventory/CommanderScreenMenu.java",
+          "src/main/java/com/github/iraxon/client/gui/CommanderScreenScreen.java"
+        ]
+      }
     }
   ],
   "variable_elements": [
@@ -408,6 +443,9 @@
   },
   "metadata": {
     "files": [
+      "src/main/java/com/github/iraxon/network/MenuStateUpdateMessage.java",
+      "src/main/java/com/github/iraxon/init/PhalanxSmpModMenus.java",
+      "src/main/java/com/github/iraxon/init/PhalanxSmpModScreens.java",
       "src/main/java/com/github/iraxon/init/PhalanxSmpModGameRules.java",
       "src/main/java/com/github/iraxon/init/PhalanxSmpModBlocks.java",
       "src/main/java/com/github/iraxon/init/PhalanxSmpModBlockEntities.java",
@@ -434,6 +472,7 @@
     "websiteURL": "https://github.com/iraxon",
     "license": "GNU General Public License version 3 (GPLv3)",
     "serverSideOnly": false,
+    "modPicture": "phalanx_smp",
     "requiredMods": [],
     "dependencies": [],
     "dependants": [],

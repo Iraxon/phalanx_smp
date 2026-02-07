@@ -26,11 +26,7 @@ import java.util.Collection;
 import java.util.ArrayList;
 import java.util.AbstractMap;
 
-import com.github.iraxon.init.PhalanxSmpModTabs;
-import com.github.iraxon.init.PhalanxSmpModItems;
-import com.github.iraxon.init.PhalanxSmpModEntities;
-import com.github.iraxon.init.PhalanxSmpModBlocks;
-import com.github.iraxon.init.PhalanxSmpModBlockEntities;
+import com.github.iraxon.init.*;
 
 @Mod("phalanx_smp")
 public class PhalanxSmpMod {
@@ -47,6 +43,7 @@ public class PhalanxSmpMod {
 		PhalanxSmpModItems.REGISTRY.register(bus);
 		PhalanxSmpModEntities.REGISTRY.register(bus);
 		PhalanxSmpModTabs.REGISTRY.register(bus);
+		PhalanxSmpModMenus.REGISTRY.register(bus);
 		// Start of user code block mod init
 		// End of user code block mod init
 	}
