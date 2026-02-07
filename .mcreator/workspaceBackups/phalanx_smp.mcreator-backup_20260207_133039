@@ -1,6 +1,185 @@
 {
   "mod_elements": [
     {
+      "name": "ClaimTotemBlockIsPlacedBy",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "claim_totem_block_is_placed_by",
+      "metadata": {
+        "files": [
+          "src/main/java/com/github/iraxon/procedures/ClaimTotemBlockIsPlacedByProcedure.java"
+        ],
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ]
+      }
+    },
+    {
+      "name": "ClaimTotemOnTickUpdate",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "claim_totem_on_tick_update",
+      "metadata": {
+        "files": [
+          "src/main/java/com/github/iraxon/procedures/ClaimTotemOnTickUpdateProcedure.java"
+        ],
+        "dependencies": [
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Core",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "core",
+      "metadata": {
+        "files": [
+          "src/main/java/com/github/iraxon/procedures/CoreProcedure.java"
+        ],
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ]
+      }
+    },
+    {
+      "name": "DoesClaimExist",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "does_claim_exist",
+      "metadata": {
+        "return_type": "logic",
+        "files": [
+          "src/main/java/com/github/iraxon/procedures/DoesClaimExistProcedure.java"
+        ],
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ]
+      }
+    },
+    {
+      "name": "IsPlayerInProtectedLand",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "is_player_in_protected_land",
+      "metadata": {
+        "return_type": "logic",
+        "files": [
+          "src/main/java/com/github/iraxon/procedures/IsPlayerInProtectedLandProcedure.java"
+        ],
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ]
+      }
+    },
+    {
+      "name": "GetLandowner",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "get_landowner",
+      "metadata": {
+        "return_type": "string",
+        "files": [
+          "src/main/java/com/github/iraxon/procedures/GetLandownerProcedure.java"
+        ],
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ]
+      }
+    },
+    {
       "name": "IsOnline",
       "type": "procedure",
       "compiles": true,
@@ -33,6 +212,17 @@
             "type": "world"
           }
         ]
+      }
+    },
+    {
+      "name": "OfflineProtectionDebuffs",
+      "type": "gamerule",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "offline_protection_debuffs",
+      "metadata": {
+        "files": [],
+        "type": "logic"
       }
     },
     {
@@ -238,6 +428,8 @@
       "block.phalanx_smp.claim_totem.description_2": "",
       "gamerule.phalanxVarOnline": "Internal Phalanx Variable",
       "gamerule.phalanxVarOnline.description": "Does nothing",
+      "gamerule.offlineProtectionDebuffs": "Offline Protection Debuffs",
+      "gamerule.offlineProtectionDebuffs.description": "Whether debuffs should be inflicted on players walking on claimed land of offline players",
       "block.phalanx_smp.claim_totem.description_3": "",
       "entity.phalanx_smp.deepslate_golem": "Deepslate Golem"
     }
