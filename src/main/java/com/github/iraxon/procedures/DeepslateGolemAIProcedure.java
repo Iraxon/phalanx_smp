@@ -7,6 +7,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.Entity;
 
 import com.github.iraxon.entity.DeepslateGolemEntity;
+import com.github.iraxon.procedures.DeepslateGolemNBTWrapper.GolemType;
 
 import java.util.Objects;
 
@@ -28,16 +29,13 @@ public class DeepslateGolemAIProcedure {
 		@Nonnull
 		final DeepslateGolemNBTWrapper nbt = DeepslateGolemNBTWrapper.of(entity);
 
-		// Data commmon to all golems
-		final String type = nbt.type();
-		final String player = nbt.playerUUID();
+		AI.common_ai(nbt, entity);
 
-		if (type.equals(UNIT_TYPE_COMMANDER)) {
-			AI.commander_ai(nbt, entity);
-
-		} else if (type.equals(UNIT_TYPE_HEAVY_INFANTRY)) {
-
-		}
+		switch (nbt.type()) {
+			case COMMANDER -> AI.commander_ai(nbt, entity);
+			case HEAVY_INFANTRY -> AI.heavy_infantry_ai(nbt, entity);
+			case SKIRMISHER -> AI.skirmisher_ai(nbt, entity);
+		};
 	}
 
 	private static class AI {
@@ -51,7 +49,11 @@ public class DeepslateGolemAIProcedure {
 		}
 
 		private static void heavy_infantry_ai(@Nonnull DeepslateGolemNBTWrapper nbt, @Nonnull DeepslateGolemEntity soldier) {
-			final var commander = nbt.getCommander();
+			//
+		}
+
+		public static void skirmisher_ai(DeepslateGolemNBTWrapper nbt, DeepslateGolemEntity entity) {
+			//
 		}
 
 		/**
