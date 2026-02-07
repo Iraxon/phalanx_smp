@@ -32,8 +32,6 @@ public class DeepslateGolemAIProcedure {
 		final String type = nbt.type();
 		final String player = nbt.playerUUID();
 
-		Utils.update_team(entity, player);
-
 		if (type.equals(UNIT_TYPE_COMMANDER)) {
 			AI.commander_ai(nbt, entity);
 
@@ -43,6 +41,10 @@ public class DeepslateGolemAIProcedure {
 	}
 
 	private static class AI {
+
+		private static void common_ai(@Nonnull DeepslateGolemNBTWrapper nbt, @Nonnull DeepslateGolemEntity soldier) {
+			AIUtils.update_team(soldier, nbt.playerUUID());
+		}
 
 		private static void commander_ai(@Nonnull DeepslateGolemNBTWrapper nbt, @Nonnull DeepslateGolemEntity commander) {
 			// final var formationWrapper = nbt.formationWrapper();
@@ -95,7 +97,7 @@ public class DeepslateGolemAIProcedure {
 
 	}
 
-	private class Utils {
+	private class AIUtils {
 
 		private static void update_team(@Nonnull DeepslateGolemEntity entity, String playerUUIDString) {
 			if (playerUUIDString.equals("")) {
