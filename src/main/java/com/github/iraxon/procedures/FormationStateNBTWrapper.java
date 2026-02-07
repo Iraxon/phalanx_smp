@@ -22,7 +22,7 @@ public record FormationStateNBTWrapper(CompoundTag data) {
 
     public static final String FORMATION_KEY = "formation";
 
-    public enum Formation {
+    public static enum Formation {
         LINE(0, Set.of(Order.HALT, Order.ADVANCE, Order.CHARGE), true),
         SQUARE(1, Set.of(Order.HALT, Order.ADVANCE), true),
         COLUMN(2, Set.of(Order.HALT, Order.FOLLOW, Order.COLLECT), false),
@@ -61,7 +61,7 @@ public record FormationStateNBTWrapper(CompoundTag data) {
 
     public static final String ORDER_KEY = "order";
 
-    public enum Order {
+    public static enum Order {
         HALT(0),
         ADVANCE(1),
         CHARGE(2),
@@ -103,7 +103,7 @@ public record FormationStateNBTWrapper(CompoundTag data) {
 
     public static final String DIRECTION_KEY = "direction";
 
-    public enum Direction {
+    public static enum Direction {
         SOUTH(0),
         SOUTHWEST(1),
         WEST(2),
