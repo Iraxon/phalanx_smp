@@ -2,6 +2,7 @@ package com.github.iraxon.procedures;
 
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.stream.Stream;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -54,15 +55,33 @@ public record DeepslateGolemNBTWrapper(@Nonnull DeepslateGolemEntity golem, @Non
 
     public static final String GOLEM_TYPE_KEY = "phalanx_golem_type";
 
-    @Nonnull
-    public String type() {
-        return Objects.requireNonNull(data.getString(GOLEM_TYPE_KEY));
+    public static enum GolemType {
+        COMMANDER(0),
+        HEAVY_INFANTRY(1),
+        SKIRMISHER(2);
+
+        public final int index;
+
+        private GolemType(int index) {
+            this.index = index;
+        }
+
+        @SuppressWarnings("null")
+        @Nonnull
+        public static GolemType get(int index) {
+            return Stream.of(values()).filter(v -> v.index == index).findAny().orElse(COMMANDER);
+        }
     }
 
-    public static final String GOLEM_PLAYER_KEY = "phalanx_golem_player";
+    @Nonnull
+    public GolemType type() {
+        return GolemType.get(data.getInt(GOLEM_TYPE_KEY));
+    }
+
+    public static final String GOLEM_PLAYER_UUID_KEY = "phalanx_golem_player";
 
     @Nonnull
     public String playerUUID() {
-        return Objects.requireNonNull(data.getString(GOLEM_PLAYER_KEY));
+        return Objects.requireNonNull(data.getString(GOLEM_PLAYER_UUID_KEY));
     }
 }
