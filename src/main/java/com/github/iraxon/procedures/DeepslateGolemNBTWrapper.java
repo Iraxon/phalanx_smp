@@ -84,4 +84,9 @@ public record DeepslateGolemNBTWrapper(@Nonnull DeepslateGolemEntity golem, @Non
     public String playerUUID() {
         return Objects.requireNonNull(data.getString(GOLEM_PLAYER_UUID_KEY));
     }
+
+    @Nonnull
+    public FormationStateNBTWrapper formationWrapper() {
+        return FormationStateNBTWrapper.of(data);
+    }
 }
