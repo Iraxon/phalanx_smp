@@ -1,0 +1,12 @@
+{
+  "_fv": 79,
+  "_type": "keybind",
+  "definition": {
+    "triggerKey": "W",
+    "keyBindingName": "Issue Orders Input 1",
+    "keyBindingCategoryKey": "phalanx",
+    "onKeyPressed": {
+      "name": "IssueOrdersInput1OnKeyPressed"
+    }
+  }
+}

@@ -232,57 +232,15 @@
       }
     },
     {
-      "name": "IssueOrdersInput1",
-      "type": "keybind",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "issue_orders_input_1",
-      "metadata": {
-        "files": [
-          "src/main/java/com/github/iraxon/network/IssueOrdersInput1Message.java"
-        ]
-      }
-    },
-    {
-      "name": "IssueOrdersInput1OnKeyPressed",
+      "name": "ReadOrderInput",
       "type": "procedure",
       "compiles": true,
-      "locked_code": true,
-      "registry_name": "issue_orders_input_1_on_key_pressed",
-      "metadata": {
-        "dependencies": [
-          {
-            "name": "entity",
-            "type": "entity"
-          }
-        ],
-        "files": [
-          "src/main/java/com/github/iraxon/procedures/IssueOrdersInput1OnKeyPressedProcedure.java"
-        ]
-      }
-    },
-    {
-      "name": "IssueOrdersInput2",
-      "type": "keybind",
-      "compiles": true,
       "locked_code": false,
-      "registry_name": "issue_orders_input_2",
-      "metadata": {
-        "files": [
-          "src/main/java/com/github/iraxon/network/IssueOrdersInput2Message.java"
-        ]
-      }
-    },
-    {
-      "name": "IssueOrdersInput2OnKeyPressed",
-      "type": "procedure",
-      "compiles": true,
-      "locked_code": true,
-      "registry_name": "issue_orders_input_2_on_key_pressed",
+      "registry_name": "read_order_input",
       "metadata": {
         "dependencies": [],
         "files": [
-          "src/main/java/com/github/iraxon/procedures/IssueOrdersInput2OnKeyPressedProcedure.java"
+          "src/main/java/com/github/iraxon/procedures/ReadOrderInputProcedure.java"
         ]
       }
     }
@@ -337,9 +295,7 @@
       "block.phalanx_smp.claim_totem.description_3": "",
       "entity.phalanx_smp.deepslate_golem": "Deepslate Golem",
       "key.phalanx_smp.issue_orders": "Issue Orders",
-      "key.categories.phalanx": "Phalanx",
-      "key.phalanx_smp.issue_orders_input_1": "Issue Orders Input 1",
-      "key.phalanx_smp.issue_orders_input_2": "Issue Orders Input 2"
+      "key.categories.phalanx": "Phalanx"
     }
   },
   "metadata": {

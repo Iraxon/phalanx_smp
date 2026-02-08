@@ -1,185 +1,6 @@
 {
   "mod_elements": [
     {
-      "name": "ClaimTotemBlockIsPlacedBy",
-      "type": "procedure",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "claim_totem_block_is_placed_by",
-      "metadata": {
-        "files": [
-          "src/main/java/com/github/iraxon/procedures/ClaimTotemBlockIsPlacedByProcedure.java"
-        ],
-        "dependencies": [
-          {
-            "name": "entity",
-            "type": "entity"
-          },
-          {
-            "name": "x",
-            "type": "number"
-          },
-          {
-            "name": "y",
-            "type": "number"
-          },
-          {
-            "name": "z",
-            "type": "number"
-          },
-          {
-            "name": "world",
-            "type": "world"
-          }
-        ]
-      }
-    },
-    {
-      "name": "ClaimTotemOnTickUpdate",
-      "type": "procedure",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "claim_totem_on_tick_update",
-      "metadata": {
-        "files": [
-          "src/main/java/com/github/iraxon/procedures/ClaimTotemOnTickUpdateProcedure.java"
-        ],
-        "dependencies": [
-          {
-            "name": "x",
-            "type": "number"
-          },
-          {
-            "name": "y",
-            "type": "number"
-          },
-          {
-            "name": "z",
-            "type": "number"
-          },
-          {
-            "name": "world",
-            "type": "world"
-          }
-        ]
-      }
-    },
-    {
-      "name": "Core",
-      "type": "procedure",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "core",
-      "metadata": {
-        "files": [
-          "src/main/java/com/github/iraxon/procedures/CoreProcedure.java"
-        ],
-        "dependencies": [
-          {
-            "name": "entity",
-            "type": "entity"
-          },
-          {
-            "name": "x",
-            "type": "number"
-          },
-          {
-            "name": "y",
-            "type": "number"
-          },
-          {
-            "name": "z",
-            "type": "number"
-          },
-          {
-            "name": "world",
-            "type": "world"
-          }
-        ]
-      }
-    },
-    {
-      "name": "DoesClaimExist",
-      "type": "procedure",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "does_claim_exist",
-      "metadata": {
-        "return_type": "logic",
-        "files": [
-          "src/main/java/com/github/iraxon/procedures/DoesClaimExistProcedure.java"
-        ],
-        "dependencies": [
-          {
-            "name": "entity",
-            "type": "entity"
-          },
-          {
-            "name": "world",
-            "type": "world"
-          }
-        ]
-      }
-    },
-    {
-      "name": "IsPlayerInProtectedLand",
-      "type": "procedure",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "is_player_in_protected_land",
-      "metadata": {
-        "return_type": "logic",
-        "files": [
-          "src/main/java/com/github/iraxon/procedures/IsPlayerInProtectedLandProcedure.java"
-        ],
-        "dependencies": [
-          {
-            "name": "entity",
-            "type": "entity"
-          },
-          {
-            "name": "x",
-            "type": "number"
-          },
-          {
-            "name": "y",
-            "type": "number"
-          },
-          {
-            "name": "z",
-            "type": "number"
-          },
-          {
-            "name": "world",
-            "type": "world"
-          }
-        ]
-      }
-    },
-    {
-      "name": "GetLandowner",
-      "type": "procedure",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "get_landowner",
-      "metadata": {
-        "return_type": "string",
-        "files": [
-          "src/main/java/com/github/iraxon/procedures/GetLandownerProcedure.java"
-        ],
-        "dependencies": [
-          {
-            "name": "entity",
-            "type": "entity"
-          },
-          {
-            "name": "world",
-            "type": "world"
-          }
-        ]
-      }
-    },
-    {
       "name": "IsOnline",
       "type": "procedure",
       "compiles": true,
@@ -212,17 +33,6 @@
             "type": "world"
           }
         ]
-      }
-    },
-    {
-      "name": "OfflineProtectionDebuffs",
-      "type": "gamerule",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "offline_protection_debuffs",
-      "metadata": {
-        "files": [],
-        "type": "logic"
       }
     },
     {
@@ -355,19 +165,6 @@
       }
     },
     {
-      "name": "CommanderScreen",
-      "type": "gui",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "commander_screen",
-      "metadata": {
-        "files": [
-          "src/main/java/com/github/iraxon/world/inventory/CommanderScreenMenu.java",
-          "src/main/java/com/github/iraxon/client/gui/CommanderScreenScreen.java"
-        ]
-      }
-    },
-    {
       "name": "GetOwnerOfTamed",
       "type": "procedure",
       "compiles": true,
@@ -383,6 +180,67 @@
         "return_type": "entity",
         "files": [
           "src/main/java/com/github/iraxon/procedures/GetOwnerOfTamedProcedure.java"
+        ]
+      }
+    },
+    {
+      "name": "IssueOrders",
+      "type": "keybind",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "issue_orders",
+      "metadata": {
+        "files": [
+          "src/main/java/com/github/iraxon/network/IssueOrdersMessage.java"
+        ]
+      }
+    },
+    {
+      "name": "IssueOrdersOnKeyPressed",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "issue_orders_on_key_pressed",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ],
+        "files": [
+          "src/main/java/com/github/iraxon/procedures/IssueOrdersOnKeyPressedProcedure.java"
+        ]
+      }
+    },
+    {
+      "name": "IssueOrdersOnKeyReleased",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "issue_orders_on_key_released",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ],
+        "files": [
+          "src/main/java/com/github/iraxon/procedures/IssueOrdersOnKeyReleasedProcedure.java"
+        ]
+      }
+    },
+    {
+      "name": "ReadOrderInput",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "read_order_input",
+      "metadata": {
+        "dependencies": [],
+        "files": [
+          "src/main/java/com/github/iraxon/procedures/ReadOrderInputProcedure.java"
         ]
       }
     }
@@ -417,6 +275,12 @@
       "type": "logic",
       "scope": "player_persistent",
       "value": "false"
+    },
+    {
+      "name": "isGivingOrders",
+      "type": "logic",
+      "scope": "player_persistent",
+      "value": "false"
     }
   ],
   "sound_elements": [],
@@ -428,18 +292,16 @@
       "block.phalanx_smp.claim_totem.description_2": "",
       "gamerule.phalanxVarOnline": "Internal Phalanx Variable",
       "gamerule.phalanxVarOnline.description": "Does nothing",
-      "gamerule.offlineProtectionDebuffs": "Offline Protection Debuffs",
-      "gamerule.offlineProtectionDebuffs.description": "Whether debuffs should be inflicted on players walking on claimed land of offline players",
       "block.phalanx_smp.claim_totem.description_3": "",
-      "entity.phalanx_smp.deepslate_golem": "Deepslate Golem"
+      "entity.phalanx_smp.deepslate_golem": "Deepslate Golem",
+      "key.phalanx_smp.issue_orders": "Issue Orders",
+      "key.categories.phalanx": "Phalanx"
     }
   },
   "metadata": {
     "files": [
-      "src/main/java/com/github/iraxon/network/MenuStateUpdateMessage.java",
-      "src/main/java/com/github/iraxon/init/PhalanxSmpModMenus.java",
-      "src/main/java/com/github/iraxon/init/PhalanxSmpModScreens.java",
       "src/main/java/com/github/iraxon/init/PhalanxSmpModGameRules.java",
+      "src/main/java/com/github/iraxon/init/PhalanxSmpModKeyMappings.java",
       "src/main/java/com/github/iraxon/init/PhalanxSmpModEntityRenderers.java",
       "src/main/java/com/github/iraxon/init/PhalanxSmpModEntities.java",
       "src/main/java/com/github/iraxon/network/PhalanxSmpModVariables.java",
