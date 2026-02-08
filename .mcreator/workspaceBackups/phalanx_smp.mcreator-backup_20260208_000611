@@ -202,32 +202,9 @@
       "locked_code": false,
       "registry_name": "issue_orders_on_key_pressed",
       "metadata": {
-        "dependencies": [
-          {
-            "name": "entity",
-            "type": "entity"
-          }
-        ],
+        "dependencies": [],
         "files": [
           "src/main/java/com/github/iraxon/procedures/IssueOrdersOnKeyPressedProcedure.java"
-        ]
-      }
-    },
-    {
-      "name": "IssueOrdersOnKeyReleased",
-      "type": "procedure",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "issue_orders_on_key_released",
-      "metadata": {
-        "dependencies": [
-          {
-            "name": "entity",
-            "type": "entity"
-          }
-        ],
-        "files": [
-          "src/main/java/com/github/iraxon/procedures/IssueOrdersOnKeyReleasedProcedure.java"
         ]
       }
     }
@@ -259,12 +236,6 @@
     },
     {
       "name": "nearestClaimExists",
-      "type": "logic",
-      "scope": "player_persistent",
-      "value": "false"
-    },
-    {
-      "name": "isGivingOrders",
       "type": "logic",
       "scope": "player_persistent",
       "value": "false"

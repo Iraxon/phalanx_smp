@@ -4,5 +4,7 @@
   "gamerule.phalanxVarOnline": "Internal Phalanx Variable",
   "gamerule.phalanxVarOnline.description": "Does nothing",
   "block.phalanx_smp.claim_totem.description_3": "",
-  "entity.phalanx_smp.deepslate_golem": "Deepslate Golem"
+  "entity.phalanx_smp.deepslate_golem": "Deepslate Golem",
+  "key.phalanx_smp.issue_orders": "Issue Orders",
+  "key.categories.phalanx": "Phalanx"
 }

@@ -4,6 +4,12 @@
   "definition": {
     "triggerKey": "R",
     "keyBindingName": "Issue Orders",
-    "keyBindingCategoryKey": "phalanx"
+    "keyBindingCategoryKey": "phalanx",
+    "onKeyPressed": {
+      "name": "IssueOrdersOnKeyPressed"
+    },
+    "onKeyReleased": {
+      "name": "IssueOrdersOnKeyReleased"
+    }
   }
 }

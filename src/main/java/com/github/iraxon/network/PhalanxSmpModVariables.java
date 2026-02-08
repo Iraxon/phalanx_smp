@@ -84,6 +84,7 @@ public class PhalanxSmpModVariables {
 					clone.nearestClaimY = original.nearestClaimY;
 					clone.nearestClaimZ = original.nearestClaimZ;
 					clone.nearestClaimExists = original.nearestClaimExists;
+					clone.isGivingOrders = original.isGivingOrders;
 					if (!event.isWasDeath()) {
 					}
 				});
@@ -128,6 +129,7 @@ public class PhalanxSmpModVariables {
 		public double nearestClaimY = 0;
 		public double nearestClaimZ = 0;
 		public boolean nearestClaimExists = false;
+		public boolean isGivingOrders = false;
 
 		@Override
 		public CompoundTag serializeNBT() {
@@ -137,6 +139,7 @@ public class PhalanxSmpModVariables {
 			nbt.putDouble("nearestClaimY", nearestClaimY);
 			nbt.putDouble("nearestClaimZ", nearestClaimZ);
 			nbt.putBoolean("nearestClaimExists", nearestClaimExists);
+			nbt.putBoolean("isGivingOrders", isGivingOrders);
 			return nbt;
 		}
 
@@ -147,6 +150,7 @@ public class PhalanxSmpModVariables {
 			nearestClaimY = nbt.getDouble("nearestClaimY");
 			nearestClaimZ = nbt.getDouble("nearestClaimZ");
 			nearestClaimExists = nbt.getBoolean("nearestClaimExists");
+			isGivingOrders = nbt.getBoolean("isGivingOrders");
 		}
 
 		public void markSyncDirty() {
