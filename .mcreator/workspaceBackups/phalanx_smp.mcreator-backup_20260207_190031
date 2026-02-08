@@ -182,18 +182,6 @@
           "src/main/java/com/github/iraxon/procedures/GetOwnerOfTamedProcedure.java"
         ]
       }
-    },
-    {
-      "name": "IssueOrders",
-      "type": "keybind",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "issue_orders",
-      "metadata": {
-        "files": [
-          "src/main/java/com/github/iraxon/network/IssueOrdersMessage.java"
-        ]
-      }
     }
   ],
   "variable_elements": [
@@ -238,15 +226,12 @@
       "gamerule.phalanxVarOnline": "Internal Phalanx Variable",
       "gamerule.phalanxVarOnline.description": "Does nothing",
       "block.phalanx_smp.claim_totem.description_3": "",
-      "entity.phalanx_smp.deepslate_golem": "Deepslate Golem",
-      "key.phalanx_smp.issue_orders": "Issue Orders",
-      "key.categories.phalanx": "Phalanx"
+      "entity.phalanx_smp.deepslate_golem": "Deepslate Golem"
     }
   },
   "metadata": {
     "files": [
       "src/main/java/com/github/iraxon/init/PhalanxSmpModGameRules.java",
-      "src/main/java/com/github/iraxon/init/PhalanxSmpModKeyMappings.java",
       "src/main/java/com/github/iraxon/init/PhalanxSmpModEntityRenderers.java",
       "src/main/java/com/github/iraxon/init/PhalanxSmpModEntities.java",
       "src/main/java/com/github/iraxon/network/PhalanxSmpModVariables.java",

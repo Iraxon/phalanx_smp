@@ -41,7 +41,7 @@ public class DeepslateGolemAIProcedure {
 		}
 
 		private static void commander_ai(@Nonnull DeepslateGolemNBTWrapper nbt, @Nonnull DeepslateGolemEntity commander) {
-			// final var formationWrapper = nbt.formationWrapper();
+			final FormationStateNBTWrapper formationWrapper = nbt.formationWrapper();
 		}
 
 		private static void heavy_infantry_ai(@Nonnull DeepslateGolemNBTWrapper nbt, @Nonnull DeepslateGolemEntity soldier) {
