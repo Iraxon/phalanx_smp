@@ -165,19 +165,6 @@
       }
     },
     {
-      "name": "CommanderScreen",
-      "type": "gui",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "commander_screen",
-      "metadata": {
-        "files": [
-          "src/main/java/com/github/iraxon/world/inventory/CommanderScreenMenu.java",
-          "src/main/java/com/github/iraxon/client/gui/CommanderScreenScreen.java"
-        ]
-      }
-    },
-    {
       "name": "GetOwnerOfTamed",
       "type": "procedure",
       "compiles": true,
@@ -193,6 +180,109 @@
         "return_type": "entity",
         "files": [
           "src/main/java/com/github/iraxon/procedures/GetOwnerOfTamedProcedure.java"
+        ]
+      }
+    },
+    {
+      "name": "IssueOrders",
+      "type": "keybind",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "issue_orders",
+      "metadata": {
+        "files": [
+          "src/main/java/com/github/iraxon/network/IssueOrdersMessage.java"
+        ]
+      }
+    },
+    {
+      "name": "IssueOrdersOnKeyPressed",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "issue_orders_on_key_pressed",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ],
+        "files": [
+          "src/main/java/com/github/iraxon/procedures/IssueOrdersOnKeyPressedProcedure.java"
+        ]
+      }
+    },
+    {
+      "name": "IssueOrdersOnKeyReleased",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "issue_orders_on_key_released",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ],
+        "files": [
+          "src/main/java/com/github/iraxon/procedures/IssueOrdersOnKeyReleasedProcedure.java"
+        ]
+      }
+    },
+    {
+      "name": "IssueOrdersInput1",
+      "type": "keybind",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "issue_orders_input_1",
+      "metadata": {
+        "files": [
+          "src/main/java/com/github/iraxon/network/IssueOrdersInput1Message.java"
+        ]
+      }
+    },
+    {
+      "name": "IssueOrdersInput1OnKeyPressed",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "issue_orders_input_1_on_key_pressed",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ],
+        "files": [
+          "src/main/java/com/github/iraxon/procedures/IssueOrdersInput1OnKeyPressedProcedure.java"
+        ]
+      }
+    },
+    {
+      "name": "IssueOrdersInput2",
+      "type": "keybind",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "issue_orders_input_2",
+      "metadata": {
+        "files": [
+          "src/main/java/com/github/iraxon/network/IssueOrdersInput2Message.java"
+        ]
+      }
+    },
+    {
+      "name": "IssueOrdersInput2OnKeyPressed",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "issue_orders_input_2_on_key_pressed",
+      "metadata": {
+        "dependencies": [],
+        "files": [
+          "src/main/java/com/github/iraxon/procedures/IssueOrdersInput2OnKeyPressedProcedure.java"
         ]
       }
     }
@@ -227,6 +317,12 @@
       "type": "logic",
       "scope": "player_persistent",
       "value": "false"
+    },
+    {
+      "name": "isGivingOrders",
+      "type": "logic",
+      "scope": "player_persistent",
+      "value": "false"
     }
   ],
   "sound_elements": [],
@@ -239,15 +335,17 @@
       "gamerule.phalanxVarOnline": "Internal Phalanx Variable",
       "gamerule.phalanxVarOnline.description": "Does nothing",
       "block.phalanx_smp.claim_totem.description_3": "",
-      "entity.phalanx_smp.deepslate_golem": "Deepslate Golem"
+      "entity.phalanx_smp.deepslate_golem": "Deepslate Golem",
+      "key.phalanx_smp.issue_orders": "Issue Orders",
+      "key.categories.phalanx": "Phalanx",
+      "key.phalanx_smp.issue_orders_input_1": "Issue Orders Input 1",
+      "key.phalanx_smp.issue_orders_input_2": "Issue Orders Input 2"
     }
   },
   "metadata": {
     "files": [
-      "src/main/java/com/github/iraxon/network/MenuStateUpdateMessage.java",
-      "src/main/java/com/github/iraxon/init/PhalanxSmpModMenus.java",
-      "src/main/java/com/github/iraxon/init/PhalanxSmpModScreens.java",
       "src/main/java/com/github/iraxon/init/PhalanxSmpModGameRules.java",
+      "src/main/java/com/github/iraxon/init/PhalanxSmpModKeyMappings.java",
       "src/main/java/com/github/iraxon/init/PhalanxSmpModEntityRenderers.java",
       "src/main/java/com/github/iraxon/init/PhalanxSmpModEntities.java",
       "src/main/java/com/github/iraxon/network/PhalanxSmpModVariables.java",
