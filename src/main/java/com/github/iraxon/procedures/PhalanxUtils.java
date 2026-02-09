@@ -17,6 +17,7 @@ public class PhalanxUtils {
 
     /**
      * Stream of entities that satisfy predicate
+     *
      * @param <T>
      * @param world
      * @param cls
@@ -26,9 +27,12 @@ public class PhalanxUtils {
      * @return
      */
     @SuppressWarnings("null")
-    public static <T extends Entity> Stream<T> getEntitiesWithPredicate(LevelAccessor world,
-            Class<T> cls, Vec3 center,
-            double size, Predicate<? super T> predicate) {
+    public static <T extends Entity> Stream<T> getEntitiesWithPredicate(
+            @Nonnull LevelAccessor world,
+            @Nonnull Class<T> cls,
+            @Nonnull Vec3 center,
+            double size,
+            @Nonnull Predicate<? super T> predicate) {
 
         Objects.requireNonNull(world);
         Objects.requireNonNull(cls);
@@ -40,6 +44,7 @@ public class PhalanxUtils {
 
     /**
      * Nearest entity that matches predicate
+     *
      * @param <T>
      * @param world
      * @param cls
@@ -49,9 +54,12 @@ public class PhalanxUtils {
      * @return
      */
     @Nullable
-    public static <T extends Entity> T getNearestEntityWithPredicate(@Nonnull LevelAccessor world,
-            @Nonnull Class<T> cls, @Nonnull Vec3 center,
-            double size, @Nonnull Predicate<? super T> predicate) {
+    public static <T extends Entity> T getNearestEntityWithPredicate(
+            @Nonnull LevelAccessor world,
+            @Nonnull Class<T> cls,
+            @Nonnull Vec3 center,
+            double size,
+            @Nonnull Predicate<? super T> predicate) {
 
         return getEntitiesWithPredicate(world, cls, center, size, predicate)
                 .min(Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(center))).orElse(null);
@@ -60,6 +68,7 @@ public class PhalanxUtils {
     @Nullable
     /**
      * Entity from UUID
+     *
      * @param <T>
      * @param world
      * @param cls
@@ -68,8 +77,16 @@ public class PhalanxUtils {
      * @param uuidString
      * @return
      */
-    public static <T extends Entity> T getEntityByUUID(@Nonnull LevelAccessor world, @Nonnull Class<T> cls,
-            @Nonnull Vec3 center, double size, String uuidString) {
+    public static <T extends Entity> T getEntityByUUID(
+            @Nonnull LevelAccessor world,
+            @Nonnull Class<T> cls,
+            @Nonnull Vec3 center,
+            double size,
+            String uuidString) {
+
+        if (uuidString == null) {
+            return null;
+        }
         return getNearestEntityWithPredicate(world, cls, center, size,
                 (T entity) -> entity.getStringUUID().equals(uuidString));
     }
