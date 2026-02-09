@@ -8,7 +8,6 @@ import javax.annotation.Nullable;
 import com.github.iraxon.network.PhalanxSmpModVariables;
 
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.LivingEntity;
 
 public class OrderHandling {
 
