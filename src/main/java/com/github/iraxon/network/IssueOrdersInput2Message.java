@@ -51,7 +51,7 @@ public class IssueOrdersInput2Message {
 			return;
 		if (type == 0) {
 
-			IssueOrdersInput2OnKeyPressedProcedure.execute();
+			IssueOrdersInput2OnKeyPressedProcedure.execute(entity);
 		}
 	}
 
