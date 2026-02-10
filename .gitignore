@@ -83,3 +83,6 @@ $RECYCLE.BIN/
 
 *.lock
 *.bin
+
+*.mcreator-backup*
+*.class.uniqueID*
