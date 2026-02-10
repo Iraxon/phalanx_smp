@@ -280,7 +280,16 @@
       "locked_code": true,
       "registry_name": "issue_orders_input_2_on_key_pressed",
       "metadata": {
-        "dependencies": [],
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
         "files": [
           "src/main/java/com/github/iraxon/procedures/IssueOrdersInput2OnKeyPressedProcedure.java"
         ]
