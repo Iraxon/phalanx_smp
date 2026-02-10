@@ -217,7 +217,7 @@
       "name": "IssueOrdersOnKeyReleased",
       "type": "procedure",
       "compiles": true,
-      "locked_code": false,
+      "locked_code": true,
       "registry_name": "issue_orders_on_key_released",
       "metadata": {
         "dependencies": [
