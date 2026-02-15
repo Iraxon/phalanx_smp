@@ -2,11 +2,11 @@
   "_fv": 79,
   "_type": "keybind",
   "definition": {
-    "triggerKey": "W",
-    "keyBindingName": "Issue Orders Input 1",
+    "triggerKey": "RIGHT",
+    "keyBindingName": "Issue Orders: Confirm",
     "keyBindingCategoryKey": "phalanx",
     "onKeyPressed": {
-      "name": "IssueOrdersInput1OnKeyPressed"
+      "name": "IssueOrdersConfirmOnKeyPressed"
     }
   }
 }

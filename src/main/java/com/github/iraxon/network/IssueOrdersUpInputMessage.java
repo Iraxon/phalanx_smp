@@ -11,29 +11,29 @@ import net.minecraft.network.FriendlyByteBuf;
 
 import java.util.function.Supplier;
 
-import com.github.iraxon.procedures.IssueOrdersInput2OnKeyPressedProcedure;
+import com.github.iraxon.procedures.IssueOrdersUpInputOnKeyPressedProcedure;
 import com.github.iraxon.PhalanxSmpMod;
 
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
-public class IssueOrdersInput2Message {
+public class IssueOrdersUpInputMessage {
 	int type, pressedms;
 
-	public IssueOrdersInput2Message(int type, int pressedms) {
+	public IssueOrdersUpInputMessage(int type, int pressedms) {
 		this.type = type;
 		this.pressedms = pressedms;
 	}
 
-	public IssueOrdersInput2Message(FriendlyByteBuf buffer) {
+	public IssueOrdersUpInputMessage(FriendlyByteBuf buffer) {
 		this.type = buffer.readInt();
 		this.pressedms = buffer.readInt();
 	}
 
-	public static void buffer(IssueOrdersInput2Message message, FriendlyByteBuf buffer) {
+	public static void buffer(IssueOrdersUpInputMessage message, FriendlyByteBuf buffer) {
 		buffer.writeInt(message.type);
 		buffer.writeInt(message.pressedms);
 	}
 
-	public static void handler(IssueOrdersInput2Message message, Supplier<NetworkEvent.Context> contextSupplier) {
+	public static void handler(IssueOrdersUpInputMessage message, Supplier<NetworkEvent.Context> contextSupplier) {
 		NetworkEvent.Context context = contextSupplier.get();
 		context.enqueueWork(() -> {
 			pressAction(context.getSender(), message.type, message.pressedms);
@@ -51,12 +51,12 @@ public class IssueOrdersInput2Message {
 			return;
 		if (type == 0) {
 
-			IssueOrdersInput2OnKeyPressedProcedure.execute(world, entity);
+			IssueOrdersUpInputOnKeyPressedProcedure.execute(entity);
 		}
 	}
 
 	@SubscribeEvent
 	public static void registerMessage(FMLCommonSetupEvent event) {
-		PhalanxSmpMod.addNetworkMessage(IssueOrdersInput2Message.class, IssueOrdersInput2Message::buffer, IssueOrdersInput2Message::new, IssueOrdersInput2Message::handler);
+		PhalanxSmpMod.addNetworkMessage(IssueOrdersUpInputMessage.class, IssueOrdersUpInputMessage::buffer, IssueOrdersUpInputMessage::new, IssueOrdersUpInputMessage::handler);
 	}
 }

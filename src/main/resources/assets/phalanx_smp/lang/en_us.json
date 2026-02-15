@@ -5,8 +5,9 @@
   "gamerule.phalanxVarOnline.description": "Does nothing",
   "block.phalanx_smp.claim_totem.description_3": "",
   "entity.phalanx_smp.deepslate_golem": "Deepslate Golem",
-  "key.phalanx_smp.issue_orders": "Issue Orders",
   "key.categories.phalanx": "Phalanx",
-  "key.phalanx_smp.issue_orders_input_1": "Issue Orders Input 1",
-  "key.phalanx_smp.issue_orders_input_2": "Issue Orders Input 2"
+  "key.phalanx_smp.issue_orders_cancel": "Issue Orders: Cancel",
+  "key.phalanx_smp.issue_orders_up_input": "Issue Orders: Up Input",
+  "key.phalanx_smp.issue_orders_down_input": "Issue Orders: Down Input",
+  "key.phalanx_smp.issue_orders_confirm": "Issue Orders: Confirm"
 }

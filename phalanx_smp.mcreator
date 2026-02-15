@@ -184,114 +184,122 @@
       }
     },
     {
-      "name": "IssueOrders",
+      "name": "IssueOrdersCancel",
       "type": "keybind",
       "compiles": true,
       "locked_code": false,
-      "registry_name": "issue_orders",
+      "registry_name": "issue_orders_cancel",
       "metadata": {
         "files": [
-          "src/main/java/com/github/iraxon/network/IssueOrdersMessage.java"
+          "src/main/java/com/github/iraxon/network/IssueOrdersCancelMessage.java"
         ]
       }
     },
     {
-      "name": "IssueOrdersOnKeyPressed",
-      "type": "procedure",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "issue_orders_on_key_pressed",
-      "metadata": {
-        "dependencies": [
-          {
-            "name": "entity",
-            "type": "entity"
-          }
-        ],
-        "files": [
-          "src/main/java/com/github/iraxon/procedures/IssueOrdersOnKeyPressedProcedure.java"
-        ]
-      }
-    },
-    {
-      "name": "IssueOrdersOnKeyReleased",
-      "type": "procedure",
-      "compiles": true,
-      "locked_code": true,
-      "registry_name": "issue_orders_on_key_released",
-      "metadata": {
-        "dependencies": [
-          {
-            "name": "entity",
-            "type": "entity"
-          }
-        ],
-        "files": [
-          "src/main/java/com/github/iraxon/procedures/IssueOrdersOnKeyReleasedProcedure.java"
-        ]
-      }
-    },
-    {
-      "name": "IssueOrdersInput1",
+      "name": "IssueOrdersUpInput",
       "type": "keybind",
       "compiles": true,
       "locked_code": false,
-      "registry_name": "issue_orders_input_1",
+      "registry_name": "issue_orders_up_input",
       "metadata": {
         "files": [
-          "src/main/java/com/github/iraxon/network/IssueOrdersInput1Message.java"
+          "src/main/java/com/github/iraxon/network/IssueOrdersUpInputMessage.java"
         ]
       }
     },
     {
-      "name": "IssueOrdersInput1OnKeyPressed",
-      "type": "procedure",
-      "compiles": true,
-      "locked_code": true,
-      "registry_name": "issue_orders_input_1_on_key_pressed",
-      "metadata": {
-        "dependencies": [
-          {
-            "name": "entity",
-            "type": "entity"
-          }
-        ],
-        "files": [
-          "src/main/java/com/github/iraxon/procedures/IssueOrdersInput1OnKeyPressedProcedure.java"
-        ]
-      }
-    },
-    {
-      "name": "IssueOrdersInput2",
+      "name": "IssueOrdersDownInput",
       "type": "keybind",
       "compiles": true,
       "locked_code": false,
-      "registry_name": "issue_orders_input_2",
+      "registry_name": "issue_orders_down_input",
       "metadata": {
         "files": [
-          "src/main/java/com/github/iraxon/network/IssueOrdersInput2Message.java"
+          "src/main/java/com/github/iraxon/network/IssueOrdersDownInputMessage.java"
         ]
       }
     },
     {
-      "name": "IssueOrdersInput2OnKeyPressed",
+      "name": "IssueOrdersConfirm",
+      "type": "keybind",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "issue_orders_confirm",
+      "metadata": {
+        "files": [
+          "src/main/java/com/github/iraxon/network/IssueOrdersConfirmMessage.java"
+        ]
+      }
+    },
+    {
+      "name": "IssueOrdersCancelOnKeyPressed",
       "type": "procedure",
       "compiles": true,
       "locked_code": true,
-      "registry_name": "issue_orders_input_2_on_key_pressed",
+      "registry_name": "issue_orders_cancel_on_key_pressed",
       "metadata": {
         "dependencies": [
           {
             "name": "entity",
             "type": "entity"
-          },
-          {
-            "name": "world",
-            "type": "world"
           }
         ],
         "files": [
-          "src/main/java/com/github/iraxon/procedures/IssueOrdersInput2OnKeyPressedProcedure.java"
+          "src/main/java/com/github/iraxon/procedures/IssueOrdersCancelOnKeyPressedProcedure.java"
+        ]
+      }
+    },
+    {
+      "name": "IssueOrdersUpInputOnKeyPressed",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "issue_orders_up_input_on_key_pressed",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ],
+        "files": [
+          "src/main/java/com/github/iraxon/procedures/IssueOrdersUpInputOnKeyPressedProcedure.java"
+        ]
+      }
+    },
+    {
+      "name": "IssueOrdersDownInputOnKeyPressed",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "issue_orders_down_input_on_key_pressed",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ],
+        "files": [
+          "src/main/java/com/github/iraxon/procedures/IssueOrdersDownInputOnKeyPressedProcedure.java"
+        ]
+      }
+    },
+    {
+      "name": "IssueOrdersConfirmOnKeyPressed",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "issue_orders_confirm_on_key_pressed",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ],
+        "files": [
+          "src/main/java/com/github/iraxon/procedures/IssueOrdersConfirmOnKeyPressedProcedure.java"
         ]
       }
     }
@@ -345,10 +353,11 @@
       "gamerule.phalanxVarOnline.description": "Does nothing",
       "block.phalanx_smp.claim_totem.description_3": "",
       "entity.phalanx_smp.deepslate_golem": "Deepslate Golem",
-      "key.phalanx_smp.issue_orders": "Issue Orders",
       "key.categories.phalanx": "Phalanx",
-      "key.phalanx_smp.issue_orders_input_1": "Issue Orders Input 1",
-      "key.phalanx_smp.issue_orders_input_2": "Issue Orders Input 2"
+      "key.phalanx_smp.issue_orders_cancel": "Issue Orders: Cancel",
+      "key.phalanx_smp.issue_orders_up_input": "Issue Orders: Up Input",
+      "key.phalanx_smp.issue_orders_down_input": "Issue Orders: Down Input",
+      "key.phalanx_smp.issue_orders_confirm": "Issue Orders: Confirm"
     }
   },
   "metadata": {

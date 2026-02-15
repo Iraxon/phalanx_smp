@@ -2,11 +2,11 @@
   "_fv": 79,
   "_type": "keybind",
   "definition": {
-    "triggerKey": "S",
-    "keyBindingName": "Issue Orders Input 2",
+    "triggerKey": "DOWN",
+    "keyBindingName": "Issue Orders: Down Input",
     "keyBindingCategoryKey": "phalanx",
     "onKeyPressed": {
-      "name": "IssueOrdersInput2OnKeyPressed"
+      "name": "IssueOrdersDownInputOnKeyPressed"
     }
   }
 }

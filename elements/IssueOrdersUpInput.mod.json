@@ -1,0 +1,12 @@
+{
+  "_fv": 79,
+  "_type": "keybind",
+  "definition": {
+    "triggerKey": "UP",
+    "keyBindingName": "Issue Orders: Up Input",
+    "keyBindingCategoryKey": "phalanx",
+    "onKeyPressed": {
+      "name": "IssueOrdersUpInputOnKeyPressed"
+    }
+  }
+}

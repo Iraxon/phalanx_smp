@@ -11,30 +11,29 @@ import net.minecraft.network.FriendlyByteBuf;
 
 import java.util.function.Supplier;
 
-import com.github.iraxon.procedures.IssueOrdersOnKeyReleasedProcedure;
-import com.github.iraxon.procedures.IssueOrdersOnKeyPressedProcedure;
+import com.github.iraxon.procedures.IssueOrdersDownInputOnKeyPressedProcedure;
 import com.github.iraxon.PhalanxSmpMod;
 
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
-public class IssueOrdersMessage {
+public class IssueOrdersDownInputMessage {
 	int type, pressedms;
 
-	public IssueOrdersMessage(int type, int pressedms) {
+	public IssueOrdersDownInputMessage(int type, int pressedms) {
 		this.type = type;
 		this.pressedms = pressedms;
 	}
 
-	public IssueOrdersMessage(FriendlyByteBuf buffer) {
+	public IssueOrdersDownInputMessage(FriendlyByteBuf buffer) {
 		this.type = buffer.readInt();
 		this.pressedms = buffer.readInt();
 	}
 
-	public static void buffer(IssueOrdersMessage message, FriendlyByteBuf buffer) {
+	public static void buffer(IssueOrdersDownInputMessage message, FriendlyByteBuf buffer) {
 		buffer.writeInt(message.type);
 		buffer.writeInt(message.pressedms);
 	}
 
-	public static void handler(IssueOrdersMessage message, Supplier<NetworkEvent.Context> contextSupplier) {
+	public static void handler(IssueOrdersDownInputMessage message, Supplier<NetworkEvent.Context> contextSupplier) {
 		NetworkEvent.Context context = contextSupplier.get();
 		context.enqueueWork(() -> {
 			pressAction(context.getSender(), message.type, message.pressedms);
@@ -52,16 +51,12 @@ public class IssueOrdersMessage {
 			return;
 		if (type == 0) {
 
-			IssueOrdersOnKeyPressedProcedure.execute(entity);
-		}
-		if (type == 1) {
-
-			IssueOrdersOnKeyReleasedProcedure.execute(entity);
+			IssueOrdersDownInputOnKeyPressedProcedure.execute(entity);
 		}
 	}
 
 	@SubscribeEvent
 	public static void registerMessage(FMLCommonSetupEvent event) {
-		PhalanxSmpMod.addNetworkMessage(IssueOrdersMessage.class, IssueOrdersMessage::buffer, IssueOrdersMessage::new, IssueOrdersMessage::handler);
+		PhalanxSmpMod.addNetworkMessage(IssueOrdersDownInputMessage.class, IssueOrdersDownInputMessage::buffer, IssueOrdersDownInputMessage::new, IssueOrdersDownInputMessage::handler);
 	}
 }

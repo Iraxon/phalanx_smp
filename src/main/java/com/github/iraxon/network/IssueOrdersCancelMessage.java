@@ -11,29 +11,29 @@ import net.minecraft.network.FriendlyByteBuf;
 
 import java.util.function.Supplier;
 
-import com.github.iraxon.procedures.IssueOrdersInput1OnKeyPressedProcedure;
+import com.github.iraxon.procedures.IssueOrdersCancelOnKeyPressedProcedure;
 import com.github.iraxon.PhalanxSmpMod;
 
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
-public class IssueOrdersInput1Message {
+public class IssueOrdersCancelMessage {
 	int type, pressedms;
 
-	public IssueOrdersInput1Message(int type, int pressedms) {
+	public IssueOrdersCancelMessage(int type, int pressedms) {
 		this.type = type;
 		this.pressedms = pressedms;
 	}
 
-	public IssueOrdersInput1Message(FriendlyByteBuf buffer) {
+	public IssueOrdersCancelMessage(FriendlyByteBuf buffer) {
 		this.type = buffer.readInt();
 		this.pressedms = buffer.readInt();
 	}
 
-	public static void buffer(IssueOrdersInput1Message message, FriendlyByteBuf buffer) {
+	public static void buffer(IssueOrdersCancelMessage message, FriendlyByteBuf buffer) {
 		buffer.writeInt(message.type);
 		buffer.writeInt(message.pressedms);
 	}
 
-	public static void handler(IssueOrdersInput1Message message, Supplier<NetworkEvent.Context> contextSupplier) {
+	public static void handler(IssueOrdersCancelMessage message, Supplier<NetworkEvent.Context> contextSupplier) {
 		NetworkEvent.Context context = contextSupplier.get();
 		context.enqueueWork(() -> {
 			pressAction(context.getSender(), message.type, message.pressedms);
@@ -51,12 +51,12 @@ public class IssueOrdersInput1Message {
 			return;
 		if (type == 0) {
 
-			IssueOrdersInput1OnKeyPressedProcedure.execute(entity);
+			IssueOrdersCancelOnKeyPressedProcedure.execute(entity);
 		}
 	}
 
 	@SubscribeEvent
 	public static void registerMessage(FMLCommonSetupEvent event) {
-		PhalanxSmpMod.addNetworkMessage(IssueOrdersInput1Message.class, IssueOrdersInput1Message::buffer, IssueOrdersInput1Message::new, IssueOrdersInput1Message::handler);
+		PhalanxSmpMod.addNetworkMessage(IssueOrdersCancelMessage.class, IssueOrdersCancelMessage::buffer, IssueOrdersCancelMessage::new, IssueOrdersCancelMessage::handler);
 	}
 }
