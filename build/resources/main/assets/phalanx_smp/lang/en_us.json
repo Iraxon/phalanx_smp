@@ -1,9 +1,6 @@
 {
-  "block.phalanx_smp.claim_totem.description_1": "gets much more insistent and loud if you are offline;",
-  "block.phalanx_smp.claim_totem.description_2": "",
   "gamerule.phalanxVarOnline": "Internal Phalanx Variable",
   "gamerule.phalanxVarOnline.description": "Does nothing",
-  "block.phalanx_smp.claim_totem.description_3": "",
   "entity.phalanx_smp.deepslate_golem": "Deepslate Golem",
   "key.categories.phalanx": "Phalanx",
   "key.phalanx_smp.issue_orders_cancel": "Issue Orders: Cancel",
