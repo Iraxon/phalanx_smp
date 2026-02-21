@@ -8,7 +8,9 @@ import java.util.stream.Stream;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
@@ -89,5 +91,18 @@ public class PhalanxUtils {
         }
         return getNearestEntityWithPredicate(world, cls, center, size,
                 (T entity) -> entity.getStringUUID().equals(uuidString));
+    }
+
+    @SuppressWarnings("null")
+    /**
+     * Displays a message to the entity if it's a player
+     * and this is being done from server side
+     * @param recipient
+     * @param msg
+     * @param useActionBar Uses chat if false
+     */
+    public static void sendMessage(@Nullable Entity recipient, String msg, boolean useActionbar) {
+        if (recipient instanceof Player player && !player.level().isClientSide())
+            player.displayClientMessage(Component.literal("Message"), useActionbar);
     }
 }
