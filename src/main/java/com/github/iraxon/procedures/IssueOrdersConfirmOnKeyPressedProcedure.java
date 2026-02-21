@@ -6,6 +6,6 @@ public class IssueOrdersConfirmOnKeyPressedProcedure {
 	public static void execute(Entity entity) {
 		if (entity == null)
 			return;
-		OrderManager.of(entity).inputConfirm();
+		OrderManager.of(entity).ifPresent(OrderManager::inputConfirm);
 	}
 }

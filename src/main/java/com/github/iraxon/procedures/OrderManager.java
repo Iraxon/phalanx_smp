@@ -24,15 +24,21 @@ public record OrderManager(@Nonnull Entity orderIssuer, @Nonnull ArrayList<Order
     /**
      * Factory; use instead of constructor
      *
+     * Does not work on logical client (hence Optional)
+     *
      * @param orderIssuer
      * @return
      */
-    public static OrderManager of(@Nonnull Entity orderIssuer) {
+    public static Optional<OrderManager> of(@Nonnull Entity orderIssuer) {
+
+        if (orderIssuer.level().isClientSide()) {
+            return Optional.empty();
+        }
 
         final String uuid = Objects.requireNonNull(orderIssuer).getStringUUID();
 
-        return cache.computeIfAbsent(uuid,
-                (String u) -> new OrderManager(orderIssuer));
+        return Optional.of(cache.computeIfAbsent(uuid,
+                (String u) -> new OrderManager(orderIssuer)));
     }
 
     @Nullable
@@ -46,6 +52,7 @@ public record OrderManager(@Nonnull Entity orderIssuer, @Nonnull ArrayList<Order
     /**
      * Gets the OrderManager for this entity if one exists already;
      * does not make one if there wasn't one
+     *
      * @param orderIssuer
      * @return
      */
@@ -55,19 +62,39 @@ public record OrderManager(@Nonnull Entity orderIssuer, @Nonnull ArrayList<Order
 
     public void inputUp() {
         this.basicInput(OrderInput.UP);
+        PhalanxUtils.sendMessage(orderIssuer, infoMessage(), true);
     }
 
     public void inputDown() {
         this.basicInput(OrderInput.DOWN);
+        PhalanxUtils.sendMessage(orderIssuer, infoMessage(), true);
     }
 
     public void inputCancel() {
         this.inputs.clear();
+        PhalanxUtils.sendMessage(orderIssuer, "Canceled", true);
     }
 
     public void inputConfirm() {
         // TOOD: Orders
         this.inputs.clear();
+        PhalanxUtils.sendMessage(orderIssuer, "Sent", true);
+    }
+
+    public static void inputUp(@Nonnull Entity orderIssuer) {
+        OrderManager.of(orderIssuer).ifPresent(OrderManager::inputUp);
+    }
+
+    public static void inputDown(@Nonnull Entity orderIssuer) {
+        OrderManager.of(orderIssuer).ifPresent(OrderManager::inputDown);
+    }
+
+    public static void inputCancel(@Nonnull Entity orderIssuer) {
+        OrderManager.of(orderIssuer).ifPresent(OrderManager::inputCancel);
+    }
+
+    public static void inputConfirm(@Nonnull Entity orderIssuer) {
+        OrderManager.of(orderIssuer).ifPresent(OrderManager::inputConfirm);
     }
 
     private void basicInput(OrderInput input) {
@@ -81,17 +108,13 @@ public record OrderManager(@Nonnull Entity orderIssuer, @Nonnull ArrayList<Order
         return this.inputs.size() > 0;
     }
 
-    /**
-     * @return The info message for the current order issuing state;
-     *         should be displayed every tick while isActive() returns true
-     */
-    public String infoMessage() {
+    private String infoMessage() {
         return this.isActive()
                 ? ("Typing: "
                         + this.inputs.stream()
                                 .map(OrderInput::rep)
                                 .reduce("", String::concat))
-                : "";
+                : "No Order";
     }
 
     private static enum OrderInput {
@@ -100,8 +123,8 @@ public record OrderManager(@Nonnull Entity orderIssuer, @Nonnull ArrayList<Order
 
         public String rep() {
             return switch (this) {
-                case UP -> "/\\";
-                case DOWN -> "\\/";
+                case UP -> "▲";
+                case DOWN -> "▼";
             };
         }
     }

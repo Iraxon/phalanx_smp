@@ -6,6 +6,6 @@ public class IssueOrdersCancelOnKeyPressedProcedure {
 	public static void execute(Entity entity) {
 		if (entity == null)
 			return;
-		OrderManager.of(entity).inputCancel();
+		OrderManager.of(entity).ifPresent(OrderManager::inputCancel);
 	}
 }
