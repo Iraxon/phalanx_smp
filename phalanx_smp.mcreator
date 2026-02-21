@@ -302,6 +302,24 @@
           "src/main/java/com/github/iraxon/procedures/IssueOrdersConfirmOnKeyPressedProcedure.java"
         ]
       }
+    },
+    {
+      "name": "DisplayOrderMessages",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "display_order_messages",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ],
+        "files": [
+          "src/main/java/com/github/iraxon/procedures/DisplayOrderMessagesProcedure.java"
+        ]
+      }
     }
   ],
   "variable_elements": [
