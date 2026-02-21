@@ -14,7 +14,10 @@ import net.minecraft.nbt.CompoundTag;
 public record DeepslateGolemNBTWrapper(@Nonnull DeepslateGolemEntity golem, @Nonnull CompoundTag data) {
 
     @Nonnull
-    private static ConcurrentHashMap<String, DeepslateGolemNBTWrapper> cache = new ConcurrentHashMap<>();
+    private static final ConcurrentHashMap<String, DeepslateGolemNBTWrapper> serverCache = new ConcurrentHashMap<>();
+
+    @Nonnull
+    private static final ConcurrentHashMap<String, DeepslateGolemNBTWrapper> clientCache = new ConcurrentHashMap<>();
 
     @SuppressWarnings("null")
     @Nonnull
@@ -28,7 +31,7 @@ public record DeepslateGolemNBTWrapper(@Nonnull DeepslateGolemEntity golem, @Non
 
         final String uuid = Objects.requireNonNull(golem).getStringUUID();
 
-        return cache.computeIfAbsent(uuid,
+        return (golem.level().isClientSide ? clientCache : serverCache).computeIfAbsent(uuid,
                 (String u) -> new DeepslateGolemNBTWrapper(golem, golem.getPersistentData()));
     }
 
