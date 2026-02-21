@@ -103,6 +103,6 @@ public class PhalanxUtils {
      */
     public static void sendMessage(@Nullable Entity recipient, String msg, boolean useActionbar) {
         if (recipient instanceof Player player && !player.level().isClientSide())
-            player.displayClientMessage(Component.literal("Message"), useActionbar);
+            player.displayClientMessage(Component.literal(msg), useActionbar);
     }
 }
