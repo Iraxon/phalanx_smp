@@ -121,6 +121,9 @@
       "value": ""
     },
     "entityDataEntries": [],
+    "onRightClickedOn": {
+      "name": "DeepslateGolemRightclickedOnEntity"
+    },
     "onMobTickUpdate": {
       "name": "DeepslateGolemAI"
     },

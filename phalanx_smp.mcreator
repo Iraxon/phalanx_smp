@@ -67,7 +67,6 @@
       "metadata": {
         "files": [
           "src/main/java/com/github/iraxon/client/renderer/DeepslateGolemRenderer.java",
-          "src/main/resources/data/phalanx_smp/forge/biome_modifier/deepslate_golem_biome_modifier.json",
           "src/main/java/com/github/iraxon/entity/DeepslateGolemEntity.java"
         ]
       }
@@ -300,6 +299,32 @@
         ],
         "files": [
           "src/main/java/com/github/iraxon/procedures/IssueOrdersConfirmOnKeyPressedProcedure.java"
+        ]
+      }
+    },
+    {
+      "name": "DeepslateGolemRightclickedOnEntity",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "deepslate_golem_rightclicked_on_entity",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "sourceentity",
+            "type": "entity"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/com/github/iraxon/procedures/DeepslateGolemRightclickedOnEntityProcedure.java"
         ]
       }
     }
