@@ -8,9 +8,12 @@ import java.util.stream.Stream;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.GameType;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
@@ -105,4 +108,17 @@ public class PhalanxUtils {
         if (recipient instanceof Player player && !player.level().isClientSide())
             player.displayClientMessage(Component.literal(msg), useActionbar);
     }
+
+    @SuppressWarnings("null")
+    @Nonnull
+    public static GameType getGameMode(Player player) {
+		if (player instanceof ServerPlayer serverPlayer) {
+			return serverPlayer.gameMode.getGameModeForPlayer();
+		} else if (player.level().isClientSide()) {
+            var playerInfo = Minecraft.getInstance().getConnection().getPlayerInfo(player.getGameProfile().getId());
+			if (playerInfo != null)
+				return playerInfo.getGameMode();
+		}
+		return null;
+	}
 }
