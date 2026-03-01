@@ -306,7 +306,7 @@
       "name": "DeepslateGolemRightclickedOnEntity",
       "type": "procedure",
       "compiles": true,
-      "locked_code": false,
+      "locked_code": true,
       "registry_name": "deepslate_golem_rightclicked_on_entity",
       "metadata": {
         "dependencies": [
