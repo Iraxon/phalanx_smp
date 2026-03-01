@@ -1,7 +1,10 @@
 package com.github.iraxon.procedures;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
+import java.util.Map.Entry;
 import java.util.stream.Stream;
 
 import javax.annotation.Nonnull;
@@ -115,6 +118,11 @@ public record FormationStateNBTWrapper(CompoundTag data) {
 
         public final int index;
 
+        @SuppressWarnings("unchecked")
+        private static final Map<Integer, Direction> getMap = Map
+                .ofEntries((Entry<Integer, Direction>[]) Stream.of(values()).map(
+                        dir -> Map.entry(dir.index, dir)).toArray());
+
         private Direction(int index) {
             this.index = index;
         }
@@ -125,7 +133,9 @@ public record FormationStateNBTWrapper(CompoundTag data) {
 
         /**
          * Returns rotated direction
-         * @param change In 45-degree increments clockwise (e.g. +2 for 90 degrees clockwise)
+         *
+         * @param change In 45-degree increments clockwise (e.g. +2 for 90 degrees
+         *               clockwise)
          * @return New direction
          */
         public Direction rotate(int change) {
@@ -135,7 +145,7 @@ public record FormationStateNBTWrapper(CompoundTag data) {
         @SuppressWarnings("null")
         @Nonnull
         public static Direction get(int index) {
-            return Stream.of(values()).filter(v -> v.index == index).findAny().orElse(SOUTH);
+            return getMap.getOrDefault(index, SOUTH);
         }
     }
 
