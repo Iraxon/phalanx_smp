@@ -1,16 +1,23 @@
 package com.github.iraxon.procedures;
 
+import net.minecraft.world.level.GameType;
 import net.minecraft.world.level.LevelAccessor;
+
+import com.github.iraxon.entity.DeepslateGolemEntity;
+
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.damagesource.DamageTypes;
-import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.core.registries.Registries;
+import net.minecraft.world.entity.player.Player;
 
 public class DeepslateGolemRightclickedOnEntityProcedure {
 	public static void execute(LevelAccessor world, Entity entity, Entity sourceentity) {
-		if (entity == null || sourceentity == null)
+		if (world == null || entity == null || sourceentity == null)
 			return;
-		entity.hurt(new DamageSource(world.registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(DamageTypes.GENERIC)), 1);
-		sourceentity.hurt(new DamageSource(world.registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(DamageTypes.GENERIC)), 1);
+
+		if (sourceentity instanceof Player p && PhalanxUtils.getGameMode(p) == GameType.CREATIVE
+				&& entity instanceof DeepslateGolemEntity e) {
+
+			DeepslateGolemNBTWrapper.of(e).setPlayerIfNeutral(p);
+
+		}
 	}
 }
