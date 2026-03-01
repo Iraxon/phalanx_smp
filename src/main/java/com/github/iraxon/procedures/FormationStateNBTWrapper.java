@@ -123,6 +123,15 @@ public record FormationStateNBTWrapper(CompoundTag data) {
             return f.uses_direction;
         }
 
+        /**
+         * Returns rotated direction
+         * @param change In 45-degree increments clockwise (e.g. +2 for 90 degrees clockwise)
+         * @return New direction
+         */
+        public Direction rotate(int change) {
+            return Direction.get((index + change) % 8);
+        }
+
         @SuppressWarnings("null")
         @Nonnull
         public static Direction get(int index) {
