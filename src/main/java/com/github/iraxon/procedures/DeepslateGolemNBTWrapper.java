@@ -8,8 +8,8 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import com.github.iraxon.entity.DeepslateGolemEntity;
-
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.entity.player.Player;
 
 public record DeepslateGolemNBTWrapper(@Nonnull DeepslateGolemEntity golem, @Nonnull CompoundTag data) {
 
@@ -34,6 +34,10 @@ public record DeepslateGolemNBTWrapper(@Nonnull DeepslateGolemEntity golem, @Non
         return (golem.level().isClientSide ? clientCache : serverCache).computeIfAbsent(uuid,
                 (String u) -> new DeepslateGolemNBTWrapper(golem, golem.getPersistentData()));
     }
+
+    /**
+     * SETTERS AND GETTERS
+     */
 
     private static final String UNIT_COMMANDER_NBT_KEY = "phalanx_golem_commander";
 
@@ -77,14 +81,18 @@ public record DeepslateGolemNBTWrapper(@Nonnull DeepslateGolemEntity golem, @Non
     }
 
     @Nonnull
-    public GolemType type() {
+    public GolemType getType() {
         return GolemType.get(data.getInt(GOLEM_TYPE_KEY));
     }
 
     public static final String GOLEM_PLAYER_UUID_KEY = "phalanx_golem_player";
 
+    public void setPlayerIfNeutral(Player p) {
+        data.putString(GOLEM_PLAYER_UUID_KEY, Objects.requireNonNull(p.getStringUUID()));
+    }
+
     @Nonnull
-    public String playerUUID() {
+    public String getPlayerUUID() {
         return Objects.requireNonNull(data.getString(GOLEM_PLAYER_UUID_KEY));
     }
 
