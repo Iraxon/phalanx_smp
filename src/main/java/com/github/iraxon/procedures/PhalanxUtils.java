@@ -2,6 +2,7 @@ package com.github.iraxon.procedures;
 
 import java.util.Comparator;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
 
@@ -58,8 +59,7 @@ public class PhalanxUtils {
      * @param predicate
      * @return
      */
-    @Nullable
-    public static <T extends Entity> T getNearestEntityWithPredicate(
+    public static <T extends Entity> Optional<T> getNearestEntityWithPredicate(
             @Nonnull LevelAccessor world,
             @Nonnull Class<T> cls,
             @Nonnull Vec3 center,
@@ -67,10 +67,9 @@ public class PhalanxUtils {
             @Nonnull Predicate<? super T> predicate) {
 
         return getEntitiesWithPredicate(world, cls, center, size, predicate)
-                .min(Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(center))).orElse(null);
+                .min(Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(center)));
     }
 
-    @Nullable
     /**
      * Entity from UUID
      *
@@ -82,7 +81,7 @@ public class PhalanxUtils {
      * @param uuidString
      * @return
      */
-    public static <T extends Entity> T getEntityByUUID(
+    public static <T extends Entity> Optional<T> getEntityByUUID(
             @Nonnull LevelAccessor world,
             @Nonnull Class<T> cls,
             @Nonnull Vec3 center,
