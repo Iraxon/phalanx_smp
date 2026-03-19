@@ -107,41 +107,6 @@
       }
     },
     {
-      "name": "EntityFromUUID",
-      "type": "procedure",
-      "compiles": true,
-      "locked_code": true,
-      "registry_name": "entity_from_uuid",
-      "metadata": {
-        "dependencies": [
-          {
-            "name": "x",
-            "type": "number"
-          },
-          {
-            "name": "y",
-            "type": "number"
-          },
-          {
-            "name": "z",
-            "type": "number"
-          },
-          {
-            "name": "uuid",
-            "type": "string"
-          },
-          {
-            "name": "world",
-            "type": "world"
-          }
-        ],
-        "return_type": "entity",
-        "files": [
-          "src/main/java/com/github/iraxon/procedures/EntityFromUUIDProcedure.java"
-        ]
-      }
-    },
-    {
       "name": "AlignTeam",
       "type": "procedure",
       "compiles": true,
