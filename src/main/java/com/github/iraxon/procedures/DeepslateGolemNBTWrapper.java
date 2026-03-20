@@ -5,8 +5,6 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Stream;
 
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import com.github.iraxon.entity.DeepslateGolemEntity;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.player.Player;
@@ -41,7 +39,6 @@ public record DeepslateGolemNBTWrapper(@Nonnull DeepslateGolemEntity golem, @Non
 
     private static final String UNIT_COMMANDER_NBT_KEY = "phalanx_golem_commander";
 
-    @Nullable
     /**
      * Finds this unit's commander
      *
@@ -57,7 +54,7 @@ public record DeepslateGolemNBTWrapper(@Nonnull DeepslateGolemEntity golem, @Non
         final String commanderUUID = data().getString(UNIT_COMMANDER_NBT_KEY);
         return PhalanxUtils.getEntityByUUID(Objects.requireNonNull(golem.level()),
                 DeepslateGolemEntity.class,
-                Objects.requireNonNull(golem.position()), 64, commanderUUID);
+                Objects.requireNonNull(golem.position()), 64, commanderUUID).orElse(this.golem);
     }
 
     public static final String GOLEM_TYPE_KEY = "phalanx_golem_type";
@@ -87,7 +84,7 @@ public record DeepslateGolemNBTWrapper(@Nonnull DeepslateGolemEntity golem, @Non
 
     public static final String GOLEM_PLAYER_UUID_KEY = "phalanx_golem_player";
 
-    public void setPlayerIfNeutral(Player p) {
+    public void setPlayerIfNeutral(@Nonnull Player p) {
         data.putString(GOLEM_PLAYER_UUID_KEY, Objects.requireNonNull(p.getStringUUID()));
     }
 

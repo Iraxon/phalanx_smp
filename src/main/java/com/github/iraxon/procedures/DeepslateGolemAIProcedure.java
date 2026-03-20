@@ -9,6 +9,7 @@ import net.minecraft.world.entity.Entity;
 import com.github.iraxon.entity.DeepslateGolemEntity;
 
 import java.util.Objects;
+import java.util.Optional;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -27,24 +28,27 @@ public class DeepslateGolemAIProcedure {
 
 		AI.common_ai(nbt, entity);
 
-		switch (nbt.type()) {
+		switch (nbt.getType()) {
 			case COMMANDER -> AI.commander_ai(nbt, entity);
 			case HEAVY_INFANTRY -> AI.heavy_infantry_ai(nbt, entity);
 			case SKIRMISHER -> AI.skirmisher_ai(nbt, entity);
-		};
+		}
+		;
 	}
 
 	private static class AI {
 
 		private static void common_ai(@Nonnull DeepslateGolemNBTWrapper nbt, @Nonnull DeepslateGolemEntity soldier) {
-			AIUtils.update_team(soldier, nbt.playerUUID());
+			AIUtils.update_team(soldier, nbt.getPlayerUUID());
 		}
 
-		private static void commander_ai(@Nonnull DeepslateGolemNBTWrapper nbt, @Nonnull DeepslateGolemEntity commander) {
+		private static void commander_ai(@Nonnull DeepslateGolemNBTWrapper nbt,
+				@Nonnull DeepslateGolemEntity commander) {
 			final FormationStateNBTWrapper formationWrapper = nbt.formationWrapper();
 		}
 
-		private static void heavy_infantry_ai(@Nonnull DeepslateGolemNBTWrapper nbt, @Nonnull DeepslateGolemEntity soldier) {
+		private static void heavy_infantry_ai(@Nonnull DeepslateGolemNBTWrapper nbt,
+				@Nonnull DeepslateGolemEntity soldier) {
 			//
 		}
 
@@ -61,7 +65,7 @@ public class DeepslateGolemAIProcedure {
 		 *                   option to make sure formation is kept
 		 * @return
 		 */
-		private static LivingEntity getAttackTarget(@Nonnull DeepslateGolemEntity entity, double size,
+		private static Optional<LivingEntity> getAttackTarget(@Nonnull DeepslateGolemEntity entity, double size,
 				@Nonnull Vec3 target_pos) {
 			final LivingEntity oldAtkTarget = entity.getTarget();
 			return PhalanxUtils.getNearestEntityWithPredicate(
@@ -69,9 +73,7 @@ public class DeepslateGolemAIProcedure {
 					LivingEntity.class,
 					target_pos,
 					size,
-					(LivingEntity e) -> (e == oldAtkTarget) // To allow retaliation, the golem's current target is
-															// always a
-															// valid next target
+					(@Nonnull LivingEntity e) -> (e == oldAtkTarget) // To allow retaliation
 							|| should_target(entity, e));
 		}
 
@@ -104,7 +106,7 @@ public class DeepslateGolemAIProcedure {
 
 			final var player = PhalanxUtils.getEntityByUUID(Objects.requireNonNull(entity.level()), Player.class,
 					Objects.requireNonNull(entity.position()), 64,
-					playerUUIDString);
+					playerUUIDString).orElse(null);
 			AlignTeamProcedure.execute(entity, player);
 		}
 
