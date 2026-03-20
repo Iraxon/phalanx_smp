@@ -1,23 +1,25 @@
 package com.github.iraxon.procedures;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
-
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import com.github.iraxon.entity.DeepslateGolemEntity;
+import com.github.iraxon.procedures.DeepslateGolemNBTWrapper.GolemType;
 import net.minecraft.world.entity.Entity;
 
 public record OrderManager(@Nonnull Entity orderIssuer, @Nonnull ArrayList<OrderInput> inputs) {
 
+    @Nonnull
+    private static ConcurrentHashMap<String, OrderManager> cache = new ConcurrentHashMap<>();
+
     private OrderManager(@Nonnull Entity orderIssuer) {
         this(orderIssuer, new ArrayList<>());
     }
-
-    @Nonnull
-    private static ConcurrentHashMap<String, OrderManager> cache = new ConcurrentHashMap<>();
 
     @SuppressWarnings("null")
     @Nonnull
@@ -61,12 +63,12 @@ public record OrderManager(@Nonnull Entity orderIssuer, @Nonnull ArrayList<Order
     }
 
     public void inputUp() {
-        this.basicInput(OrderInput.UP);
+        this.addInput(OrderInput.UP);
         PhalanxUtils.sendMessage(orderIssuer, infoMessage(), true);
     }
 
     public void inputDown() {
-        this.basicInput(OrderInput.DOWN);
+        this.addInput(OrderInput.DOWN);
         PhalanxUtils.sendMessage(orderIssuer, infoMessage(), true);
     }
 
@@ -76,7 +78,7 @@ public record OrderManager(@Nonnull Entity orderIssuer, @Nonnull ArrayList<Order
     }
 
     public void inputConfirm() {
-        // TOOD: Orders
+        executeOrder(this.inputs, this.orderIssuer);
         this.inputs.clear();
         PhalanxUtils.sendMessage(orderIssuer, "Sent", true);
     }
@@ -97,7 +99,7 @@ public record OrderManager(@Nonnull Entity orderIssuer, @Nonnull ArrayList<Order
         OrderManager.of(orderIssuer).ifPresent(OrderManager::inputConfirm);
     }
 
-    private void basicInput(OrderInput input) {
+    private void addInput(OrderInput input) {
         this.inputs.add(input);
     }
 
@@ -117,7 +119,7 @@ public record OrderManager(@Nonnull Entity orderIssuer, @Nonnull ArrayList<Order
                 : "No Order";
     }
 
-    private static enum OrderInput {
+    public static enum OrderInput {
         UP,
         DOWN;
 
@@ -127,5 +129,24 @@ public record OrderManager(@Nonnull Entity orderIssuer, @Nonnull ArrayList<Order
                 case DOWN -> "▼";
             };
         }
+    }
+
+    @SuppressWarnings("null")
+    private static void executeOrder(List<OrderInput> orderCode, @Nonnull Entity orderIssuer) {
+        FormationStateNBTWrapper.Order.get(orderCode)
+                .ifPresent(order -> findOrderRecipient(orderIssuer).ifPresent(recipient -> {
+                    recipient.formationWrapper().setOrder(order);
+                }));
+    }
+
+    @SuppressWarnings("null")
+    private static Optional<DeepslateGolemNBTWrapper> findOrderRecipient(@Nonnull Entity orderIssuer) {
+        return PhalanxUtils.getNearestEntityWithPredicate(orderIssuer.level(), DeepslateGolemEntity.class,
+                orderIssuer.position(), 50,
+                golem -> {
+                    final var wrapper = DeepslateGolemNBTWrapper.of(golem);
+                    return wrapper.getType().equals(GolemType.COMMANDER)
+                            && wrapper.getPlayerUUID().equals(orderIssuer.getStringUUID());
+                }).map((@Nonnull DeepslateGolemEntity golem) -> DeepslateGolemNBTWrapper.of(golem));
     }
 }

@@ -1,13 +1,16 @@
 package com.github.iraxon.procedures;
 
-import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 import java.util.Map.Entry;
 import java.util.stream.Stream;
 
 import javax.annotation.Nonnull;
+
+import com.github.iraxon.procedures.OrderManager.OrderInput;
 
 import net.minecraft.nbt.CompoundTag;
 
@@ -28,8 +31,8 @@ public record FormationStateNBTWrapper(CompoundTag data) {
     public static enum Formation {
         LINE(0, Set.of(Order.HALT, Order.ADVANCE, Order.CHARGE), true),
         SQUARE(1, Set.of(Order.HALT, Order.ADVANCE), true),
-        COLUMN(2, Set.of(Order.HALT, Order.FOLLOW, Order.COLLECT), false),
-        NARROW_COLUMN(2, Set.of(Order.HALT, Order.FOLLOW, Order.COLLECT), false);
+        COLUMN(2, Set.of(Order.HALT, Order.FOLLOW), false),
+        NARROW_COLUMN(2, Set.of(Order.HALT, Order.FOLLOW), false);
 
         public final int index;
         /**
@@ -65,16 +68,17 @@ public record FormationStateNBTWrapper(CompoundTag data) {
     public static final String ORDER_KEY = "order";
 
     public static enum Order {
-        HALT(0),
-        ADVANCE(1),
-        CHARGE(2),
-        FOLLOW(3),
-        COLLECT(4);
+        HALT(0, codeFromString("▼▼▼")),
+        ADVANCE(1, codeFromString("▲▲▼")),
+        CHARGE(2, codeFromString("▲▲▲")),
+        FOLLOW(3, codeFromString("▲▼▲"));
 
         public final int index;
+        public final List<OrderManager.OrderInput> code;
 
-        private Order(int index) {
+        private Order(int index, List<OrderManager.OrderInput> code) {
             this.index = index;
+            this.code = code;
         }
 
         public boolean is_valid_for(Formation f) {
@@ -85,6 +89,22 @@ public record FormationStateNBTWrapper(CompoundTag data) {
         @Nonnull
         public static Order get(int index) {
             return Stream.of(values()).filter(v -> v.index == index).findAny().orElse(HALT);
+        }
+
+        @SuppressWarnings("null")
+        @Nonnull
+        public static Optional<Order> get(List<OrderInput> code) {
+            return Stream.of(values()).filter(v -> v.code.equals(code)).findAny();
+        }
+
+        @SuppressWarnings("null")
+        @Nonnull
+        private static List<OrderInput> codeFromString(@Nonnull String s) {
+            return s.chars().mapToObj(
+                    c -> switch (c) {
+                        case '^', '▲' -> OrderInput.UP;
+                        default -> OrderInput.DOWN; // ▼
+                    }).toList();
         }
     }
 
