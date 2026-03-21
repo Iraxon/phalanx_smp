@@ -53,7 +53,7 @@ public class DeepslateGolemAIProcedure {
 
 			final FormationStateNBTWrapper formationWrapper = nbt.formationWrapper();
 
-			if (formationWrapper.order().equals(Order.FOLLOW)) {
+			if (formationWrapper.getOrder().equals(Order.FOLLOW)) {
 
 				var player = commander.level().getPlayerByUUID(
 						Objects.requireNonNull(UUID.fromString(nbt.getPlayerUUID())));
@@ -62,7 +62,7 @@ public class DeepslateGolemAIProcedure {
 							commander.position()
 									.add(commander.position().subtract(player.position()).normalize().scale(1.25)));
 				}
-			} else if (formationWrapper.order().equals(Order.HALT)) {
+			} else if (formationWrapper.getOrder().equals(Order.HALT)) {
 				nbt.clearMoveTarget();
 			}
 		}
