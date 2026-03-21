@@ -85,13 +85,17 @@ public record DeepslateGolemNBTWrapper(@Nonnull DeepslateGolemEntity golem, @Non
 
     public static final String GOLEM_PLAYER_UUID_KEY = "phalanx_golem_player";
 
-    public void setPlayerIfNeutral(@Nonnull Player p) {
+    public void setPlayer(@Nonnull Player p) {
         data.putString(GOLEM_PLAYER_UUID_KEY, Objects.requireNonNull(p.getStringUUID()));
     }
 
     @Nonnull
     public String getPlayerUUID() {
         return Objects.requireNonNull(data.getString(GOLEM_PLAYER_UUID_KEY));
+    }
+
+    public boolean isNeutral() {
+        return data.getString(GOLEM_PLAYER_UUID_KEY).isEmpty();
     }
 
     @Nonnull
