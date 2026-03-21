@@ -29,10 +29,12 @@ public record FormationStateNBTWrapper(CompoundTag data) {
     public static final String FORMATION_KEY = "formation";
 
     public static enum Formation {
-        LINE(0, Set.of(Order.HALT, Order.ADVANCE, Order.CHARGE), true),
-        SQUARE(1, Set.of(Order.HALT, Order.ADVANCE), true),
-        COLUMN(2, Set.of(Order.HALT, Order.FOLLOW), false),
-        NARROW_COLUMN(2, Set.of(Order.HALT, Order.FOLLOW), false);
+
+        NARROW_COLUMN(0, Set.of(Order.HALT, Order.FOLLOW), false),
+        COLUMN(1, Set.of(Order.HALT, Order.FOLLOW), false),
+
+        LINE(2, Set.of(Order.HALT, Order.ADVANCE, Order.CHARGE), true),
+        SQUARE(3, Set.of(Order.HALT, Order.ADVANCE), true);
 
         public final int index;
         /**
@@ -51,7 +53,7 @@ public record FormationStateNBTWrapper(CompoundTag data) {
         @SuppressWarnings("null")
         @Nonnull
         public static Formation get(int index) {
-            return Stream.of(values()).filter(v -> v.index == index).findAny().orElse(COLUMN);
+            return Stream.of(values()).filter(v -> v.index == index).findAny().orElse(NARROW_COLUMN);
         }
     }
 
@@ -61,7 +63,7 @@ public record FormationStateNBTWrapper(CompoundTag data) {
     }
 
     @Nonnull
-    public Formation formation() {
+    public Formation getFormation() {
         return Formation.get(data.getInt(FORMATION_KEY));
     }
 
@@ -110,6 +112,7 @@ public record FormationStateNBTWrapper(CompoundTag data) {
 
     /**
      * Set current order
+     * 
      * @param o
      * @return Whether the order was successfully set
      */
@@ -117,7 +120,7 @@ public record FormationStateNBTWrapper(CompoundTag data) {
 
         Objects.requireNonNull(o);
 
-        if (o.is_valid_for(formation())) {
+        if (o.is_valid_for(getFormation())) {
             data.putInt(ORDER_KEY, o.index);
             return true;
 
@@ -128,7 +131,7 @@ public record FormationStateNBTWrapper(CompoundTag data) {
     }
 
     @Nonnull
-    public Order order() {
+    public Order getOrder() {
         return Order.get(data.getInt(ORDER_KEY));
     }
 
@@ -181,7 +184,7 @@ public record FormationStateNBTWrapper(CompoundTag data) {
 
         Objects.requireNonNull(d);
 
-        if (d.is_valid_for(formation()))
+        if (d.is_valid_for(getFormation()))
             data.putInt(DIRECTION_KEY, d.index);
 
         else
@@ -189,8 +192,14 @@ public record FormationStateNBTWrapper(CompoundTag data) {
     }
 
     @Nonnull
-    public Direction direction() {
+    public Direction getDirection() {
         return Direction.get(data.getInt(ORDER_KEY));
+    }
+
+    public String manifest() {
+        return ("Direction: " + getDirection() + "\n"
+                + "Formation: " + getFormation() + "\n"
+                + "Order: " + getOrder() + "\n");
     }
 
 }

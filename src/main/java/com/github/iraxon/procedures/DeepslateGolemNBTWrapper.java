@@ -125,4 +125,13 @@ public record DeepslateGolemNBTWrapper(@Nonnull DeepslateGolemEntity golem, @Non
     public void clearMoveTarget() {
         setMoveTarget(Objects.requireNonNull(this.golem.position()));
     }
+
+    public String manifest() {
+        return ("Commander: " + getCommander().getStringUUID() + "\n"
+                + "Player: " + getPlayerUUID() + "\n"
+                + "Type: " + getType() + "\n"
+                + "Move Target: " + getMoveTarget() + "\n"
+                + "---\n"
+                + formationWrapper().manifest());
+    }
 }
