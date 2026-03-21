@@ -108,15 +108,23 @@ public record FormationStateNBTWrapper(CompoundTag data) {
         }
     }
 
-    public void setOrder(@Nonnull Order o) {
+    /**
+     * Set current order
+     * @param o
+     * @return Whether the order was successfully set
+     */
+    public boolean setOrder(@Nonnull Order o) {
 
         Objects.requireNonNull(o);
 
-        if (o.is_valid_for(formation()))
+        if (o.is_valid_for(formation())) {
             data.putInt(ORDER_KEY, o.index);
+            return true;
 
-        else
+        } else {
             data.putInt(ORDER_KEY, Order.HALT.index);
+            return false;
+        }
     }
 
     @Nonnull

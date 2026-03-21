@@ -7,9 +7,11 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.Entity;
 
 import com.github.iraxon.entity.DeepslateGolemEntity;
+import com.github.iraxon.procedures.FormationStateNBTWrapper.Order;
 
 import java.util.Objects;
 import java.util.Optional;
+import java.util.UUID;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -17,7 +19,7 @@ import javax.annotation.Nullable;
 public class DeepslateGolemAIProcedure {
 
 	public static void execute(LevelAccessor world, double x, double y, double z, @Nullable Entity entity) {
-		if (!world.isClientSide() && entity instanceof DeepslateGolemEntity golem)
+		if (entity instanceof DeepslateGolemEntity golem)
 			inner_execute(golem);
 	}
 
@@ -40,11 +42,29 @@ public class DeepslateGolemAIProcedure {
 
 		private static void common_ai(@Nonnull DeepslateGolemNBTWrapper nbt, @Nonnull DeepslateGolemEntity soldier) {
 			AIUtils.update_team(soldier, nbt.getPlayerUUID());
+
+			final var targ = nbt.getMoveTarget();
+			soldier.getNavigation().moveTo(targ.x, targ.y, targ.z, 1.0);
 		}
 
+		@SuppressWarnings("null")
 		private static void commander_ai(@Nonnull DeepslateGolemNBTWrapper nbt,
 				@Nonnull DeepslateGolemEntity commander) {
+
 			final FormationStateNBTWrapper formationWrapper = nbt.formationWrapper();
+
+			if (formationWrapper.order().equals(Order.FOLLOW)) {
+
+				var player = commander.level().getPlayerByUUID(
+						Objects.requireNonNull(UUID.fromString(nbt.getPlayerUUID())));
+				if (player != null) {
+					nbt.setMoveTarget(
+							commander.position()
+									.add(commander.position().subtract(player.position()).normalize().scale(1.25)));
+				}
+			} else if (formationWrapper.order().equals(Order.HALT)) {
+				nbt.clearMoveTarget();
+			}
 		}
 
 		private static void heavy_infantry_ai(@Nonnull DeepslateGolemNBTWrapper nbt,

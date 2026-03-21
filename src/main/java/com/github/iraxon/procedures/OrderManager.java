@@ -10,6 +10,8 @@ import javax.annotation.Nullable;
 
 import com.github.iraxon.entity.DeepslateGolemEntity;
 import com.github.iraxon.procedures.DeepslateGolemNBTWrapper.GolemType;
+import com.github.iraxon.procedures.FormationStateNBTWrapper.Order;
+
 import net.minecraft.world.entity.Entity;
 
 public record OrderManager(@Nonnull Entity orderIssuer, @Nonnull ArrayList<OrderInput> inputs) {
@@ -78,9 +80,33 @@ public record OrderManager(@Nonnull Entity orderIssuer, @Nonnull ArrayList<Order
     }
 
     public void inputConfirm() {
-        executeOrder(this.inputs, this.orderIssuer);
+
+        final var orderOptional = Order.get(this.inputs);
+        if (orderOptional.isEmpty()) {
+            PhalanxUtils.sendMessage(orderIssuer, "Unknown order code", true);
+            this.inputs.clear();
+            return;
+        }
+
+        @Nonnull
+        final var order = Objects.requireNonNull(orderOptional.orElseThrow());
+
+        final var recipientOptional = findOrderRecipient(orderIssuer);
+        if (recipientOptional.isEmpty()) {
+            PhalanxUtils.sendMessage(orderIssuer, "No commander found", true);
+            this.inputs.clear();
+            return;
+        }
+
+        @Nonnull
+        final var recipient = Objects.requireNonNull(recipientOptional.orElseThrow());
+
+        final var success = recipient.formationWrapper().setOrder(order);
         this.inputs.clear();
-        PhalanxUtils.sendMessage(orderIssuer, "Sent", true);
+
+        PhalanxUtils.sendMessage(orderIssuer,
+                success ? "Order sent: " + order.toString() : "Wrong formation for order: " + order.toString(),
+                true);
     }
 
     public static void inputUp(@Nonnull Entity orderIssuer) {
@@ -129,14 +155,6 @@ public record OrderManager(@Nonnull Entity orderIssuer, @Nonnull ArrayList<Order
                 case DOWN -> "▼";
             };
         }
-    }
-
-    @SuppressWarnings("null")
-    private static void executeOrder(List<OrderInput> orderCode, @Nonnull Entity orderIssuer) {
-        FormationStateNBTWrapper.Order.get(orderCode)
-                .ifPresent(order -> findOrderRecipient(orderIssuer).ifPresent(recipient -> {
-                    recipient.formationWrapper().setOrder(order);
-                }));
     }
 
     @SuppressWarnings("null")

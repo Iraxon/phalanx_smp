@@ -8,6 +8,7 @@ import javax.annotation.Nonnull;
 import com.github.iraxon.entity.DeepslateGolemEntity;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.phys.Vec3;
 
 public record DeepslateGolemNBTWrapper(@Nonnull DeepslateGolemEntity golem, @Nonnull CompoundTag data) {
 
@@ -96,5 +97,28 @@ public record DeepslateGolemNBTWrapper(@Nonnull DeepslateGolemEntity golem, @Non
     @Nonnull
     public FormationStateNBTWrapper formationWrapper() {
         return FormationStateNBTWrapper.of(data);
+    }
+
+    private static final String TARGET_POSITION_KEY = "phalanx_golem_target_pos";
+
+    public void setMoveTarget(@Nonnull Vec3 pos) {
+        CompoundTag posTag = new CompoundTag();
+        posTag.putDouble("x", pos.x);
+        posTag.putDouble("y", pos.y);
+        posTag.putDouble("z", pos.z);
+        data.put(TARGET_POSITION_KEY, posTag);
+    }
+
+    @Nonnull
+    public Vec3 getMoveTarget() {
+        if (!data.contains(GOLEM_PLAYER_UUID_KEY)) {
+            clearMoveTarget();
+        }
+        CompoundTag posTag = data.getCompound(TARGET_POSITION_KEY);
+        return new Vec3(posTag.getDouble("x"), posTag.getDouble("y"), posTag.getDouble("z"));
+    }
+
+    public void clearMoveTarget() {
+        setMoveTarget(Objects.requireNonNull(this.golem.position()));
     }
 }
