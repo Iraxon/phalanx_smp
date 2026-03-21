@@ -103,7 +103,7 @@ public class PhalanxUtils {
      * @param msg
      * @param useActionBar Uses chat if false
      */
-    public static void sendMessage(@Nullable Entity recipient, String msg, boolean useActionbar) {
+    public static void sendMessage(@Nullable Entity recipient, @Nonnull String msg, boolean useActionbar) {
         if (recipient instanceof Player player && !player.level().isClientSide())
             player.displayClientMessage(Component.literal(msg), useActionbar);
     }
