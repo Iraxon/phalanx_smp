@@ -95,14 +95,15 @@ public class PhalanxUtils {
                 (T entity) -> entity.getStringUUID().equals(uuidString));
     }
 
-    @SuppressWarnings("null")
     /**
      * Displays a message to the entity if it's a player
      * and this is being done from server side
+     *
      * @param recipient
      * @param msg
      * @param useActionBar Uses chat if false
      */
+    @SuppressWarnings("null")
     public static void sendMessage(@Nullable Entity recipient, @Nonnull String msg, boolean useActionbar) {
         if (recipient instanceof Player player && !player.level().isClientSide())
             player.displayClientMessage(Component.literal(msg), useActionbar);
@@ -111,13 +112,13 @@ public class PhalanxUtils {
     @SuppressWarnings("null")
     @Nonnull
     public static GameType getGameMode(Player player) {
-		if (player instanceof ServerPlayer serverPlayer) {
-			return serverPlayer.gameMode.getGameModeForPlayer();
-		} else if (player.level().isClientSide()) {
+        if (player instanceof ServerPlayer serverPlayer) {
+            return serverPlayer.gameMode.getGameModeForPlayer();
+        } else if (player.level().isClientSide()) {
             var playerInfo = Minecraft.getInstance().getConnection().getPlayerInfo(player.getGameProfile().getId());
-			if (playerInfo != null)
-				return playerInfo.getGameMode();
-		}
-		return null;
-	}
+            if (playerInfo != null)
+                return playerInfo.getGameMode();
+        }
+        return null;
+    }
 }
