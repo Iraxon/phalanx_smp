@@ -292,6 +292,33 @@
           "src/main/java/com/github/iraxon/procedures/DeepslateGolemRightclickedOnEntityProcedure.java"
         ]
       }
+    },
+    {
+      "name": "UpdateLastAttacker",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "update_last_attacker",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "sourceentity",
+            "type": "entity"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "return_type": "logic",
+        "files": [
+          "src/main/java/com/github/iraxon/procedures/UpdateLastAttackerProcedure.java"
+        ]
+      }
     }
   ],
   "variable_elements": [],

@@ -38,7 +38,7 @@ public class DeepslateGolemAIProcedure {
 	private static class AI {
 
 		private static void common_ai(@Nonnull DeepslateGolemEntity soldier) {
-			AIUtils.update_team(soldier, SoldierNBT.getPlayerUUID(soldier));
+			SoldierAIUtils.update_team(soldier, SoldierNBT.getPlayerUUID(soldier));
 
 			final var targ = SoldierNBT.getMoveTarget(soldier);
 			soldier.getNavigation().moveTo(targ.x, targ.y, targ.z, 1.0);
@@ -49,6 +49,8 @@ public class DeepslateGolemAIProcedure {
 
 			final FormationStateNBTWrapper formationWrapper = SoldierNBT.formationWrapper(commander);
 
+			SoldierAIUtils.setAttackTarget(commander, 16, commander.position());
+
 			if (formationWrapper.getOrder().equals(Order.FOLLOW)) {
 
 				var player = commander.level().getPlayerByUUID(
@@ -56,7 +58,7 @@ public class DeepslateGolemAIProcedure {
 				if (player != null) {
 					SoldierNBT.setMoveTarget(commander,
 							player.position()
-									.add(commander.position().subtract(player.position()).normalize().scale(1.25)));
+									.add(commander.position().subtract(player.position()).normalize().scale(0.5)));
 				}
 			} else if (formationWrapper.getOrder().equals(Order.HALT)) {
 				SoldierNBT.clearMoveTarget(commander);
@@ -70,32 +72,11 @@ public class DeepslateGolemAIProcedure {
 		public static void skirmisher_ai(@Nonnull DeepslateGolemEntity entity) {
 			//
 		}
-
-		/**
-		 * Selects the best attack target for this soldier
-		 *
-		 * @param entity
-		 * @param size       Size of cubic search area for targets
-		 * @param target_pos The location the soldier is "supposed to" be at; useful
-		 *                   option to make sure formation is kept
-		 * @return
-		 */
-		private static Optional<LivingEntity> getAttackTarget(@Nonnull DeepslateGolemEntity entity, double size,
-				@Nonnull Vec3 target_pos) {
-			final LivingEntity oldAtkTarget = entity.getTarget();
-			return PhalanxUtils.getNearestEntityWithPredicate(
-					Objects.requireNonNull(entity.level()),
-					LivingEntity.class,
-					target_pos,
-					size,
-					(@Nonnull LivingEntity e) -> AIUtils.should_target(entity, e, oldAtkTarget));
-		}
-
 	}
 
-	private class AIUtils {
+	public class SoldierAIUtils {
 
-		private static void update_team(@Nonnull DeepslateGolemEntity entity, String playerUUIDString) {
+		public static void update_team(@Nonnull DeepslateGolemEntity entity, String playerUUIDString) {
 			if (playerUUIDString.equals("")) {
 				return;
 			}
@@ -107,6 +88,25 @@ public class DeepslateGolemAIProcedure {
 		}
 
 		/**
+		 * Selects the best attack target for this soldier
+		 *
+		 * @param entity
+		 * @param size       Size of cubic search area for targets
+		 * @param target_pos The location the soldier is "supposed to" be at; useful
+		 *                   option to make sure formation is kept
+		 * @return
+		 */
+		public static void setAttackTarget(@Nonnull DeepslateGolemEntity entity, double size,
+				@Nonnull Vec3 target_pos) {
+			entity.setTarget(PhalanxUtils.getNearestEntityWithPredicate(
+					Objects.requireNonNull(entity.level()),
+					LivingEntity.class,
+					target_pos,
+					size,
+					(@Nonnull LivingEntity e) -> SoldierAIUtils.should_target(entity, e)).orElse(null));
+		}
+
+		/**
 		 * Tells whether the soldier should consider the other entity
 		 * an enemy to be targeted
 		 *
@@ -114,25 +114,28 @@ public class DeepslateGolemAIProcedure {
 		 * @param possible_target
 		 * @return
 		 */
-		private static boolean should_target(@Nonnull DeepslateGolemEntity subject,
-				@Nonnull LivingEntity possible_target, @Nullable LivingEntity oldTarget) {
+		public static boolean should_target(@Nonnull DeepslateGolemEntity subject,
+				@Nonnull LivingEntity possible_target) {
 
+			// No friendly fire
 			if (isAllied(subject, possible_target)) {
 				return false;
 			}
 
-			// To allow retaliation
-			if (possible_target == oldTarget) {
-				return true;
-			}
 			var team = possible_target.getTeam();
 			if (team != null && !team.isAlliedTo(subject.getTeam())) {
 				return true;
 			}
+
+			// Retaliation
+			if (SoldierNBT.getLastAttackerUUID(subject).equals(possible_target.getStringUUID())) {
+				return true;
+			}
+
 			return false;
 		}
 
-		private static boolean isAllied(@Nonnull DeepslateGolemEntity subject, @Nonnull LivingEntity other) {
+		public static boolean isAllied(@Nonnull DeepslateGolemEntity subject, @Nonnull LivingEntity other) {
 
 			final var subjectTeam = subject.getTeam();
 			final var otherTeam = other.getTeam();

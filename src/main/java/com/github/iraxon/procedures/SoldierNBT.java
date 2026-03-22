@@ -1,11 +1,13 @@
 package com.github.iraxon.procedures;
 
 import java.util.Objects;
+import java.util.Optional;
 import java.util.stream.Stream;
 
 import javax.annotation.Nonnull;
 import com.github.iraxon.entity.DeepslateGolemEntity;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.Vec3;
 
@@ -105,11 +107,47 @@ public class SoldierNBT {
         setMoveTarget(soldier, Objects.requireNonNull(soldier.position()));
     }
 
+    private static final String LAST_ATTACKER_KEY = "phalanx_golem_last_attacker";
+
+    private static final String LAST_ATTACKER_UUID_KEY = "attackerUUID";
+    private static final String LAST_ATTACKER_EXPIRATION_TIMESTAMP_KEY = "timestamp";
+
+    public static void setLastAttackerUUID(DeepslateGolemEntity subject, LivingEntity attacker) {
+        final var lastAttackerinfo = new CompoundTag();
+        lastAttackerinfo.putString(LAST_ATTACKER_UUID_KEY, Objects.requireNonNull(attacker.getStringUUID()));
+        lastAttackerinfo.putLong(LAST_ATTACKER_EXPIRATION_TIMESTAMP_KEY, subject.level().getDayTime() + 3 * 60 * 20);
+        subject.getPersistentData().put(LAST_ATTACKER_KEY, lastAttackerinfo);
+    }
+
+    /**
+     * Last attacker, if the stored info is there and not expired
+     * @param subject
+     * @return Empty String if info is absent or expired
+     */
+    @Nonnull
+    public static String getLastAttackerUUID(DeepslateGolemEntity subject) {
+        final var data = subject.getPersistentData();
+        final var lastAttackerinfo = data.getCompound(LAST_ATTACKER_KEY);
+        if (subject.level().getDayTime() < lastAttackerinfo.getLong(LAST_ATTACKER_EXPIRATION_TIMESTAMP_KEY)) {
+            return Objects.requireNonNull(lastAttackerinfo.getString(LAST_ATTACKER_UUID_KEY));
+        } else {
+            data.remove(LAST_ATTACKER_KEY);
+            return "";
+        }
+    }
+
+    @Nonnull
+    public static Optional<String> getLastAttackerUUIDOptional(DeepslateGolemEntity subject) {
+        final var r = getLastAttackerUUID(subject);
+        return Objects.requireNonNull(r.isEmpty() ? Optional.empty() : Optional.of(r));
+    }
+
     public static String manifest(DeepslateGolemEntity soldier) {
         return ("Commander: " + getCommander(soldier).getStringUUID() + "\n"
                 + "Player: " + getPlayerUUID(soldier) + "\n"
                 + "Type: " + getType(soldier) + "\n"
                 + "Move Target: " + getMoveTarget(soldier) + "\n"
+                + "Last Attacker: " + getLastAttackerUUIDOptional(soldier).orElse("None") + "\n"
                 + "---\n"
                 + formationWrapper(soldier).manifest());
     }

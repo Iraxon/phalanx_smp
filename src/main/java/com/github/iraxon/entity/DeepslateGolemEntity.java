@@ -9,7 +9,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.monster.Monster;
-import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -28,6 +27,7 @@ import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.core.BlockPos;
 
+import com.github.iraxon.procedures.UpdateLastAttackerProcedure;
 import com.github.iraxon.procedures.DeepslateGolemRightclickedOnEntityProcedure;
 import com.github.iraxon.procedures.DeepslateGolemAIProcedure;
 import com.github.iraxon.init.PhalanxSmpModEntities;
@@ -59,7 +59,6 @@ public class DeepslateGolemEntity extends Monster {
 				return 4;
 			}
 		});
-		this.targetSelector.addGoal(2, new HurtByTargetGoal(this));
 	}
 
 	@Override
@@ -94,6 +93,15 @@ public class DeepslateGolemEntity extends Monster {
 
 	@Override
 	public boolean hurt(DamageSource damagesource, float amount) {
+		double x = this.getX();
+		double y = this.getY();
+		double z = this.getZ();
+		Level world = this.level();
+		Entity entity = this;
+		Entity sourceentity = damagesource.getEntity();
+		Entity immediatesourceentity = damagesource.getDirectEntity();
+		if (!UpdateLastAttackerProcedure.execute(world, entity, sourceentity))
+			return false;
 		if (damagesource.is(DamageTypes.DROWN))
 			return false;
 		if (damagesource.is(DamageTypes.LIGHTNING_BOLT))
