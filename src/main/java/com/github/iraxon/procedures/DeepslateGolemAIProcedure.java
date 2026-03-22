@@ -10,7 +10,6 @@ import com.github.iraxon.entity.DeepslateGolemEntity;
 import com.github.iraxon.procedures.FormationStateNBTWrapper.Order;
 
 import java.util.Objects;
-import java.util.Optional;
 import java.util.UUID;
 
 import javax.annotation.Nonnull;
