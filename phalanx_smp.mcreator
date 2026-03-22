@@ -36,18 +36,6 @@
       }
     },
     {
-      "name": "ClaimBlockMake",
-      "type": "recipe",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "claim_block_make",
-      "metadata": {
-        "files": [
-          "src/main/resources/data/phalanx_smp/recipes/claim_block_make.json"
-        ]
-      }
-    },
-    {
       "name": "PhalanxVarOnline",
       "type": "gamerule",
       "compiles": true,
