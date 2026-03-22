@@ -136,6 +136,7 @@ public record OrderManager(@Nonnull Entity orderIssuer, @Nonnull ArrayList<Order
         return this.inputs.size() > 0;
     }
 
+    @Nonnull
     private String infoMessage() {
         return this.isActive()
                 ? ("Typing: "
