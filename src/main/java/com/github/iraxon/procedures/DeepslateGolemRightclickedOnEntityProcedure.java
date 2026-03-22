@@ -15,14 +15,12 @@ public class DeepslateGolemRightclickedOnEntityProcedure {
 
 		if (sourceentity instanceof Player p && entity instanceof DeepslateGolemEntity e) {
 
-			final var nbt = DeepslateGolemNBTWrapper.of(e);
-
-			if (PhalanxUtils.getGameMode(p) == GameType.CREATIVE && nbt.isNeutral()) {
-				nbt.setPlayer(p);
+			if (PhalanxUtils.getGameMode(p) == GameType.CREATIVE && SoldierNBT.isNeutral(e)) {
+				SoldierNBT.setPlayer(e, p);
 				PhalanxUtils.sendMessage(p, "Recruited", true);
 
 			} else {
-				PhalanxUtils.sendMessage(p, "Unit Data:\n" + nbt.manifest(), false);
+				PhalanxUtils.sendMessage(p, "Unit Data:\n" + SoldierNBT.manifest(e), false);
 			}
 		}
 	}

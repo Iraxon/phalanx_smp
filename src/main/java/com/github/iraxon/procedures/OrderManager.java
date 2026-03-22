@@ -6,7 +6,7 @@ import java.util.Objects;
 import java.util.Optional;
 import javax.annotation.Nonnull;
 import com.github.iraxon.entity.DeepslateGolemEntity;
-import com.github.iraxon.procedures.DeepslateGolemNBTWrapper.GolemType;
+import com.github.iraxon.procedures.SoldierNBT.SoldierType;
 import com.github.iraxon.procedures.FormationStateNBTWrapper.Order;
 
 import net.minecraft.world.entity.Entity;
@@ -122,7 +122,7 @@ public class OrderManager {
         @Nonnull
         final var recipient = Objects.requireNonNull(recipientOptional.orElseThrow());
 
-        final var success = recipient.formationWrapper().setOrder(order);
+        final var success = SoldierNBT.formationWrapper(recipient).setOrder(order);
         clearInputs(orderIssuer);
 
         PhalanxUtils.sendMessage(orderIssuer,
@@ -131,13 +131,12 @@ public class OrderManager {
     }
 
     @SuppressWarnings("null")
-    private static Optional<DeepslateGolemNBTWrapper> findOrderRecipient(@Nonnull Entity orderIssuer) {
+    private static Optional<DeepslateGolemEntity> findOrderRecipient(@Nonnull Entity orderIssuer) {
         return PhalanxUtils.getNearestEntityWithPredicate(orderIssuer.level(), DeepslateGolemEntity.class,
                 orderIssuer.position(), 50,
                 golem -> {
-                    final var wrapper = DeepslateGolemNBTWrapper.of(golem);
-                    return wrapper.getType().equals(GolemType.COMMANDER)
-                            && wrapper.getPlayerUUID().equals(orderIssuer.getStringUUID());
-                }).map((@Nonnull DeepslateGolemEntity golem) -> DeepslateGolemNBTWrapper.of(golem));
+                    return SoldierNBT.getType(golem).equals(SoldierType.COMMANDER)
+                            && SoldierNBT.getPlayerUUID(golem).equals(orderIssuer.getStringUUID());
+                });
     }
 }
