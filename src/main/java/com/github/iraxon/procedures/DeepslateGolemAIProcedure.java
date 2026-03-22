@@ -59,7 +59,7 @@ public class DeepslateGolemAIProcedure {
 						Objects.requireNonNull(UUID.fromString(nbt.getPlayerUUID())));
 				if (player != null) {
 					nbt.setMoveTarget(
-							commander.position()
+							player.position()
 									.add(commander.position().subtract(player.position()).normalize().scale(1.25)));
 				}
 			} else if (formationWrapper.getOrder().equals(Order.HALT)) {
