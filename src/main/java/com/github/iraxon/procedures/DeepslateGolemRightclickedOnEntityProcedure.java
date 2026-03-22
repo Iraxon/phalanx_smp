@@ -13,11 +13,17 @@ public class DeepslateGolemRightclickedOnEntityProcedure {
 		if (world == null || entity == null || sourceentity == null)
 			return;
 
-		if (sourceentity instanceof Player p && PhalanxUtils.getGameMode(p) == GameType.CREATIVE
-				&& entity instanceof DeepslateGolemEntity e) {
+		if (sourceentity instanceof Player p && entity instanceof DeepslateGolemEntity e) {
 
-			DeepslateGolemNBTWrapper.of(e).setPlayerIfNeutral(p);
+			final var nbt = DeepslateGolemNBTWrapper.of(e);
 
+			if (PhalanxUtils.getGameMode(p) == GameType.CREATIVE && nbt.isNeutral()) {
+				nbt.setPlayer(p);
+				PhalanxUtils.sendMessage(p, "Recruited", true);
+
+			} else {
+				PhalanxUtils.sendMessage(p, "Unit Data:\n" + nbt.manifest(), false);
+			}
 		}
 	}
 }
