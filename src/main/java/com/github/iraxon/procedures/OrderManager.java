@@ -1,89 +1,111 @@
 package com.github.iraxon.procedures;
 
-import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.concurrent.ConcurrentHashMap;
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import com.github.iraxon.entity.DeepslateGolemEntity;
 import com.github.iraxon.procedures.DeepslateGolemNBTWrapper.GolemType;
 import com.github.iraxon.procedures.FormationStateNBTWrapper.Order;
 
 import net.minecraft.world.entity.Entity;
 
-public record OrderManager(@Nonnull Entity orderIssuer, @Nonnull ArrayList<OrderInput> inputs) {
+public class OrderManager {
+
+    private static final String ORDER_MANAGER_KEY = "phalanx_order_manager";
+
+    // NBT Accessing methods
 
     @Nonnull
-    private static ConcurrentHashMap<String, OrderManager> cache = new ConcurrentHashMap<>();
-
-    private OrderManager(@Nonnull Entity orderIssuer) {
-        this(orderIssuer, new ArrayList<>());
+    private static String getOrderCodeString(Entity orderIssuer) {
+        return Objects.requireNonNull(orderIssuer.getPersistentData().getString(ORDER_MANAGER_KEY));
     }
 
-    @SuppressWarnings("null")
+    private static void addInput(Entity orderIssuer, OrderInput input) {
+        orderIssuer.getPersistentData().putString(ORDER_MANAGER_KEY, getOrderCodeString(orderIssuer) + input.rep);
+    }
+
+    private static void clearInputs(Entity orderIssuer) {
+        orderIssuer.getPersistentData().putString(ORDER_MANAGER_KEY, "");
+    }
+
+    // End NBT Accessing
+
     @Nonnull
-    /**
-     * Factory; use instead of constructor
-     *
-     * Does not work on logical client (hence Optional)
-     *
-     * @param orderIssuer
-     * @return
-     */
-    public static Optional<OrderManager> of(@Nonnull Entity orderIssuer) {
-
-        if (orderIssuer.level().isClientSide()) {
-            return Optional.empty();
-        }
-
-        final String uuid = orderIssuer.getStringUUID();
-
-        return Optional.of(cache.computeIfAbsent(uuid,
-                (String u) -> new OrderManager(orderIssuer)));
-    }
-
-    @Nullable
-    private static OrderManager ifPresent(@Nullable Entity orderIssuer) {
-        if (orderIssuer == null) {
-            return null;
-        }
-        return cache.getOrDefault(orderIssuer.getStringUUID(), null);
+    private static List<OrderInput> getOrderCode(Entity orderIssuer) {
+        return Objects.requireNonNull(getOrderCodeString(orderIssuer).chars().mapToObj(Character::toString)
+                .map(OrderInput::fromString).toList());
     }
 
     /**
-     * Gets the OrderManager for this entity if one exists already;
-     * does not make one if there wasn't one
-     *
-     * @param orderIssuer
-     * @return
+     * @return Whether the orderIssuer is currently typing an order
      */
-    public static Optional<OrderManager> getOptional(@Nullable Entity orderIssuer) {
-        return Optional.ofNullable(ifPresent(orderIssuer));
+    public static boolean isActive(Entity orderIssuer) {
+        return getOrderCodeString(orderIssuer).length() > 0;
     }
 
-    public void inputUp() {
-        this.addInput(OrderInput.UP);
-        PhalanxUtils.sendMessage(orderIssuer, infoMessage(), true);
+    @Nonnull
+    private static String infoMessage(Entity orderIssuer) {
+        return isActive(orderIssuer)
+                ? ("Typing: "
+                        + getOrderCodeString(orderIssuer))
+                : "No Order";
     }
 
-    public void inputDown() {
-        this.addInput(OrderInput.DOWN);
-        PhalanxUtils.sendMessage(orderIssuer, infoMessage(), true);
+    public static enum OrderInput {
+        UP("▲"),
+        DOWN("▼");
+
+        private final String rep;
+
+        private OrderInput(String rep) {
+            this.rep = rep;
+        }
+
+        /**
+         * @return Guaranteed to be of length 1
+         */
+        public String asString() {
+            return this.rep;
+        }
+
+        /**
+         * @param s A 1-length String representing an OrderInput
+         * @return
+         */
+        public static OrderInput fromString(String s) {
+            return Arrays.stream(values()).filter(orderInput -> orderInput.rep.equals(s)).findAny().orElse(DOWN);
+        }
     }
 
-    public void inputCancel() {
-        this.inputs.clear();
+    // Input methods
+
+    public static void inputUp(Entity orderIssuer) {
+        addInput(orderIssuer, OrderInput.UP);
+        PhalanxUtils.sendMessage(orderIssuer, infoMessage(orderIssuer), true);
+    }
+
+    public static void inputDown(Entity orderIssuer) {
+        addInput(orderIssuer, OrderInput.DOWN);
+        PhalanxUtils.sendMessage(orderIssuer, infoMessage(orderIssuer), true);
+    }
+
+    public static void inputCancel(Entity orderIssuer) {
+        clearInputs(orderIssuer);
         PhalanxUtils.sendMessage(orderIssuer, "Canceled", true);
     }
 
-    public void inputConfirm() {
+    public static void inputConfirm(Entity orderIssuer) {
 
-        final var orderOptional = Order.get(this.inputs);
+        if (orderIssuer.level().isClientSide) {
+            return;
+        }
+
+        final var orderOptional = Order.get(getOrderCode(orderIssuer));
         if (orderOptional.isEmpty()) {
             PhalanxUtils.sendMessage(orderIssuer, "Unknown order code", true);
-            this.inputs.clear();
+            clearInputs(orderIssuer);
             return;
         }
 
@@ -93,7 +115,7 @@ public record OrderManager(@Nonnull Entity orderIssuer, @Nonnull ArrayList<Order
         final var recipientOptional = findOrderRecipient(orderIssuer);
         if (recipientOptional.isEmpty()) {
             PhalanxUtils.sendMessage(orderIssuer, "No commander found", true);
-            this.inputs.clear();
+            clearInputs(orderIssuer);
             return;
         }
 
@@ -101,60 +123,11 @@ public record OrderManager(@Nonnull Entity orderIssuer, @Nonnull ArrayList<Order
         final var recipient = Objects.requireNonNull(recipientOptional.orElseThrow());
 
         final var success = recipient.formationWrapper().setOrder(order);
-        this.inputs.clear();
+        clearInputs(orderIssuer);
 
         PhalanxUtils.sendMessage(orderIssuer,
                 success ? "Order sent: " + order.toString() : "Wrong formation for order: " + order.toString(),
                 true);
-    }
-
-    public static void inputUp(@Nonnull Entity orderIssuer) {
-        OrderManager.of(orderIssuer).ifPresent(OrderManager::inputUp);
-    }
-
-    public static void inputDown(@Nonnull Entity orderIssuer) {
-        OrderManager.of(orderIssuer).ifPresent(OrderManager::inputDown);
-    }
-
-    public static void inputCancel(@Nonnull Entity orderIssuer) {
-        OrderManager.of(orderIssuer).ifPresent(OrderManager::inputCancel);
-    }
-
-    public static void inputConfirm(@Nonnull Entity orderIssuer) {
-        OrderManager.of(orderIssuer).ifPresent(OrderManager::inputConfirm);
-    }
-
-    private void addInput(OrderInput input) {
-        this.inputs.add(input);
-    }
-
-    /**
-     * @return Whether the orderIssuer is currently typing an order
-     */
-    public boolean isActive() {
-        return this.inputs.size() > 0;
-    }
-
-    @Nonnull
-    private String infoMessage() {
-        return this.isActive()
-                ? ("Typing: "
-                        + this.inputs.stream()
-                                .map(OrderInput::rep)
-                                .reduce("", String::concat))
-                : "No Order";
-    }
-
-    public static enum OrderInput {
-        UP,
-        DOWN;
-
-        public String rep() {
-            return switch (this) {
-                case UP -> "▲";
-                case DOWN -> "▼";
-            };
-        }
     }
 
     @SuppressWarnings("null")

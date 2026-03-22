@@ -6,6 +6,6 @@ public class IssueOrdersUpInputOnKeyPressedProcedure {
 	public static void execute(Entity entity) {
 		if (entity == null)
 			return;
-		OrderManager.of(entity).ifPresent(OrderManager::inputUp);
+		OrderManager.inputUp(entity);
 	}
 }
