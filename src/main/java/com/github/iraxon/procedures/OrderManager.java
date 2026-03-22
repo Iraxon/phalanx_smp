@@ -38,7 +38,7 @@ public record OrderManager(@Nonnull Entity orderIssuer, @Nonnull ArrayList<Order
             return Optional.empty();
         }
 
-        final String uuid = Objects.requireNonNull(orderIssuer).getStringUUID();
+        final String uuid = orderIssuer.getStringUUID();
 
         return Optional.of(cache.computeIfAbsent(uuid,
                 (String u) -> new OrderManager(orderIssuer)));
