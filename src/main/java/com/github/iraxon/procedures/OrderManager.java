@@ -27,7 +27,7 @@ public class OrderManager {
     }
 
     private static void clearInputs(Entity orderIssuer) {
-        orderIssuer.getPersistentData().putString(ORDER_MANAGER_KEY, "");
+        orderIssuer.getPersistentData().remove(ORDER_MANAGER_KEY);
     }
 
     // End NBT Accessing
