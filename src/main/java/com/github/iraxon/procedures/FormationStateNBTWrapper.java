@@ -112,7 +112,7 @@ public record FormationStateNBTWrapper(CompoundTag data) {
 
     /**
      * Set current order
-     * 
+     *
      * @param o
      * @return Whether the order was successfully set
      */
@@ -151,8 +151,8 @@ public record FormationStateNBTWrapper(CompoundTag data) {
 
         @SuppressWarnings("unchecked")
         private static final Map<Integer, Direction> getMap = Map
-                .ofEntries((Entry<Integer, Direction>[]) Stream.of(values()).map(
-                        dir -> Map.entry(dir.index, dir)).toArray());
+                .ofEntries(Stream.of(values()).map(
+                        dir -> Map.entry(dir.index, dir)).toArray(Entry[]::new));
 
         private Direction(int index) {
             this.index = index;
