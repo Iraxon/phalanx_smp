@@ -119,6 +119,6 @@ public class PhalanxUtils {
             if (playerInfo != null)
                 return playerInfo.getGameMode();
         }
-        return null;
+        throw new RuntimeException("Player was neither serverPlayer nor client player: " + player.getName());
     }
 }
