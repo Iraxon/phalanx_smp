@@ -1,13 +1,11 @@
 package com.github.iraxon.procedures;
 
 import java.util.Objects;
-import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Stream;
 
 import javax.annotation.Nonnull;
 import com.github.iraxon.entity.DeepslateGolemEntity;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.Vec3;
 
