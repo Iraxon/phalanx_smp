@@ -15,6 +15,11 @@ public class SoldierNBT {
 
     private static final String UNIT_COMMANDER_NBT_KEY = "phalanx_golem_commander";
 
+    public static void setCommander(DeepslateGolemEntity soldier, DeepslateGolemEntity commander) {
+        soldier.getPersistentData().putString(UNIT_COMMANDER_NBT_KEY,
+                Objects.requireNonNull(commander.getStringUUID()));
+    }
+
     /**
      * Finds this unit's commander
      *
@@ -54,6 +59,10 @@ public class SoldierNBT {
         public static SoldierType get(int index) {
             return Stream.of(values()).filter(v -> v.index == index).findAny().orElse(COMMANDER);
         }
+    }
+
+    public static void setType(DeepslateGolemEntity soldier, SoldierType t) {
+        soldier.getPersistentData().putInt(SOLDIER_TYPE_KEY, t.index);
     }
 
     @Nonnull
@@ -121,6 +130,7 @@ public class SoldierNBT {
 
     /**
      * Last attacker, if the stored info is there and not expired
+     * 
      * @param subject
      * @return Empty String if info is absent or expired
      */
