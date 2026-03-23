@@ -3,13 +3,21 @@ package com.github.iraxon.procedures;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.monster.AbstractSkeleton;
+import net.minecraft.world.entity.monster.Creeper;
+import net.minecraft.world.entity.monster.Guardian;
+import net.minecraft.world.entity.monster.Slime;
+import net.minecraft.world.entity.monster.Spider;
+import net.minecraft.world.entity.monster.Zombie;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.raid.Raider;
 import net.minecraft.world.entity.Entity;
 
 import com.github.iraxon.entity.DeepslateGolemEntity;
 import com.github.iraxon.procedures.FormationStateNBTWrapper.Order;
 
 import java.util.Objects;
+import java.util.Set;
 import java.util.UUID;
 
 import javax.annotation.Nonnull;
@@ -152,6 +160,22 @@ public class DeepslateGolemAIProcedure {
 			}
 
 			return false;
+		}
+
+		private static Set<Class<? extends LivingEntity>> kosTypes = Set.of(
+			Zombie.class,
+			AbstractSkeleton.class,
+			Creeper.class,
+			Spider.class,
+			Slime.class,
+			Raider.class,
+			Guardian.class
+		);
+
+		public static boolean isKillOnSight(@Nonnull LivingEntity potentialTarget) {
+			return kosTypes.stream().anyMatch(
+				t -> t.isInstance(potentialTarget)
+			);
 		}
 
 	}
