@@ -15,7 +15,7 @@ public class SoldierNBT {
 
     private static final String UNIT_COMMANDER_NBT_KEY = "phalanx_golem_commander";
 
-    public static void setCommander(DeepslateGolemEntity soldier, DeepslateGolemEntity commander) {
+    public static void setCommander(@Nonnull DeepslateGolemEntity soldier, @Nonnull DeepslateGolemEntity commander) {
         soldier.getPersistentData().putString(UNIT_COMMANDER_NBT_KEY,
                 Objects.requireNonNull(commander.getStringUUID()));
     }
@@ -27,7 +27,7 @@ public class SoldierNBT {
      * @param soldier
      * @return Commander entity or this unit itself if none found
      */
-    public static DeepslateGolemEntity getCommander(DeepslateGolemEntity soldier) {
+    public static DeepslateGolemEntity getCommander(@Nonnull DeepslateGolemEntity soldier) {
 
         final var data = soldier.getPersistentData();
 
@@ -61,38 +61,38 @@ public class SoldierNBT {
         }
     }
 
-    public static void setType(DeepslateGolemEntity soldier, SoldierType t) {
+    public static void setType(@Nonnull DeepslateGolemEntity soldier, @Nonnull SoldierType t) {
         soldier.getPersistentData().putInt(SOLDIER_TYPE_KEY, t.index);
     }
 
     @Nonnull
-    public static SoldierType getType(DeepslateGolemEntity soldier) {
+    public static SoldierType getType(@Nonnull DeepslateGolemEntity soldier) {
         return SoldierType.get(soldier.getPersistentData().getInt(SOLDIER_TYPE_KEY));
     }
 
     public static final String GOLEM_PLAYER_UUID_KEY = "phalanx_golem_player";
 
-    public static void setPlayer(DeepslateGolemEntity soldier, @Nonnull Player p) {
+    public static void setPlayer(@Nonnull DeepslateGolemEntity soldier, @Nonnull Player p) {
         soldier.getPersistentData().putString(GOLEM_PLAYER_UUID_KEY, Objects.requireNonNull(p.getStringUUID()));
     }
 
     @Nonnull
-    public static String getPlayerUUID(DeepslateGolemEntity soldier) {
+    public static String getPlayerUUID(@Nonnull DeepslateGolemEntity soldier) {
         return Objects.requireNonNull(soldier.getPersistentData().getString(GOLEM_PLAYER_UUID_KEY));
     }
 
-    public static boolean isNeutral(DeepslateGolemEntity soldier) {
+    public static boolean isNeutral(@Nonnull DeepslateGolemEntity soldier) {
         return soldier.getPersistentData().getString(GOLEM_PLAYER_UUID_KEY).isEmpty();
     }
 
     @Nonnull
-    public static FormationStateNBTWrapper formationWrapper(DeepslateGolemEntity soldier) {
+    public static FormationStateNBTWrapper formationWrapper(@Nonnull DeepslateGolemEntity soldier) {
         return FormationStateNBTWrapper.of(Objects.requireNonNull(soldier.getPersistentData()));
     }
 
     private static final String TARGET_POSITION_KEY = "phalanx_golem_target_pos";
 
-    public static void setMoveTarget(DeepslateGolemEntity soldier, @Nonnull Vec3 pos) {
+    public static void setMoveTarget(@Nonnull DeepslateGolemEntity soldier, @Nonnull Vec3 pos) {
         CompoundTag posTag = new CompoundTag();
         posTag.putDouble("x", pos.x);
         posTag.putDouble("y", pos.y);
@@ -101,7 +101,7 @@ public class SoldierNBT {
     }
 
     @Nonnull
-    public static Vec3 getMoveTarget(DeepslateGolemEntity soldier) {
+    public static Vec3 getMoveTarget(@Nonnull DeepslateGolemEntity soldier) {
 
         final var data = soldier.getPersistentData();
 
@@ -112,7 +112,7 @@ public class SoldierNBT {
         return new Vec3(posTag.getDouble("x"), posTag.getDouble("y"), posTag.getDouble("z"));
     }
 
-    public static void clearMoveTarget(DeepslateGolemEntity soldier) {
+    public static void clearMoveTarget(@Nonnull DeepslateGolemEntity soldier) {
         setMoveTarget(soldier, Objects.requireNonNull(soldier.position()));
     }
 
@@ -130,12 +130,12 @@ public class SoldierNBT {
 
     /**
      * Last attacker, if the stored info is there and not expired
-     * 
+     *
      * @param subject
      * @return Empty String if info is absent or expired
      */
     @Nonnull
-    public static String getLastAttackerUUID(DeepslateGolemEntity subject) {
+    public static String getLastAttackerUUID(@Nonnull DeepslateGolemEntity subject) {
         final var data = subject.getPersistentData();
         final var lastAttackerinfo = data.getCompound(LAST_ATTACKER_KEY);
         if (subject.level().getDayTime() < lastAttackerinfo.getLong(LAST_ATTACKER_EXPIRATION_TIMESTAMP_KEY)) {
@@ -147,12 +147,12 @@ public class SoldierNBT {
     }
 
     @Nonnull
-    public static Optional<String> getLastAttackerUUIDOptional(DeepslateGolemEntity subject) {
+    public static Optional<String> getLastAttackerUUIDOptional(@Nonnull DeepslateGolemEntity subject) {
         final var r = getLastAttackerUUID(subject);
         return Objects.requireNonNull(r.isEmpty() ? Optional.empty() : Optional.of(r));
     }
 
-    public static String manifest(DeepslateGolemEntity soldier) {
+    public static String manifest(@Nonnull DeepslateGolemEntity soldier) {
         return ("Commander: " + getCommander(soldier).getStringUUID() + "\n"
                 + "Player: " + getPlayerUUID(soldier) + "\n"
                 + "Type: " + getType(soldier) + "\n"
