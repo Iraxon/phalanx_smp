@@ -16,23 +16,27 @@ import net.minecraft.world.entity.MobSpawnType;
 
 public class SoldierSpawns {
 
-    public static Optional<DeepslateGolemEntity> spawn(@Nonnull ServerLevel world, @Nonnull BlockPos position) {
-        return spawn(world, position, SoldierType.COMMANDER, null);
+    public static Optional<DeepslateGolemEntity> spawnCommander(@Nonnull ServerLevel world,
+            @Nonnull BlockPos position) {
+        return _spawn(world, position, SoldierType.COMMANDER, null);
     }
 
     public static Optional<DeepslateGolemEntity> spawn(@Nonnull ServerLevel world, @Nonnull BlockPos position,
             @Nonnull SoldierType type,
-            @Nullable DeepslateGolemEntity commander) {
+            @Nonnull DeepslateGolemEntity commander) {
+        return _spawn(world, position, type, commander);
+    }
 
-        if (!type.equals(SoldierType.COMMANDER) && commander == null) {
-            Objects.requireNonNull(commander);
-        }
+    private static Optional<DeepslateGolemEntity> _spawn(@Nonnull ServerLevel world, @Nonnull BlockPos position,
+            @Nonnull SoldierType type,
+            @Nullable DeepslateGolemEntity commander) {
 
         final var rVal = golem(world, position);
         rVal.ifPresent(
                 (@Nonnull DeepslateGolemEntity golem) -> {
                     @Nonnull
-                    final var true_commander = commander == null ? golem : commander;
+                    final var true_commander = (commander == null || type.equals(SoldierType.COMMANDER)) ? golem
+                            : commander;
                     SoldierNBT.setType(golem, type);
                     SoldierNBT.setCommander(golem, true_commander);
                 });
