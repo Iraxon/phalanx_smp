@@ -16,17 +16,20 @@ import net.minecraft.world.entity.MobSpawnType;
 
 public class SoldierSpawns {
 
+    @Nonnull
     public static Optional<DeepslateGolemEntity> spawnCommander(@Nonnull ServerLevel world,
             @Nonnull BlockPos position) {
         return _spawn(world, position, SoldierType.COMMANDER, null);
     }
 
+    @Nonnull
     public static Optional<DeepslateGolemEntity> spawn(@Nonnull ServerLevel world, @Nonnull BlockPos position,
             @Nonnull SoldierType type,
             @Nonnull DeepslateGolemEntity commander) {
         return _spawn(world, position, type, commander);
     }
 
+    @Nonnull
     private static Optional<DeepslateGolemEntity> _spawn(@Nonnull ServerLevel world, @Nonnull BlockPos position,
             @Nonnull SoldierType type,
             @Nullable DeepslateGolemEntity commander) {
