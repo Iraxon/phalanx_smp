@@ -12,7 +12,7 @@ import com.github.iraxon.procedures.FormationStateNBTWrapper.Order;
 
 import net.minecraft.world.entity.Entity;
 
-public class OrderManager {
+public class OrderInputManager {
 
     private static final String ORDER_MANAGER_KEY = "phalanx_order_manager";
 

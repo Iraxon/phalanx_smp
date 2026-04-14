@@ -6,6 +6,6 @@ public class IssueOrdersDownInputOnKeyPressedProcedure {
 	public static void execute(Entity entity) {
 		if (entity == null)
 			return;
-		OrderManager.inputDown(entity);
+		OrderInputManager.inputDown(entity);
 	}
 }

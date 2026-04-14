@@ -6,6 +6,6 @@ public class IssueOrdersConfirmOnKeyPressedProcedure {
 	public static void execute(Entity entity) {
 		if (entity == null)
 			return;
-		OrderManager.inputConfirm(entity);
+		OrderInputManager.inputConfirm(entity);
 	}
 }

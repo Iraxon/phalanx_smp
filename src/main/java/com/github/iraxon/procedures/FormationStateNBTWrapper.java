@@ -10,7 +10,7 @@ import java.util.stream.Stream;
 
 import javax.annotation.Nonnull;
 
-import com.github.iraxon.procedures.OrderManager.OrderInput;
+import com.github.iraxon.procedures.OrderInputManager.OrderInput;
 
 import net.minecraft.nbt.CompoundTag;
 
@@ -76,9 +76,9 @@ public record FormationStateNBTWrapper(CompoundTag data) {
         FOLLOW(3, codeFromString("▲▼▲"));
 
         public final int index;
-        public final List<OrderManager.OrderInput> code;
+        public final List<OrderInputManager.OrderInput> code;
 
-        private Order(int index, List<OrderManager.OrderInput> code) {
+        private Order(int index, List<OrderInputManager.OrderInput> code) {
             this.index = index;
             this.code = code;
         }
