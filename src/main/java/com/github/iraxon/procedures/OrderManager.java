@@ -130,13 +130,8 @@ public class OrderManager {
                 true);
     }
 
-    @SuppressWarnings("null")
+    @Nonnull
     private static Optional<DeepslateGolemEntity> findOrderRecipient(@Nonnull Entity orderIssuer) {
-        return PhalanxUtils.getNearestEntityWithPredicate(orderIssuer.level(), DeepslateGolemEntity.class,
-                orderIssuer.position(), 50,
-                golem -> {
-                    return SoldierNBT.getType(golem).equals(SoldierType.COMMANDER)
-                            && SoldierNBT.getPlayerUUID(golem).equals(orderIssuer.getStringUUID());
-                });
+        return Objects.requireNonNull(Optional.ofNullable(GetNearestCommanderOfPlayerProcedure.execute(orderIssuer)));
     }
 }
