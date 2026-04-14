@@ -17,6 +17,6 @@ public class DeepslateGolemRenderer extends HumanoidMobRenderer<DeepslateGolemEn
 
 	@Override
 	public ResourceLocation getTextureLocation(DeepslateGolemEntity entity) {
-		return new ResourceLocation("phalanx_smp:textures/entities/mountain_raider.png");
+		return new ResourceLocation("phalanx_smp:textures/entities/deepslate_golem.png");
 	}
 }

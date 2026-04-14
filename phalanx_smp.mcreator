@@ -307,6 +307,64 @@
           "src/main/java/com/github/iraxon/procedures/UpdateLastAttackerProcedure.java"
         ]
       }
+    },
+    {
+      "name": "CommanderScreen",
+      "type": "gui",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "commander_screen",
+      "metadata": {
+        "files": [
+          "src/main/java/com/github/iraxon/world/inventory/CommanderScreenMenu.java",
+          "src/main/java/com/github/iraxon/client/gui/CommanderScreenScreen.java"
+        ]
+      }
+    },
+    {
+      "name": "GetNearestCommanderOfPlayer",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "get_nearest_commander_of_player",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ],
+        "return_type": "entity",
+        "files": [
+          "src/main/java/com/github/iraxon/procedures/GetNearestCommanderOfPlayerProcedure.java"
+        ]
+      }
+    },
+    {
+      "name": "CommanderGolemShell",
+      "type": "item",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "commander_golem_shell",
+      "metadata": {
+        "files": [
+          "src/main/java/com/github/iraxon/item/CommanderGolemShellItem.java",
+          "src/main/resources/assets/phalanx_smp/models/item/commander_golem_shell.json"
+        ]
+      }
+    },
+    {
+      "name": "HeavyInfantryGolemShell",
+      "type": "item",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "heavy_infantry_golem_shell",
+      "metadata": {
+        "files": [
+          "src/main/java/com/github/iraxon/item/HeavyInfantryGolemShellItem.java",
+          "src/main/resources/assets/phalanx_smp/models/item/heavy_infantry_golem_shell.json"
+        ]
+      }
     }
   ],
   "variable_elements": [],
@@ -322,16 +380,26 @@
       "key.phalanx_smp.issue_orders_cancel": "Issue Orders: Cancel",
       "key.phalanx_smp.issue_orders_up_input": "Issue Orders: Up Input",
       "key.phalanx_smp.issue_orders_down_input": "Issue Orders: Down Input",
-      "key.phalanx_smp.issue_orders_confirm": "Issue Orders: Confirm"
+      "key.phalanx_smp.issue_orders_confirm": "Issue Orders: Confirm",
+      "gui.phalanx_smp.commander_screen.button_recruit": "Add Soldier",
+      "gui.phalanx_smp.commander_screen.label_supplies_not_implemented": "Supplies: [NOT IMPLEMENTED]",
+      "gui.phalanx_smp.commander_screen.label_deepslate_golem_commander": "Deepslate Golem Commander",
+      "item.phalanx_smp.commander_golem_shell": "Deepslate Golem Shell: Commander",
+      "item.phalanx_smp.heavy_infantry_golem_shell": "Deepslate Golem Shell: Heavy Infantry"
     }
   },
   "metadata": {
     "files": [
+      "src/main/java/com/github/iraxon/network/MenuStateUpdateMessage.java",
+      "src/main/java/com/github/iraxon/init/PhalanxSmpModMenus.java",
+      "src/main/java/com/github/iraxon/init/PhalanxSmpModScreens.java",
       "src/main/java/com/github/iraxon/init/PhalanxSmpModGameRules.java",
       "src/main/java/com/github/iraxon/init/PhalanxSmpModKeyMappings.java",
+      "src/main/java/com/github/iraxon/init/PhalanxSmpModItems.java",
       "src/main/java/com/github/iraxon/init/PhalanxSmpModEntityRenderers.java",
       "src/main/java/com/github/iraxon/init/PhalanxSmpModEntities.java",
       "src/main/resources/pack.mcmeta",
+      "src/main/java/com/github/iraxon/init/PhalanxSmpModTabs.java",
       "src/main/resources/META-INF/mods.toml",
       "src/main/java/com/github/iraxon/PhalanxSmpMod.java"
     ]

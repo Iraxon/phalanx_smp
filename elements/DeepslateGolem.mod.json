@@ -5,7 +5,7 @@
     "mobName": "Deepslate Golem",
     "mobLabel": "",
     "mobModelName": "Biped",
-    "mobModelTexture": "mountain_raider.png",
+    "mobModelTexture": "deepslate_golem.png",
     "transparentModelCondition": {
       "fixedValue": false
     },
