@@ -5,8 +5,9 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import com.github.iraxon.entity.DeepslateGolemEntity;
-import com.github.iraxon.procedures.SoldierNBT.SoldierType;
 import com.github.iraxon.procedures.FormationStateNBTWrapper.Order;
 
 import net.minecraft.world.entity.Entity;
@@ -18,22 +19,22 @@ public class OrderManager {
     // NBT Accessing methods
 
     @Nonnull
-    private static String getOrderCodeString(Entity orderIssuer) {
+    private static String getOrderCodeString(@Nonnull Entity orderIssuer) {
         return Objects.requireNonNull(orderIssuer.getPersistentData().getString(ORDER_MANAGER_KEY));
     }
 
-    private static void addInput(Entity orderIssuer, OrderInput input) {
+    private static void addInput(@Nonnull Entity orderIssuer, @Nonnull OrderInput input) {
         orderIssuer.getPersistentData().putString(ORDER_MANAGER_KEY, getOrderCodeString(orderIssuer) + input.rep);
     }
 
-    private static void clearInputs(Entity orderIssuer) {
+    private static void clearInputs(@Nonnull Entity orderIssuer) {
         orderIssuer.getPersistentData().remove(ORDER_MANAGER_KEY);
     }
 
     // End NBT Accessing
 
     @Nonnull
-    private static List<OrderInput> getOrderCode(Entity orderIssuer) {
+    private static List<OrderInput> getOrderCode(@Nonnull Entity orderIssuer) {
         return Objects.requireNonNull(getOrderCodeString(orderIssuer).chars().mapToObj(Character::toString)
                 .map(OrderInput::fromString).toList());
     }
@@ -41,12 +42,12 @@ public class OrderManager {
     /**
      * @return Whether the orderIssuer is currently typing an order
      */
-    public static boolean isActive(Entity orderIssuer) {
+    public static boolean isActive(@Nonnull Entity orderIssuer) {
         return getOrderCodeString(orderIssuer).length() > 0;
     }
 
     @Nonnull
-    private static String infoMessage(Entity orderIssuer) {
+    private static String infoMessage(@Nonnull Entity orderIssuer) {
         return isActive(orderIssuer)
                 ? ("Typing: "
                         + getOrderCodeString(orderIssuer))
@@ -81,23 +82,34 @@ public class OrderManager {
 
     // Input methods
 
-    public static void inputUp(Entity orderIssuer) {
+    public static void inputUp(@Nullable Entity orderIssuer) {
+        if (orderIssuer == null) {
+            return;
+        }
         addInput(orderIssuer, OrderInput.UP);
         PhalanxUtils.sendMessage(orderIssuer, infoMessage(orderIssuer), true);
     }
 
-    public static void inputDown(Entity orderIssuer) {
+    public static void inputDown(@Nullable Entity orderIssuer) {
+        if (orderIssuer == null) {
+            return;
+        }
         addInput(orderIssuer, OrderInput.DOWN);
         PhalanxUtils.sendMessage(orderIssuer, infoMessage(orderIssuer), true);
     }
 
-    public static void inputCancel(Entity orderIssuer) {
+    public static void inputCancel(@Nullable Entity orderIssuer) {
+        if (orderIssuer == null) {
+            return;
+        }
         clearInputs(orderIssuer);
         PhalanxUtils.sendMessage(orderIssuer, "Canceled", true);
     }
 
-    public static void inputConfirm(Entity orderIssuer) {
-
+    public static void inputConfirm(@Nullable Entity orderIssuer) {
+        if (orderIssuer == null) {
+            return;
+        }
         if (orderIssuer.level().isClientSide) {
             return;
         }
