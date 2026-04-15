@@ -10,6 +10,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
@@ -120,5 +121,38 @@ public class PhalanxUtils {
                 return playerInfo.getGameMode();
         }
         throw new RuntimeException("Player was neither serverPlayer nor client player: " + player.getName());
+    }
+
+    public static class Vec3NBT {
+
+        public static void storeVec3(CompoundTag nbt, String key, @Nullable Vec3 vec3) {
+            if (nbt == null || key == null) {
+                return;
+            }
+            if (vec3 == null) {
+                nbt.remove(key);
+                return;
+            }
+
+            var storedVector = new CompoundTag();
+            storedVector.putDouble("x", vec3.x);
+            storedVector.putDouble("y", vec3.y);
+            storedVector.putDouble("z", vec3.z);
+            nbt.put(key, storedVector);
+        }
+
+        @Nullable
+        public static Vec3 retrieveVec3(@Nonnull CompoundTag nbt, @Nonnull String key) {
+            Objects.requireNonNull(nbt);
+            Objects.requireNonNull(key);
+
+            if (nbt.contains(key)) {
+                final var storedVector = nbt.getCompound(key);
+                return new Vec3(
+                        storedVector.getDouble("x"), storedVector.getDouble("y"), storedVector.getDouble("z"));
+            }
+            return null;
+        }
+
     }
 }
