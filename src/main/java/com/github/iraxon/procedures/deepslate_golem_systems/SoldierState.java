@@ -15,10 +15,6 @@ import net.minecraft.world.entity.Mob;
 import net.minecraft.world.phys.Vec3;
 
 /**
- * All NBT methods that relate to
- * golems in their capacity as individual soldiers
- * go here.
- *
  * This is the home of low-level methods
  * to micromanage the troops. They are meant
  * to be called as part of more complicated
