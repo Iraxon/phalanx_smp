@@ -5,6 +5,7 @@ import java.util.Objects;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import com.github.iraxon.entity.DeepslateGolemEntity;
 import com.github.iraxon.procedures.PhalanxUtils;
 import com.github.iraxon.procedures.PhalanxUtils.Vec3NBT;
 
@@ -146,5 +147,13 @@ public class SoldierState {
         }
         followEntityTick(soldier, target);
         soldier.setTarget(target);
+    }
+
+    public static String manifest(DeepslateGolemEntity e) {
+        if (e == null) {
+            return "Null entity";
+        }
+        final var data = e.getPersistentData();
+        return "\n" + data.getString(KEY_STATE_TYPE) + "\n" + data.getCompound(KEY_STATE_PAYLOAD).toString();
     }
 }
