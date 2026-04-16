@@ -14,7 +14,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.phys.Vec3;
 
-public class SoldierManagement {
+public class SoldierState {
 
     private static final String KEY_STATE_TYPE = "phalanx_soldier_state_type";
     private static final String KEY_STATE_PAYLOAD = "phalanx_soldier_state_payload";
