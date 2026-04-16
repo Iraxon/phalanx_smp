@@ -8,7 +8,6 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import com.github.iraxon.entity.DeepslateGolemEntity;
-import com.github.iraxon.procedures.FormationStateNBTWrapper.Order;
 
 import net.minecraft.world.entity.Entity;
 
