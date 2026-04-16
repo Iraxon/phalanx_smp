@@ -5,6 +5,7 @@ import net.minecraft.world.entity.Entity;
 import javax.annotation.Nullable;
 
 import com.github.iraxon.entity.DeepslateGolemEntity;
+import com.github.iraxon.procedures.deepslate_golem_systems.SoldierState;
 
 import net.minecraft.server.level.ServerPlayer;
 
@@ -19,10 +20,8 @@ public class GetNearestCommanderOfPlayerProcedure {
 					orderIssuer.level(),
 					DeepslateGolemEntity.class,
 					orderIssuer.position(), 50,
-					(DeepslateGolemEntity golem) -> {
-						return SoldierNBT.getType(golem).equals(SoldierType.COMMANDER)
-								&& SoldierNBT.getPlayerUUID(golem).equals(orderIssuer.getStringUUID());
-					}).orElse(null);
+					// TODO: Re-add filter for commanders only
+					(DeepslateGolemEntity golem) -> SoldierState.getPlayerUUID(golem).equals(orderIssuer.getStringUUID())).orElse(null);
 		}
 		return null;
 	}
