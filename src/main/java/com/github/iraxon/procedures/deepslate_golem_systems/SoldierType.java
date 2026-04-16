@@ -23,6 +23,7 @@ public enum SoldierType {
             return this.name;
         }
 
+        @SuppressWarnings("null")
         @Nonnull
         public static Optional<SoldierType> decode(String name) {
             return Arrays.stream(values()).filter(t -> name.equals(t.name)).findAny();
