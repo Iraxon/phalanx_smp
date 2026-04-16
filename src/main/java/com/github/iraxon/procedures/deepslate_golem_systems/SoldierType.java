@@ -7,6 +7,8 @@ public enum SoldierType {
         COMMANDER("commander"),
         HEAVY_INFANTRY("heavy_infantry");
 
+        public static final SoldierType DEFAULT = HEAVY_INFANTRY;
+
         private final String name;
 
         private SoldierType(String name) {
