@@ -39,7 +39,6 @@ public class DeepslateGolemAIProcedure {
 			case HEAVY_INFANTRY -> AI.heavy_infantry_ai(entity);
 			case SKIRMISHER -> AI.skirmisher_ai(entity);
 		}
-		;
 	}
 
 	private static class AI {
