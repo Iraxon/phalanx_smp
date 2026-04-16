@@ -2,6 +2,7 @@ package com.github.iraxon.procedures.deepslate_golem_systems;
 
 import java.util.Objects;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import com.github.iraxon.procedures.PhalanxUtils;
@@ -21,6 +22,19 @@ import net.minecraft.world.phys.Vec3;
  * orders.
  */
 public class SoldierState {
+
+    private static final String KEY_PLAYER_LIEGE_UUID = "phalanx_soldier_player_liege_uuid";
+
+    public static void setPlayerUUID(@Nonnull Mob soldier, @Nonnull String playerUUID) {
+        Objects.requireNonNull(soldier);
+        Objects.requireNonNull(playerUUID);
+        soldier.getPersistentData().putString(KEY_PLAYER_LIEGE_UUID, playerUUID);
+    }
+
+    public static String getPlayerUUID(@Nonnull Mob soldier) {
+        Objects.requireNonNull(soldier);
+        return soldier.getPersistentData().getString(KEY_PLAYER_LIEGE_UUID);
+    }
 
     private static final String KEY_STATE_TYPE = "phalanx_soldier_state_type";
     private static final String KEY_STATE_PAYLOAD = "phalanx_soldier_state_payload";
