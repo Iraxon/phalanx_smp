@@ -120,10 +120,7 @@ public class SoldierState {
         } else {
             atMovePosition = movePosition.subtract(Objects.requireNonNull(soldier.position()))
                     .horizontalDistanceSqr() < 0.75 * 0.75;
-
-            if (!atMovePosition) {
-                soldier.getNavigation().moveTo(movePosition.x, movePosition.y, movePosition.z, 1.0);
-            }
+            soldier.getNavigation().moveTo(movePosition.x, movePosition.y, movePosition.z, 1.0);
         }
 
         if (atMovePosition && lookVector != null) {
@@ -136,7 +133,11 @@ public class SoldierState {
         if (soldier == null || target == null) {
             return;
         }
-        soldier.getNavigation().moveTo(target, 1.3);
+        @SuppressWarnings("null")
+        // Following the target at a distance of 0.5
+        final var movePosition = target.position()
+                .add(soldier.position().subtract(target.position()).normalize().scale(0.5));
+        soldier.getNavigation().moveTo(movePosition.x, movePosition.y, movePosition.z, 1.3);
     }
 
     private static void attackEntity(Mob soldier, LivingEntity target) {
