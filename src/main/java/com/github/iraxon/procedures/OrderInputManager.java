@@ -106,39 +106,39 @@ public class OrderInputManager {
     }
 
     public static void inputConfirm(@Nullable Entity orderIssuer) {
-        if (orderIssuer == null) {
-            return;
-        }
-        if (orderIssuer.level().isClientSide) {
-            return;
-        }
+        // if (orderIssuer == null) {
+        //     return;
+        // }
+        // if (orderIssuer.level().isClientSide) {
+        //     return;
+        // }
 
-        final var orderOptional = Order.get(getOrderCode(orderIssuer));
-        if (orderOptional.isEmpty()) {
-            PhalanxUtils.sendMessage(orderIssuer, "Unknown order code", true);
-            clearInputs(orderIssuer);
-            return;
-        }
+        // final var orderOptional = Order.get(getOrderCode(orderIssuer));
+        // if (orderOptional.isEmpty()) {
+        //     PhalanxUtils.sendMessage(orderIssuer, "Unknown order code", true);
+        //     clearInputs(orderIssuer);
+        //     return;
+        // }
 
-        @Nonnull
-        final var order = Objects.requireNonNull(orderOptional.orElseThrow());
+        // @Nonnull
+        // final var order = Objects.requireNonNull(orderOptional.orElseThrow());
 
-        final var recipientOptional = findOrderRecipient(orderIssuer);
-        if (recipientOptional.isEmpty()) {
-            PhalanxUtils.sendMessage(orderIssuer, "No commander found", true);
-            clearInputs(orderIssuer);
-            return;
-        }
+        // final var recipientOptional = findOrderRecipient(orderIssuer);
+        // if (recipientOptional.isEmpty()) {
+        //     PhalanxUtils.sendMessage(orderIssuer, "No commander found", true);
+        //     clearInputs(orderIssuer);
+        //     return;
+        // }
 
-        @Nonnull
-        final var recipient = Objects.requireNonNull(recipientOptional.orElseThrow());
+        // @Nonnull
+        // final var recipient = Objects.requireNonNull(recipientOptional.orElseThrow());
 
-        final var success = SoldierNBT.formationWrapper(recipient).setOrder(order);
-        clearInputs(orderIssuer);
+        // final var success = SoldierNBT.formationWrapper(recipient).setOrder(order);
+        // clearInputs(orderIssuer);
 
-        PhalanxUtils.sendMessage(orderIssuer,
-                success ? "Order sent: " + order.toString() : "Wrong formation for order: " + order.toString(),
-                true);
+        // PhalanxUtils.sendMessage(orderIssuer,
+        //         success ? "Order sent: " + order.toString() : "Wrong formation for order: " + order.toString(),
+        //         true);
     }
 
     @Nonnull
