@@ -5,7 +5,6 @@ import net.minecraft.world.entity.Entity;
 import javax.annotation.Nullable;
 
 import com.github.iraxon.entity.DeepslateGolemEntity;
-import com.github.iraxon.procedures.SoldierNBT.SoldierType;
 
 import net.minecraft.server.level.ServerPlayer;
 
