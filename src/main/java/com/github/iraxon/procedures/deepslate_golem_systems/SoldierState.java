@@ -54,11 +54,11 @@ public class SoldierState {
     }
 
     public static Optional<SoldierType> getTypeOptional(Mob soldier) {
-        return SoldierType.decode(soldier.getPersistentData().getString(KEY_SOLDIER_TYPE));
+        return SoldierType.decodeOptional(soldier.getPersistentData().getString(KEY_SOLDIER_TYPE));
     }
 
     public static SoldierType getType(Mob soldier) {
-        return getTypeOptional(soldier).orElse(SoldierType.DEFAULT);
+        return SoldierType.decode(soldier.getPersistentData().getString(KEY_SOLDIER_TYPE));
     }
 
     private static final String KEY_STATE_TYPE = "phalanx_soldier_state_type";

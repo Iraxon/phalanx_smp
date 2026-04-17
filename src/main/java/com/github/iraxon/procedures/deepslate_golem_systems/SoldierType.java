@@ -25,7 +25,13 @@ public enum SoldierType {
 
         @SuppressWarnings("null")
         @Nonnull
-        public static Optional<SoldierType> decode(String name) {
+        public static Optional<SoldierType> decodeOptional(String name) {
             return Arrays.stream(values()).filter(t -> name.equals(t.name)).findAny();
+        }
+
+        @SuppressWarnings("null")
+        @Nonnull
+        public static SoldierType decode(String name) {
+            return decodeOptional(name).orElse(DEFAULT);
         }
     }
