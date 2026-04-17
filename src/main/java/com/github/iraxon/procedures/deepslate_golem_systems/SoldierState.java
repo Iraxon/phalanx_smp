@@ -1,5 +1,7 @@
 package com.github.iraxon.procedures.deepslate_golem_systems;
 
+import static com.github.iraxon.procedures.PhalanxUtils.NBTStringStoredVariable;
+
 import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Function;
@@ -11,7 +13,6 @@ import com.github.iraxon.PhalanxSmpMod;
 import com.github.iraxon.entity.DeepslateGolemEntity;
 import com.github.iraxon.procedures.PhalanxUtils;
 import com.github.iraxon.procedures.PhalanxUtils.GenericNBTStoredVariable;
-import static com.github.iraxon.procedures.PhalanxUtils.NBTStringStoredVariable;
 import com.github.iraxon.procedures.PhalanxUtils.Vec3NBT;
 
 import net.minecraft.commands.arguments.EntityAnchorArgument;
