@@ -2,12 +2,16 @@ package com.github.iraxon.procedures.deepslate_golem_systems;
 
 import java.util.Objects;
 import java.util.Optional;
+import java.util.function.Function;
+
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import com.github.iraxon.PhalanxSmpMod;
 import com.github.iraxon.entity.DeepslateGolemEntity;
 import com.github.iraxon.procedures.PhalanxUtils;
+import com.github.iraxon.procedures.PhalanxUtils.GenericNBTStoredVariable;
+import static com.github.iraxon.procedures.PhalanxUtils.NBTStringStoredVariable;
 import com.github.iraxon.procedures.PhalanxUtils.Vec3NBT;
 
 import net.minecraft.commands.arguments.EntityAnchorArgument;
@@ -25,18 +29,11 @@ import net.minecraft.world.phys.Vec3;
  */
 public class SoldierState {
 
-    private static final String KEY_PLAYER_LIEGE_UUID = "phalanx_soldier_player_liege_uuid";
-
-    public static void setPlayerUUID(@Nonnull Mob soldier, @Nonnull String playerUUID) {
-        Objects.requireNonNull(soldier);
-        Objects.requireNonNull(playerUUID);
-        soldier.getPersistentData().putString(KEY_PLAYER_LIEGE_UUID, playerUUID);
-    }
-
-    public static String getPlayerUUID(@Nonnull Mob soldier) {
-        Objects.requireNonNull(soldier);
-        return soldier.getPersistentData().getString(KEY_PLAYER_LIEGE_UUID);
-    }
+    @SuppressWarnings("null")
+    public static final GenericNBTStoredVariable<Mob, String, String> playerUUID = NBTStringStoredVariable(
+            "phalanx_soldier_player_liege_uuid",
+            Function.identity(),
+            Function.identity());
 
     private static final String KEY_SOLDIER_TYPE = "phalanx_soldier_type";
 
@@ -53,11 +50,11 @@ public class SoldierState {
                 type == null ? SoldierType.DEFAULT.encode() : type.encode());
     }
 
-    public static Optional<SoldierType> getTypeOptional(Mob soldier) {
+    public static Optional<SoldierType> getTypeOptional(@Nonnull Mob soldier) {
         return SoldierType.decodeOptional(soldier.getPersistentData().getString(KEY_SOLDIER_TYPE));
     }
 
-    public static SoldierType getType(Mob soldier) {
+    public static SoldierType getType(@Nonnull Mob soldier) {
         return SoldierType.decode(soldier.getPersistentData().getString(KEY_SOLDIER_TYPE));
     }
 

@@ -184,19 +184,12 @@ public class PhalanxUtils {
         }
     }
 
-    public static record NBTStringStoredVariable<E extends Entity, V>(
+    public static <E extends Entity, V> GenericNBTStoredVariable<E, V, String> NBTStringStoredVariable(
             @Nonnull String key,
             @Nonnull Function<V, String> serializer,
-            @Nonnull Function<String, V> deserializer)
-            implements NBTStoredVariable<E, V> {
-
-        public void set(@Nonnull E mob, V value) {
-            mob.getPersistentData().putString(key, Objects.requireNonNull(serializer.apply(value)));
-        }
-
-        public V get(@Nonnull E mob) {
-            return deserializer.apply(mob.getPersistentData().getString(key));
-        }
+            @Nonnull Function<String, V> deserializer) {
+        return new GenericNBTStoredVariable<>(key, serializer, deserializer, CompoundTag::putString,
+                CompoundTag::getString);
     }
 
     public static record NBTIntStoredVariable<E extends Entity, V>(
