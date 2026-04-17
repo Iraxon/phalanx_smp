@@ -3,11 +3,17 @@ package com.github.iraxon.procedures;
 import java.util.Comparator;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.function.BiFunction;
+import java.util.function.Function;
+import java.util.function.IntFunction;
 import java.util.function.Predicate;
+import java.util.function.ToIntFunction;
 import java.util.stream.Stream;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+
+import org.apache.logging.log4j.util.TriConsumer;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.nbt.CompoundTag;
@@ -154,5 +160,57 @@ public class PhalanxUtils {
             return null;
         }
 
+    }
+
+    public static interface NBTStoredVariable<E extends Entity, V> {
+        public void set(E mob, V value);
+
+        public V get(E mob);
+    }
+
+    public static record GenericNBTStoredVariable<E extends Entity, V, S>(
+            @Nonnull String key,
+            @Nonnull Function<V, S> serializer,
+            @Nonnull Function<S, V> deserializer,
+            @Nonnull TriConsumer<CompoundTag, String, S> NBTsetter,
+            @Nonnull BiFunction<CompoundTag, String, S> NBTgetter) implements NBTStoredVariable<E, V> {
+
+        public void set(E mob, V value) {
+            NBTsetter.accept(mob.getPersistentData(), key, serializer.apply(value));
+        }
+
+        public V get(E mob) {
+            return deserializer.apply(NBTgetter.apply(mob.getPersistentData(), key));
+        }
+    }
+
+    public static record NBTStringStoredVariable<E extends Entity, V>(
+            @Nonnull String key,
+            @Nonnull Function<V, String> serializer,
+            @Nonnull Function<String, V> deserializer)
+            implements NBTStoredVariable<E, V> {
+
+        public void set(E mob, V value) {
+            mob.getPersistentData().putString(key, Objects.requireNonNull(serializer.apply(value)));
+        }
+
+        public V get(E mob) {
+            return deserializer.apply(mob.getPersistentData().getString(key));
+        }
+    }
+
+    public static record NBTIntStoredVariable<E extends Entity, V>(
+            @Nonnull String key,
+            @Nonnull ToIntFunction<V> serializer,
+            @Nonnull IntFunction<V> deserializer)
+            implements NBTStoredVariable<E, V> {
+
+        public void set(E mob, V value) {
+            mob.getPersistentData().putInt(key, Objects.requireNonNull(serializer.applyAsInt(value)));
+        }
+
+        public V get(E mob) {
+            return deserializer.apply(mob.getPersistentData().getInt(key));
+        }
     }
 }
