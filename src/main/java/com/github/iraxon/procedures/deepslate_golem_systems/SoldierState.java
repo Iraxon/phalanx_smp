@@ -1,18 +1,16 @@
 package com.github.iraxon.procedures.deepslate_golem_systems;
 
-import static com.github.iraxon.procedures.PhalanxUtils.NBTStringStoredVariable;
+import static com.github.iraxon.procedures.PhalanxUtils.NBTStringVariable;
 
 import java.util.Objects;
 import java.util.Optional;
-import java.util.function.Function;
-
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import com.github.iraxon.PhalanxSmpMod;
 import com.github.iraxon.entity.DeepslateGolemEntity;
 import com.github.iraxon.procedures.PhalanxUtils;
-import com.github.iraxon.procedures.PhalanxUtils.GenericNBTStoredVariable;
+import com.github.iraxon.procedures.PhalanxUtils.NBTStoredVariable;
 import com.github.iraxon.procedures.PhalanxUtils.Vec3NBT;
 
 import net.minecraft.commands.arguments.EntityAnchorArgument;
@@ -30,11 +28,8 @@ import net.minecraft.world.phys.Vec3;
  */
 public class SoldierState {
 
-    @SuppressWarnings("null")
-    public static final GenericNBTStoredVariable<Mob, String, String> playerUUID = NBTStringStoredVariable(
-            "phalanx_soldier_player_liege_uuid",
-            Function.identity(),
-            Function.identity());
+    public static final NBTStoredVariable<Mob, String> playerUUID = NBTStringVariable(
+            "phalanx_soldier_player_liege_uuid");
 
     private static final String KEY_SOLDIER_TYPE = "phalanx_soldier_type";
 
@@ -56,7 +51,7 @@ public class SoldierState {
     }
 
     public static SoldierType getType(@Nonnull Mob soldier) {
-        return SoldierType.decode(soldier.getPersistentData().getString(KEY_SOLDIER_TYPE));
+        return getTypeOptional(soldier).orElse(SoldierType.DEFAULT);
     }
 
     private static final String KEY_STATE_TYPE = "phalanx_soldier_state_type";

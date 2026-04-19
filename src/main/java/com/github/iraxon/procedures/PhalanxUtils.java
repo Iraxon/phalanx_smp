@@ -15,6 +15,8 @@ import javax.annotation.Nullable;
 
 import org.apache.logging.log4j.util.TriConsumer;
 
+import com.github.iraxon.PhalanxSmpMod;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -184,12 +186,52 @@ public class PhalanxUtils {
         }
     }
 
+    public static interface FinalNBTStoredVariable<E extends Entity, V, S> {
+    }
+
+    public static record FinalNBTStoredVariableBasic<E extends Entity, V, S>(
+            @Nonnull String key,
+            @Nonnull Function<V, S> serializer,
+            @Nonnull Function<S, Optional<V>> deserializer,
+            @Nonnull TriConsumer<CompoundTag, String, S> NBTsetter,
+            @Nonnull BiFunction<CompoundTag, String, S> NBTgetter)
+            implements FinalNBTStoredVariable<E, V, S> {
+
+        public void set(@Nonnull E mob, V value) {
+            final var data = mob.getPersistentData();
+            if (getOptional(mob).isPresent()) {
+                PhalanxSmpMod.LOGGER.error(
+                        "Attempted to reassign final NBT variable to " + value + " on mob with existing value "
+                                + getOptional(mob).get() + ", UUID " + mob.getStringUUID());
+                return;
+            }
+            NBTsetter.accept(data, key, serializer.apply(value));
+        }
+
+        public Optional<V> getOptional(@Nonnull E mob) {
+            return deserializer.apply(NBTgetter.apply(mob.getPersistentData(), key));
+        }
+    }
+
     public static <E extends Entity, V> GenericNBTStoredVariable<E, V, String> NBTStringStoredVariable(
             @Nonnull String key,
             @Nonnull Function<V, String> serializer,
             @Nonnull Function<String, V> deserializer) {
         return new GenericNBTStoredVariable<>(key, serializer, deserializer, CompoundTag::putString,
                 CompoundTag::getString);
+    }
+
+    @SuppressWarnings("null")
+    public static <E extends Entity, VS> GenericNBTStoredVariable<E, VS, VS> NBTStoredVariableUnserialized(
+            @Nonnull String key,
+            @Nonnull TriConsumer<CompoundTag, String, VS> NBTsetter,
+            @Nonnull BiFunction<CompoundTag, String, VS> NBTgetter) {
+        return new GenericNBTStoredVariable<>(key, Function.identity(), Function.identity(), NBTsetter, NBTgetter);
+    }
+
+    public static <E extends Entity> GenericNBTStoredVariable<E, String, String> NBTStringVariable(
+            @Nonnull String key) {
+        return NBTStoredVariableUnserialized(key, CompoundTag::putString, CompoundTag::getString);
     }
 
     public static record NBTIntStoredVariable<E extends Entity, V>(
