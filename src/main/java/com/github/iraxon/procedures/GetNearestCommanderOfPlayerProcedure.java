@@ -21,7 +21,7 @@ public class GetNearestCommanderOfPlayerProcedure {
 					DeepslateGolemEntity.class,
 					orderIssuer.position(), 50,
 					// TODO: Re-add filter for commanders only
-					(DeepslateGolemEntity golem) -> SoldierState.getPlayerUUID(golem).equals(orderIssuer.getStringUUID())).orElse(null);
+					(DeepslateGolemEntity golem) -> SoldierState.playerUUID.get(golem).equals(orderIssuer.getStringUUID())).orElse(null);
 		}
 		return null;
 	}
