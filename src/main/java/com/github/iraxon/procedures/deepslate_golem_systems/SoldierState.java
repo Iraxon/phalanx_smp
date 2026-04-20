@@ -3,13 +3,12 @@ package com.github.iraxon.procedures.deepslate_golem_systems;
 import static com.github.iraxon.procedures.PhalanxUtils.NBTStringVariable;
 
 import java.util.Objects;
-import java.util.Optional;
-import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-import com.github.iraxon.PhalanxSmpMod;
 import com.github.iraxon.entity.DeepslateGolemEntity;
 import com.github.iraxon.procedures.PhalanxUtils;
+import com.github.iraxon.procedures.PhalanxUtils.FinalNBTStoredVariable;
+import com.github.iraxon.procedures.PhalanxUtils.FinalNBTStoredVariableBasic;
 import com.github.iraxon.procedures.PhalanxUtils.NBTStoredVariable;
 import com.github.iraxon.procedures.PhalanxUtils.Vec3NBT;
 
@@ -31,28 +30,13 @@ public class SoldierState {
     public static final NBTStoredVariable<Mob, String> playerUUID = NBTStringVariable(
             "phalanx_soldier_player_liege_uuid");
 
-    private static final String KEY_SOLDIER_TYPE = "phalanx_soldier_type";
-
-    public static void setType(Mob soldier, SoldierType type) {
-        if (soldier == null) {
-            return;
-        }
-        if (getTypeOptional(soldier).isPresent()) {
-            PhalanxSmpMod.LOGGER.error("Attempted to give soldier type " + type + " to soldier with existing type "
-                    + getType(soldier) + ", UUID " + soldier.getStringUUID());
-            return;
-        }
-        soldier.getPersistentData().putString(KEY_SOLDIER_TYPE,
-                type == null ? SoldierType.DEFAULT.encode() : type.encode());
-    }
-
-    public static Optional<SoldierType> getTypeOptional(@Nonnull Mob soldier) {
-        return SoldierType.decodeOptional(soldier.getPersistentData().getString(KEY_SOLDIER_TYPE));
-    }
-
-    public static SoldierType getType(@Nonnull Mob soldier) {
-        return getTypeOptional(soldier).orElse(SoldierType.DEFAULT);
-    }
+    public static final FinalNBTStoredVariable<Mob, SoldierType, String> soldierType = new FinalNBTStoredVariableBasic<Mob, SoldierType, String>(
+        "phalanx_soldier_type",
+        SoldierType::encode,
+        SoldierType::decodeOptional,
+        CompoundTag::putString,
+        CompoundTag::getString
+    );
 
     private static final String KEY_STATE_TYPE = "phalanx_soldier_state_type";
     private static final String KEY_STATE_PAYLOAD = "phalanx_soldier_state_payload";
