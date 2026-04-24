@@ -8,7 +8,6 @@ import javax.annotation.Nullable;
 import com.github.iraxon.entity.DeepslateGolemEntity;
 import com.github.iraxon.procedures.PhalanxUtils;
 import com.github.iraxon.procedures.PhalanxUtils.FinalNBTStoredVariable;
-import com.github.iraxon.procedures.PhalanxUtils.FinalNBTStoredVariableBasic;
 import com.github.iraxon.procedures.PhalanxUtils.NBTStoredVariable;
 import com.github.iraxon.procedures.PhalanxUtils.Vec3NBT;
 
@@ -27,10 +26,10 @@ import net.minecraft.world.phys.Vec3;
  */
 public class SoldierState {
 
-    public static final NBTStoredVariable<Mob, String> playerUUID = NBTStringVariable(
+    public static final NBTStoredVariable<Mob, String, String> playerUUID = NBTStringVariable(
             "phalanx_soldier_player_liege_uuid");
 
-    public static final FinalNBTStoredVariable<Mob, SoldierType, String> soldierType = new FinalNBTStoredVariableBasic<Mob, SoldierType, String>(
+    public static final FinalNBTStoredVariable<Mob, SoldierType, String> soldierType = new FinalNBTStoredVariable<Mob, SoldierType, String>(
         "phalanx_soldier_type",
         SoldierType::encode,
         SoldierType::decodeOptional,

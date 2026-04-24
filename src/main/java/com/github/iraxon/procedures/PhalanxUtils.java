@@ -164,10 +164,9 @@ public class PhalanxUtils {
 
     }
 
-    public static interface NBTStoredVariable<E extends Entity, V> {
-        public void set(@Nonnull E mob, V value);
-
-        public V get(@Nonnull E mob);
+    public static interface NBTStoredVariable<E extends Entity, T, R> {
+        public void set(@Nonnull E mob, T value);
+        public R get (@Nonnull E mob);
     }
 
     public static record GenericNBTStoredVariable<E extends Entity, V, S>(
@@ -175,7 +174,7 @@ public class PhalanxUtils {
             @Nonnull Function<V, S> serializer,
             @Nonnull Function<S, V> deserializer,
             @Nonnull TriConsumer<CompoundTag, String, S> NBTsetter,
-            @Nonnull BiFunction<CompoundTag, String, S> NBTgetter) implements NBTStoredVariable<E, V> {
+            @Nonnull BiFunction<CompoundTag, String, S> NBTgetter) implements NBTStoredVariable<E, V, V> {
 
         public void set(@Nonnull E mob, V value) {
             NBTsetter.accept(mob.getPersistentData(), key, serializer.apply(value));
@@ -186,29 +185,26 @@ public class PhalanxUtils {
         }
     }
 
-    public static interface FinalNBTStoredVariable<E extends Entity, V, S> {
-    }
-
-    public static record FinalNBTStoredVariableBasic<E extends Entity, V, S>(
+    public static record FinalNBTStoredVariable<E extends Entity, V, S>(
             @Nonnull String key,
             @Nonnull Function<V, S> serializer,
             @Nonnull Function<S, Optional<V>> deserializer,
             @Nonnull TriConsumer<CompoundTag, String, S> NBTsetter,
             @Nonnull BiFunction<CompoundTag, String, S> NBTgetter)
-            implements FinalNBTStoredVariable<E, V, S> {
+            implements NBTStoredVariable<E, V, Optional<V>> {
 
         public void set(@Nonnull E mob, V value) {
             final var data = mob.getPersistentData();
-            if (getOptional(mob).isPresent()) {
+            if (get(mob).isPresent()) {
                 PhalanxSmpMod.LOGGER.error(
                         "Attempted to reassign final NBT variable to " + value + " on mob with existing value "
-                                + getOptional(mob).get() + ", UUID " + mob.getStringUUID());
+                                + get(mob).get() + ", UUID " + mob.getStringUUID());
                 return;
             }
             NBTsetter.accept(data, key, serializer.apply(value));
         }
 
-        public Optional<V> getOptional(@Nonnull E mob) {
+        public Optional<V> get(@Nonnull E mob) {
             return deserializer.apply(NBTgetter.apply(mob.getPersistentData(), key));
         }
     }
@@ -238,7 +234,7 @@ public class PhalanxUtils {
             @Nonnull String key,
             @Nonnull ToIntFunction<V> serializer,
             @Nonnull IntFunction<V> deserializer)
-            implements NBTStoredVariable<E, V> {
+            implements NBTStoredVariable<E, V, V> {
 
         public void set(@Nonnull E mob, V value) {
             mob.getPersistentData().putInt(key, Objects.requireNonNull(serializer.applyAsInt(value)));
