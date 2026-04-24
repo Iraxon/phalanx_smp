@@ -18,8 +18,8 @@ public class DeepslateGolemRightclickedOnEntityProcedure {
 
 		if (sourceentity instanceof Player p && entity instanceof DeepslateGolemEntity e) {
 
-			if (PhalanxUtils.getGameMode(p) == GameType.CREATIVE && SoldierState.playerUUID.get(e).equals("")) {
-				SoldierState.playerUUID.set(e, Objects.requireNonNull(p.getStringUUID()));
+			if (PhalanxUtils.getGameMode(p) == GameType.CREATIVE && SoldierState.playerLiegeUUID.get(e).equals("")) {
+				SoldierState.playerLiegeUUID.set(e, Objects.requireNonNull(p.getStringUUID()));
 				PhalanxUtils.sendMessage(p, "Recruited", true);
 
 			} else {

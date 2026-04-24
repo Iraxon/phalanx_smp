@@ -26,7 +26,7 @@ import net.minecraft.world.phys.Vec3;
  */
 public class SoldierState {
 
-    public static final NBTStoredVariable<Mob, String, String> playerUUID = NBTStringVariable(
+    public static final NBTStoredVariable<Mob, String, String> playerLiegeUUID = NBTStringVariable(
             "phalanx_soldier_player_liege_uuid");
 
     public static final FinalNBTStoredVariable<Mob, SoldierType, String> soldierType = new FinalNBTStoredVariable<Mob, SoldierType, String>(
