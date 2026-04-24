@@ -86,3 +86,4 @@ $RECYCLE.BIN/
 
 *.mcreator-backup*
 *.class.uniqueID*
+/.gradle
