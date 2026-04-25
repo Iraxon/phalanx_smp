@@ -1,0 +1,18 @@
+--------------------------------------------------------------------------------
+
+Command-Line:
+ - C:\Program Files\Pylo\MCreator\jdk\bin\java.exe
+ - -jar
+ - C:\Users\98kev\.mcreator\gradle\caches\modules-2\files-2.1\net.minecraftforge\mergetool\1.1.7\3d41564f78f123d64573cae7948014baf3aaba3f\mergetool-1.1.7-fatjar.jar
+ - --strip
+ - --input
+ - C:\Users\98kev\.mcreator\gradle\caches\neoformruntime\intermediate_results\rename_7ffd0c8df686fd01343a89a94d4bf09c679b6b08_output.jar
+ - --output
+ - ./output.jar
+ - --data
+ - sas\forge.sas
+--------------------------------------------------------------------------------
+
+Input:  C:\Users\98kev\.mcreator\gradle\caches\neoformruntime\intermediate_results\rename_7ffd0c8df686fd01343a89a94d4bf09c679b6b08_output.jar
+Output: C:\Users\98kev\MCreatorWorkspaces\phalanx_smp\build\tmp\neoformruntime\20260118-115104_stripSideAnnotations\.\output.jar
+Data:   C:\Users\98kev\MCreatorWorkspaces\phalanx_smp\build\tmp\neoformruntime\20260118-115104_stripSideAnnotations\sas\forge.sas
