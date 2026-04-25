@@ -1,6 +1,0 @@
-{
-  "parent": "item/generated",
-  "textures": {
-    "layer0": "phalanx_smp:item/golem_shell_heavy"
-  }
-}
