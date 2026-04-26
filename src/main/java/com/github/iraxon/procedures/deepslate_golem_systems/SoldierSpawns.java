@@ -1,3 +1,4 @@
+package com.github.iraxon.procedures.deepslate_golem_systems;
 // package com.github.iraxon.procedures;
 
 // import java.util.Objects;
