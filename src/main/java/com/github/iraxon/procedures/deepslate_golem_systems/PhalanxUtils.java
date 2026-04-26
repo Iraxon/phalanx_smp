@@ -170,7 +170,8 @@ public class PhalanxUtils {
 
     public static interface NBTStoredVariable<E extends Entity, T, R> {
         public void set(@Nonnull E mob, T value);
-        public R get (@Nonnull E mob);
+
+        public R get(@Nonnull E mob);
     }
 
     public static record GenericNBTStoredVariable<E extends Entity, V, S>(
@@ -255,11 +256,17 @@ public class PhalanxUtils {
             return;
         final var stackCopy = itemstack.copy();
         entity.setItemInHand(hand, stackCopy);
+        if (entity instanceof Player p) {
+            p.getInventory().setChanged();
+        }
     }
 
     public static void setItemInHand(LivingEntity entity, InteractionHand hand, int count, Item item) {
         if (entity == null || hand == null || item == null)
             return;
         entity.setItemInHand(hand, new ItemStack(item, count));
+        if (entity instanceof Player p) {
+            p.getInventory().setChanged();
+        }
     }
 }
