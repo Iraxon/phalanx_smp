@@ -33,6 +33,7 @@ public class SoldierItemInteractions {
             Map.ofEntries(
                     Map.entry(Items.STONE_SWORD, simpleInteractionDescription)));
 
+    @SuppressWarnings("null")
     public static InteractionResult interact(@Nonnull Mob soldier, Player player) {
 
         final var heldItemstack = player.getItemInHand(InteractionHand.MAIN_HAND);
