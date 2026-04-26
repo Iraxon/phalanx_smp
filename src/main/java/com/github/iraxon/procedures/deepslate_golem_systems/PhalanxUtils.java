@@ -7,6 +7,7 @@ import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.function.IntFunction;
 import java.util.function.Predicate;
+import java.util.function.Supplier;
 import java.util.function.ToIntFunction;
 import java.util.stream.Stream;
 
@@ -20,10 +21,12 @@ import com.github.iraxon.PhalanxSmpMod;
 import net.minecraft.client.Minecraft;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -267,6 +270,15 @@ public class PhalanxUtils {
         entity.setItemInHand(hand, new ItemStack(item, count));
         if (entity instanceof Player p) {
             p.getInventory().setChanged();
+        }
+    }
+
+    public static void spawnItem(@Nonnull LevelAccessor world, @Nonnull Vec3 pos, @Nonnull Supplier<ItemStack> itemstackSupplier) {
+        if (world instanceof ServerLevel serverWorld) {
+            @SuppressWarnings("null")
+            final var toSpawn = new ItemEntity(serverWorld, pos.x, pos.y, pos.z, itemstackSupplier.get());
+            toSpawn.setPickUpDelay(10);
+            serverWorld.addFreshEntity(toSpawn);
         }
     }
 }
