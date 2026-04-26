@@ -221,6 +221,7 @@ public class PhalanxUtils {
             @Nonnull String key,
             @Nonnull Function<V, String> serializer,
             @Nonnull Function<String, V> deserializer) {
+
         return new GenericNBTStoredVariable<>(key, serializer, deserializer, CompoundTag::putString,
                 CompoundTag::getString);
     }
@@ -230,6 +231,7 @@ public class PhalanxUtils {
             @Nonnull String key,
             @Nonnull TriConsumer<CompoundTag, String, VS> NBTsetter,
             @Nonnull BiFunction<CompoundTag, String, VS> NBTgetter) {
+
         return new GenericNBTStoredVariable<>(key, Function.identity(), Function.identity(), NBTsetter, NBTgetter);
     }
 
@@ -273,7 +275,11 @@ public class PhalanxUtils {
         }
     }
 
-    public static void spawnItem(@Nonnull LevelAccessor world, @Nonnull Vec3 pos, @Nonnull Supplier<ItemStack> itemstackSupplier) {
+    public static void spawnItem(
+            @Nonnull LevelAccessor world,
+            @Nonnull Vec3 pos,
+            @Nonnull Supplier<ItemStack> itemstackSupplier) {
+
         if (world instanceof ServerLevel serverWorld) {
             @SuppressWarnings("null")
             final var toSpawn = new ItemEntity(serverWorld, pos.x, pos.y, pos.z, itemstackSupplier.get());
