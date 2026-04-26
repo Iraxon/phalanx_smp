@@ -30,14 +30,14 @@ public class SoldierItemInteractions {
         }
     }
 
-    public static final SoldierItemInteractionDescription simpleInteractionDescription = new SoldierItemInteractionDescription(
+    public static final SoldierItemInteractionDescription GIVE_INTERACTION = new SoldierItemInteractionDescription(
             (soldier, item) -> PhalanxUtils.setItemInHand(soldier, InteractionHand.MAIN_HAND, 1, item),
             (soldier) -> soldier.getItemInHand(InteractionHand.MAIN_HAND).isEmpty(),
             true);
 
     public static final HashMap<Item, SoldierItemInteractionDescription> itemBehaviorMap = new HashMap<>(
             Map.ofEntries(
-                    Map.entry(Items.STONE_SWORD, simpleInteractionDescription)));
+                    Map.entry(Items.STONE_SWORD, GIVE_INTERACTION)));
 
     @SuppressWarnings("null")
     public static InteractionResult interact(@Nonnull Mob soldier, Player player) {
