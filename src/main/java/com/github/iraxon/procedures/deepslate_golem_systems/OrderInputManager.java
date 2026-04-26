@@ -24,7 +24,7 @@ public class OrderInputManager {
     }
 
     private static void addInput(@Nonnull Entity orderIssuer, @Nonnull OrderInput input) {
-        orderIssuer.getPersistentData().putString(ORDER_MANAGER_KEY, getOrderCodeString(orderIssuer) + input.rep);
+        orderIssuer.getPersistentData().putString(ORDER_MANAGER_KEY, getOrderCodeString(orderIssuer) + input.asString());
     }
 
     private static void clearInputs(@Nonnull Entity orderIssuer) {
@@ -52,32 +52,6 @@ public class OrderInputManager {
                 ? ("Typing: "
                         + getOrderCodeString(orderIssuer))
                 : "No Order";
-    }
-
-    public static enum OrderInput {
-        UP("▲"),
-        DOWN("▼");
-
-        private final String rep;
-
-        private OrderInput(String rep) {
-            this.rep = rep;
-        }
-
-        /**
-         * @return Guaranteed to be of length 1
-         */
-        public String asString() {
-            return this.rep;
-        }
-
-        /**
-         * @param s A 1-length String representing an OrderInput
-         * @return
-         */
-        public static OrderInput fromString(String s) {
-            return Arrays.stream(values()).filter(orderInput -> orderInput.rep.equals(s)).findAny().orElse(DOWN);
-        }
     }
 
     // Input methods
