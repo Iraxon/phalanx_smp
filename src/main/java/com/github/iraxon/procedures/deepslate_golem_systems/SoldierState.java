@@ -15,6 +15,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.Vec3;
 
 /**
@@ -28,11 +29,16 @@ public class SoldierState {
     public static class PlayerLiegeUUID {
         private static final String KEY = "phalanx_soldier_player_liege_uuid";
 
-        public static boolean set(@Nonnull Mob soldier, @Nonnull String playerLiegeUUID) {
+        @SuppressWarnings("null")
+        public static boolean set(@Nonnull Mob soldier, @Nonnull Player player) {
+            return set(soldier, player.getStringUUID());
+        }
+
+        public static boolean set(@Nonnull Mob soldier, @Nonnull String playerUUID) {
             if (isSet(soldier)) {
                 return false;
             } else {
-                soldier.getPersistentData().putString(KEY, playerLiegeUUID);
+                soldier.getPersistentData().putString(KEY, playerUUID);
                 return true;
             }
         }
