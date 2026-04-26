@@ -256,32 +256,6 @@
       }
     },
     {
-      "name": "DeepslateGolemRightclickedOnEntity",
-      "type": "procedure",
-      "compiles": true,
-      "locked_code": true,
-      "registry_name": "deepslate_golem_rightclicked_on_entity",
-      "metadata": {
-        "dependencies": [
-          {
-            "name": "entity",
-            "type": "entity"
-          },
-          {
-            "name": "sourceentity",
-            "type": "entity"
-          },
-          {
-            "name": "world",
-            "type": "world"
-          }
-        ],
-        "files": [
-          "src/main/java/com/github/iraxon/procedures/DeepslateGolemRightclickedOnEntityProcedure.java"
-        ]
-      }
-    },
-    {
       "name": "UpdateLastAttacker",
       "type": "procedure",
       "compiles": true,

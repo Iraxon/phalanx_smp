@@ -1,13 +1,13 @@
 package com.github.iraxon.procedures.deepslate_golem_systems;
 
-import static com.github.iraxon.procedures.deepslate_golem_systems.PhalanxUtils.NBTStringVariable;
-
 import java.util.Objects;
+import java.util.Optional;
+
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import com.github.iraxon.entity.DeepslateGolemEntity;
 import com.github.iraxon.procedures.deepslate_golem_systems.PhalanxUtils.FinalNBTStoredVariable;
-import com.github.iraxon.procedures.deepslate_golem_systems.PhalanxUtils.NBTStoredVariable;
 import com.github.iraxon.procedures.deepslate_golem_systems.PhalanxUtils.Vec3NBT;
 
 import net.minecraft.commands.arguments.EntityAnchorArgument;
@@ -25,16 +25,40 @@ import net.minecraft.world.phys.Vec3;
  */
 public class SoldierState {
 
-    public static final NBTStoredVariable<Mob, String, String> playerLiegeUUID = NBTStringVariable(
-            "phalanx_soldier_player_liege_uuid");
+    public static class PlayerLiegeUUID {
+        private static final String KEY = "phalanx_soldier_player_liege_uuid";
+
+        public static boolean set(@Nonnull Mob soldier, @Nonnull String playerLiegeUUID) {
+            if (isSet(soldier)) {
+                return false;
+            } else {
+                soldier.getPersistentData().putString(KEY, playerLiegeUUID);
+                return true;
+            }
+        }
+
+        public static boolean reset(@Nonnull Mob soldier) {
+            final var result = isSet(soldier);
+            soldier.getPersistentData().remove(KEY);
+            return result;
+        }
+
+        public static Optional<String> get(@Nonnull Mob soldier) {
+            final var data = soldier.getPersistentData();
+            return isSet(soldier) ? Optional.of(data.getString(KEY)) : Optional.empty();
+        }
+
+        public static boolean isSet(@Nonnull Mob soldier) {
+            return soldier.getPersistentData().contains(KEY);
+        }
+    }
 
     public static final FinalNBTStoredVariable<Mob, SoldierType, String> soldierType = new FinalNBTStoredVariable<Mob, SoldierType, String>(
-        "phalanx_soldier_type",
-        SoldierType::encode,
-        SoldierType::decodeOptional,
-        CompoundTag::putString,
-        CompoundTag::getString
-    );
+            "phalanx_soldier_type",
+            SoldierType::encode,
+            SoldierType::decodeOptional,
+            CompoundTag::putString,
+            CompoundTag::getString);
 
     private static final String KEY_STATE_TYPE = "phalanx_soldier_state_type";
     private static final String KEY_STATE_PAYLOAD = "phalanx_soldier_state_payload";
