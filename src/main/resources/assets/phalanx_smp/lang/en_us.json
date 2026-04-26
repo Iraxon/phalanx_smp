@@ -9,7 +9,5 @@
   "key.phalanx_smp.issue_orders_confirm": "Issue Orders: Confirm",
   "gui.phalanx_smp.commander_screen.button_recruit": "Add Soldier",
   "gui.phalanx_smp.commander_screen.label_supplies_not_implemented": "Supplies: [NOT IMPLEMENTED]",
-  "gui.phalanx_smp.commander_screen.label_deepslate_golem_commander": "Deepslate Golem Commander",
-  "item.phalanx_smp.commander_golem_shell": "Deepslate Golem Shell: Commander",
-  "item.phalanx_smp.heavy_infantry_golem_shell": "Deepslate Golem Shell: Heavy Infantry"
+  "gui.phalanx_smp.commander_screen.label_deepslate_golem_commander": "Deepslate Golem Commander"
 }

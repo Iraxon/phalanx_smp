@@ -341,35 +341,57 @@
       }
     },
     {
-      "name": "CommanderGolemShell",
-      "type": "item",
+      "name": "DeepslateGolemMake",
+      "type": "procedure",
       "compiles": true,
       "locked_code": false,
-      "registry_name": "commander_golem_shell",
+      "registry_name": "deepslate_golem_make",
       "metadata": {
+        "dependencies": [
+          {
+            "name": "blockstate",
+            "type": "blockstate"
+          },
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
         "files": [
-          "src/main/java/com/github/iraxon/item/CommanderGolemShellItem.java",
-          "src/main/resources/assets/phalanx_smp/models/item/commander_golem_shell.json"
-        ]
-      }
-    },
-    {
-      "name": "HeavyInfantryGolemShell",
-      "type": "item",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "heavy_infantry_golem_shell",
-      "metadata": {
-        "files": [
-          "src/main/java/com/github/iraxon/item/HeavyInfantryGolemShellItem.java",
-          "src/main/resources/assets/phalanx_smp/models/item/heavy_infantry_golem_shell.json"
+          "src/main/java/com/github/iraxon/procedures/DeepslateGolemMakeProcedure.java"
         ]
       }
     }
   ],
   "variable_elements": [],
   "sound_elements": [],
-  "tag_elements": {},
+  "tag_elements": {
+    "BLOCKS:mod:golem_head": [
+      "Blocks.CARVED_PUMPKIN",
+      "Blocks.LIT_PUMPKIN",
+      "Blocks.CHISELED_DEEPSLATE"
+    ],
+    "BLOCKS:mod:deepslate_golem_body": [
+      "Blocks.COBBLED_DEEPSLATE",
+      "Blocks.POLISHED_DEEPSLATE",
+      "Blocks.DEEPSLATE_TILES",
+      "Blocks.DEEPSLATE_BRICKS",
+      "Blocks.CRACKED_DEEPSLATE_BRICKS",
+      "Blocks.CRACKED_DEEPSLATE_TILES"
+    ]
+  },
   "tab_element_order": {},
   "language_map": {
     "en_us": {
@@ -383,9 +405,7 @@
       "key.phalanx_smp.issue_orders_confirm": "Issue Orders: Confirm",
       "gui.phalanx_smp.commander_screen.button_recruit": "Add Soldier",
       "gui.phalanx_smp.commander_screen.label_supplies_not_implemented": "Supplies: [NOT IMPLEMENTED]",
-      "gui.phalanx_smp.commander_screen.label_deepslate_golem_commander": "Deepslate Golem Commander",
-      "item.phalanx_smp.commander_golem_shell": "Deepslate Golem Shell: Commander",
-      "item.phalanx_smp.heavy_infantry_golem_shell": "Deepslate Golem Shell: Heavy Infantry"
+      "gui.phalanx_smp.commander_screen.label_deepslate_golem_commander": "Deepslate Golem Commander"
     }
   },
   "metadata": {
@@ -395,11 +415,9 @@
       "src/main/java/com/github/iraxon/init/PhalanxSmpModScreens.java",
       "src/main/java/com/github/iraxon/init/PhalanxSmpModGameRules.java",
       "src/main/java/com/github/iraxon/init/PhalanxSmpModKeyMappings.java",
-      "src/main/java/com/github/iraxon/init/PhalanxSmpModItems.java",
       "src/main/java/com/github/iraxon/init/PhalanxSmpModEntityRenderers.java",
       "src/main/java/com/github/iraxon/init/PhalanxSmpModEntities.java",
       "src/main/resources/pack.mcmeta",
-      "src/main/java/com/github/iraxon/init/PhalanxSmpModTabs.java",
       "src/main/resources/META-INF/mods.toml",
       "src/main/java/com/github/iraxon/PhalanxSmpMod.java"
     ]
