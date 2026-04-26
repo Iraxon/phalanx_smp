@@ -1,4 +1,4 @@
-package com.github.iraxon.procedures;
+package com.github.iraxon.procedures.deepslate_golem_systems;
 
 import java.util.Arrays;
 import java.util.List;
@@ -8,7 +8,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import com.github.iraxon.entity.DeepslateGolemEntity;
-import com.github.iraxon.procedures.deepslate_golem_systems.PhalanxUtils;
+import com.github.iraxon.procedures.GetNearestCommanderOfPlayerProcedure;
 
 import net.minecraft.world.entity.Entity;
 
