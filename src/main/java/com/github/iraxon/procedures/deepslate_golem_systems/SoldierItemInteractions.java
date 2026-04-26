@@ -3,6 +3,8 @@ package com.github.iraxon.procedures.deepslate_golem_systems;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.BiConsumer;
+import java.util.function.Predicate;
+
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
@@ -12,23 +14,25 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraftforge.items.ItemHandlerHelper;
 
 public class SoldierItemInteractions {
 
     public static record SoldierItemInteractionDescription(@Nonnull BiConsumer<Mob, Item> action,
+            @Nonnull Predicate<Mob> precondition,
             boolean shouldConsumeItem) {
+        public boolean checkPrecondition(@Nonnull Mob soldier) {
+            return precondition.test(soldier);
+        }
         public void execute(@Nonnull Mob soldier, @Nonnull Item item) {
             action.accept(soldier, item);
         }
     }
 
     public static final SoldierItemInteractionDescription simpleInteractionDescription = new SoldierItemInteractionDescription(
-            (soldier, item) -> {
-                PhalanxUtils.setItemInHand(soldier, InteractionHand.MAIN_HAND, 1, item);
-            },
+            (soldier, item) -> PhalanxUtils.setItemInHand(soldier, InteractionHand.MAIN_HAND, 1, item),
+            (soldier) -> soldier.getItemInHand(InteractionHand.MAIN_HAND).isEmpty(),
             true);
 
     public static final HashMap<Item, SoldierItemInteractionDescription> itemBehaviorMap = new HashMap<>(
@@ -42,8 +46,15 @@ public class SoldierItemInteractions {
         final var item = heldItemstack.getItem();
 
         if (itemBehaviorMap.containsKey(item)) {
+
             final var desc = itemBehaviorMap.get(item);
+
+            if (!desc.checkPrecondition(soldier)) {
+                return InteractionResult.PASS;
+            }
+
             desc.execute(soldier, item);
+
             if (desc.shouldConsumeItem()) {
                 heldItemstack.shrink(1);
             }
