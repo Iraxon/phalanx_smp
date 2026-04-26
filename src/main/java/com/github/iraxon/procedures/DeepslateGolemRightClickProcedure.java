@@ -12,7 +12,11 @@ public class DeepslateGolemRightClickProcedure {
 		if (entity == null || sourceentity == null)
 			return InteractionResult.PASS;
 		if (entity instanceof Mob && sourceentity instanceof Player) {
-			return SoldierItemInteractions.interact(entity, sourceentity);
+			if (sourceentity.isShiftKeyDown()) {
+				return SoldierItemInteractions.takeAway(entity, sourceentity);
+			} else {
+				return SoldierItemInteractions.interact(entity, sourceentity);
+			}
 		}
 		return InteractionResult.PASS;
 	}
