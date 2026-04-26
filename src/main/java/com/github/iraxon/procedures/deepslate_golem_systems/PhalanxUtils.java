@@ -1,4 +1,4 @@
-package com.github.iraxon.procedures;
+package com.github.iraxon.procedures.deepslate_golem_systems;
 
 import java.util.Comparator;
 import java.util.Objects;

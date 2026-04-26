@@ -8,6 +8,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import com.github.iraxon.entity.DeepslateGolemEntity;
+import com.github.iraxon.procedures.deepslate_golem_systems.PhalanxUtils;
 
 import net.minecraft.world.entity.Entity;
 

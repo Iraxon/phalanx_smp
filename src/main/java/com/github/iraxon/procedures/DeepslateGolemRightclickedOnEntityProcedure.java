@@ -6,6 +6,7 @@ import net.minecraft.world.level.LevelAccessor;
 import java.util.Objects;
 
 import com.github.iraxon.entity.DeepslateGolemEntity;
+import com.github.iraxon.procedures.deepslate_golem_systems.PhalanxUtils;
 import com.github.iraxon.procedures.deepslate_golem_systems.SoldierState;
 
 import net.minecraft.world.entity.Entity;

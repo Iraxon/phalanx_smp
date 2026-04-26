@@ -1,15 +1,14 @@
 package com.github.iraxon.procedures.deepslate_golem_systems;
 
-import static com.github.iraxon.procedures.PhalanxUtils.NBTStringVariable;
+import static com.github.iraxon.procedures.deepslate_golem_systems.PhalanxUtils.NBTStringVariable;
 
 import java.util.Objects;
 import javax.annotation.Nullable;
 
 import com.github.iraxon.entity.DeepslateGolemEntity;
-import com.github.iraxon.procedures.PhalanxUtils;
-import com.github.iraxon.procedures.PhalanxUtils.FinalNBTStoredVariable;
-import com.github.iraxon.procedures.PhalanxUtils.NBTStoredVariable;
-import com.github.iraxon.procedures.PhalanxUtils.Vec3NBT;
+import com.github.iraxon.procedures.deepslate_golem_systems.PhalanxUtils.FinalNBTStoredVariable;
+import com.github.iraxon.procedures.deepslate_golem_systems.PhalanxUtils.NBTStoredVariable;
+import com.github.iraxon.procedures.deepslate_golem_systems.PhalanxUtils.Vec3NBT;
 
 import net.minecraft.commands.arguments.EntityAnchorArgument;
 import net.minecraft.nbt.CompoundTag;

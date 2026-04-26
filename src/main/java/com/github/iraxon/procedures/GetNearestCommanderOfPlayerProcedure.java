@@ -5,6 +5,7 @@ import net.minecraft.world.entity.Entity;
 import javax.annotation.Nullable;
 
 import com.github.iraxon.entity.DeepslateGolemEntity;
+import com.github.iraxon.procedures.deepslate_golem_systems.PhalanxUtils;
 import com.github.iraxon.procedures.deepslate_golem_systems.SoldierState;
 
 import net.minecraft.server.level.ServerPlayer;
