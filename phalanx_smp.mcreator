@@ -373,6 +373,29 @@
           "src/main/java/com/github/iraxon/procedures/DeepslateGolemMakeProcedure.java"
         ]
       }
+    },
+    {
+      "name": "DeepslateGolemRightClick",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "deepslate_golem_right_click",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "sourceentity",
+            "type": "entity"
+          }
+        ],
+        "return_type": "actionresulttype",
+        "files": [
+          "src/main/java/com/github/iraxon/procedures/DeepslateGolemRightClickProcedure.java"
+        ]
+      }
     }
   ],
   "variable_elements": [],

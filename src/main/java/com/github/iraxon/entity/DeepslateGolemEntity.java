@@ -28,7 +28,7 @@ import net.minecraft.network.protocol.Packet;
 import net.minecraft.core.BlockPos;
 
 import com.github.iraxon.procedures.UpdateLastAttackerProcedure;
-import com.github.iraxon.procedures.DeepslateGolemRightclickedOnEntityProcedure;
+import com.github.iraxon.procedures.DeepslateGolemRightClickProcedure;
 import com.github.iraxon.procedures.DeepslateGolemAIProcedure;
 import com.github.iraxon.init.PhalanxSmpModEntities;
 
@@ -119,9 +119,7 @@ public class DeepslateGolemEntity extends Monster {
 		double z = this.getZ();
 		Entity entity = this;
 		Level world = this.level();
-
-		DeepslateGolemRightclickedOnEntityProcedure.execute(world, entity, sourceentity);
-		return retval;
+		return DeepslateGolemRightClickProcedure.execute(entity, sourceentity);
 	}
 
 	@Override

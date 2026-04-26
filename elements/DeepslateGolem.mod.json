@@ -125,7 +125,7 @@
       "name": "UpdateLastAttacker"
     },
     "onRightClickedOn": {
-      "name": "DeepslateGolemRightclickedOnEntity"
+      "name": "DeepslateGolemRightClick"
     },
     "onMobTickUpdate": {
       "name": "DeepslateGolemAI"
