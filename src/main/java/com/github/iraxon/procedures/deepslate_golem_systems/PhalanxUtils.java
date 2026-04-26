@@ -21,8 +21,12 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.GameType;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.phys.AABB;
@@ -243,5 +247,19 @@ public class PhalanxUtils {
         public V get(@Nonnull E mob) {
             return deserializer.apply(mob.getPersistentData().getInt(key));
         }
+    }
+
+    @SuppressWarnings("null")
+    public static void setItemInHand(LivingEntity entity, InteractionHand hand, ItemStack itemstack) {
+        if (entity == null || hand == null || itemstack == null)
+            return;
+        final var stackCopy = itemstack.copy();
+        entity.setItemInHand(hand, stackCopy);
+    }
+
+    public static void setItemInHand(LivingEntity entity, InteractionHand hand, int count, Item item) {
+        if (entity == null || hand == null || item == null)
+            return;
+        entity.setItemInHand(hand, new ItemStack(item, count));
     }
 }
