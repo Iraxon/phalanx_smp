@@ -68,13 +68,6 @@ public class SoldierState {
         }
     }
 
-    public static final FinalNBTStoredVariable<Mob, SoldierType, String> soldierType = new FinalNBTStoredVariable<Mob, SoldierType, String>(
-            "phalanx_soldier_type",
-            SoldierType::encode,
-            SoldierType::decodeOptional,
-            CompoundTag::putString,
-            CompoundTag::getString);
-
     private static final String KEY_STATE_TYPE = "phalanx_soldier_state_type";
     private static final String KEY_STATE_PAYLOAD = "phalanx_soldier_state_payload";
 
