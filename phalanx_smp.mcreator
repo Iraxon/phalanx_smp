@@ -296,25 +296,6 @@
       }
     },
     {
-      "name": "GetNearestCommanderOfPlayer",
-      "type": "procedure",
-      "compiles": true,
-      "locked_code": true,
-      "registry_name": "get_nearest_commander_of_player",
-      "metadata": {
-        "dependencies": [
-          {
-            "name": "entity",
-            "type": "entity"
-          }
-        ],
-        "return_type": "entity",
-        "files": [
-          "src/main/java/com/github/iraxon/procedures/GetNearestCommanderOfPlayerProcedure.java"
-        ]
-      }
-    },
-    {
       "name": "DeepslateGolemMake",
       "type": "procedure",
       "compiles": true,

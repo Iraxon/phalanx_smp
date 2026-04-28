@@ -1,16 +1,14 @@
 package com.github.iraxon.procedures.deepslate_golem_systems;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-import com.github.iraxon.entity.DeepslateGolemEntity;
-import com.github.iraxon.procedures.GetNearestCommanderOfPlayerProcedure;
-
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.Mob;
 
 public class OrderInputManager {
 
@@ -24,7 +22,8 @@ public class OrderInputManager {
     }
 
     private static void addInput(@Nonnull Entity orderIssuer, @Nonnull OrderInput input) {
-        orderIssuer.getPersistentData().putString(ORDER_MANAGER_KEY, getOrderCodeString(orderIssuer) + input.asString());
+        orderIssuer.getPersistentData().putString(ORDER_MANAGER_KEY,
+                getOrderCodeString(orderIssuer) + input.asString());
     }
 
     private static void clearInputs(@Nonnull Entity orderIssuer) {
@@ -61,7 +60,7 @@ public class OrderInputManager {
             return;
         }
         addInput(orderIssuer, OrderInput.UP);
-        PhalanxUtils.sendMessage(orderIssuer, infoMessage(orderIssuer), true);
+        PhalanxUtils.sendMessage(orderIssuer, infoMessage(orderIssuer));
     }
 
     public static void inputDown(@Nullable Entity orderIssuer) {
@@ -69,7 +68,7 @@ public class OrderInputManager {
             return;
         }
         addInput(orderIssuer, OrderInput.DOWN);
-        PhalanxUtils.sendMessage(orderIssuer, infoMessage(orderIssuer), true);
+        PhalanxUtils.sendMessage(orderIssuer, infoMessage(orderIssuer));
     }
 
     public static void inputCancel(@Nullable Entity orderIssuer) {
@@ -77,47 +76,45 @@ public class OrderInputManager {
             return;
         }
         clearInputs(orderIssuer);
-        PhalanxUtils.sendMessage(orderIssuer, "Canceled", true);
+        PhalanxUtils.sendMessage(orderIssuer, "Canceled");
     }
 
+    @SuppressWarnings("null")
     public static void inputConfirm(@Nullable Entity orderIssuer) {
-        // if (orderIssuer == null) {
-        //     return;
-        // }
-        // if (orderIssuer.level().isClientSide) {
-        //     return;
-        // }
+        if (orderIssuer == null) {
+            return;
+        }
+        final var orderCode = getOrderCode(orderIssuer);
+        final var orderCodeString = Order.stringFromCode(orderCode);
 
-        // final var orderOptional = Order.get(getOrderCode(orderIssuer));
-        // if (orderOptional.isEmpty()) {
-        //     PhalanxUtils.sendMessage(orderIssuer, "Unknown order code", true);
-        //     clearInputs(orderIssuer);
-        //     return;
-        // }
+        clearInputs(orderIssuer);
 
-        // @Nonnull
-        // final var order = Objects.requireNonNull(orderOptional.orElseThrow());
-
-        // final var recipientOptional = findOrderRecipient(orderIssuer);
-        // if (recipientOptional.isEmpty()) {
-        //     PhalanxUtils.sendMessage(orderIssuer, "No commander found", true);
-        //     clearInputs(orderIssuer);
-        //     return;
-        // }
-
-        // @Nonnull
-        // final var recipient = Objects.requireNonNull(recipientOptional.orElseThrow());
-
-        // final var success = SoldierNBT.formationWrapper(recipient).setOrder(order);
-        // clearInputs(orderIssuer);
-
-        // PhalanxUtils.sendMessage(orderIssuer,
-        //         success ? "Order sent: " + order.toString() : "Wrong formation for order: " + order.toString(),
-        //         true);
+        Order.decode(orderCodeString).ifPresentOrElse(
+                order -> processOrder(orderCodeString, order, orderIssuer),
+                () -> PhalanxUtils.sendMessage(orderIssuer, "Unknown order code: " + orderCodeString));
     }
 
-    @Nonnull
-    private static Optional<DeepslateGolemEntity> findOrderRecipient(@Nonnull Entity orderIssuer) {
-        return Objects.requireNonNull(Optional.ofNullable(GetNearestCommanderOfPlayerProcedure.execute(orderIssuer)));
+    @SuppressWarnings("null")
+    private static void processOrder(@Nonnull String orderCodeString, @Nonnull Order order,
+            @Nullable Entity orderIssuer) {
+
+        if (orderIssuer == null) {
+            return;
+        }
+        findOrderRecipient(orderIssuer).ifPresentOrElse(
+                recipient -> Order.issueOrder(order, recipient, orderIssuer),
+                () -> PhalanxUtils.sendMessage(orderIssuer, "No recipient for order: " + orderCodeString));
+
+    }
+
+    @SuppressWarnings("null")
+    private static Optional<Mob> findOrderRecipient(@Nonnull Entity orderIssuer) {
+        return PhalanxUtils.getNearestEntityWithPredicate(
+                orderIssuer.level(),
+                Mob.class,
+                orderIssuer.position(),
+                128,
+                entity -> SoldierState.PlayerLiegeUUID.get(entity).filter(orderIssuer.getStringUUID()::equals)
+                        .isPresent());
     }
 }

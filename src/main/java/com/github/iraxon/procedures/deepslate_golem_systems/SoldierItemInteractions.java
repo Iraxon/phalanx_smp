@@ -25,6 +25,7 @@ public class SoldierItemInteractions {
         public boolean checkPrecondition(@Nonnull Mob soldier) {
             return precondition.test(soldier);
         }
+
         public void execute(@Nonnull Mob soldier, @Nonnull Item item) {
             action.accept(soldier, item);
         }
@@ -39,17 +40,18 @@ public class SoldierItemInteractions {
             Map.ofEntries(
                     Map.entry(Items.STONE_SWORD, GIVE_INTERACTION)));
 
+    private static final InteractionResult DEFAULT_RESULT = InteractionResult.PASS;
 
     @SuppressWarnings("null")
     public static InteractionResult interact(@Nonnull Mob soldier, @Nonnull Player player) {
 
-        final var DEFAULT_RESULT = InteractionResult.PASS;
-
         if (!SoldierState.PlayerLiegeUUID.isSet(soldier)) {
             SoldierState.PlayerLiegeUUID.set(soldier, player);
+            PhalanxUtils.sendMessage(player, "Loyalty programmed");
         }
 
         if (!SoldierState.PlayerLiegeUUID.isLoyalTo(soldier, player)) {
+            PhalanxUtils.sendMessage(player, "Not loyal to you");
             return DEFAULT_RESULT;
         }
 
@@ -57,12 +59,14 @@ public class SoldierItemInteractions {
         final var item = heldItemstack.getItem();
 
         if (!itemBehaviorMap.containsKey(item)) {
+            PhalanxUtils.sendMessage(player, "Soldiers cannot use this item");
             return DEFAULT_RESULT;
         }
 
         final var itemInteraction = itemBehaviorMap.get(item);
 
         if (!itemInteraction.checkPrecondition(soldier)) {
+            PhalanxUtils.sendMessage(player, "Interaction unavailable");
             return DEFAULT_RESULT;
         }
 
@@ -82,6 +86,16 @@ public class SoldierItemInteractions {
 
     @SuppressWarnings("null")
     public static InteractionResult takeAway(@Nonnull Mob soldier, @Nullable Player player) {
+
+        if (!SoldierState.PlayerLiegeUUID.isSet(soldier)) {
+            SoldierState.PlayerLiegeUUID.set(soldier, player);
+            PhalanxUtils.sendMessage(player, "Loyalty programmed");
+        }
+
+        if (!SoldierState.PlayerLiegeUUID.isLoyalTo(soldier, player)) {
+            PhalanxUtils.sendMessage(player, "Not loyal to you");
+            return DEFAULT_RESULT;
+        }
 
         final var soldierItemstack = soldier.getItemInHand(InteractionHand.MAIN_HAND);
 
