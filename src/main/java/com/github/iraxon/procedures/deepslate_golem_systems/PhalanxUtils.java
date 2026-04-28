@@ -112,6 +112,17 @@ public class PhalanxUtils {
     }
 
     /**
+     * Displays an actionbar message to the entity if it's a player
+     * and this is being done from server side
+     *
+     * @param recipient
+     * @param msg
+     */
+    public static void sendMessage(@Nullable Entity recipient, @Nonnull String msg) {
+        sendMessage(recipient, msg, true);
+    }
+
+    /**
      * Displays a message to the entity if it's a player
      * and this is being done from server side
      *
@@ -135,7 +146,7 @@ public class PhalanxUtils {
             if (playerInfo != null)
                 return playerInfo.getGameMode();
         }
-        throw new RuntimeException("Player was neither serverPlayer nor client player: " + player.getName());
+        throw new RuntimeException("Player was neither ServerPlayer nor client player: " + player.getName());
     }
 
     public static class Vec3NBT {
