@@ -4,19 +4,14 @@ import java.util.Comparator;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.function.BiFunction;
-import java.util.function.Function;
-import java.util.function.IntFunction;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
-import java.util.function.ToIntFunction;
 import java.util.stream.Stream;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import org.apache.logging.log4j.util.TriConsumer;
-
-import com.github.iraxon.PhalanxSmpMod;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.nbt.CompoundTag;
@@ -182,87 +177,43 @@ public class PhalanxUtils {
 
     }
 
-    public static interface NBTStoredVariable<E extends Entity, T, R> {
-        public void set(@Nonnull E mob, T value);
+    public static class NBTVariableWrapper<E extends Entity, T> {
+        @Nonnull
+        private final String KEY;
+        private final TriConsumer<CompoundTag, String, T> NBTSetter;
+        private final BiFunction<CompoundTag, String, T> NBTGetter;
 
-        public R get(@Nonnull E mob);
-    }
+        public NBTVariableWrapper(
+                @Nonnull String KEY,
+                TriConsumer<CompoundTag, String, T> NBTSetter,
+                BiFunction<CompoundTag, String, T> NBTGetter) {
 
-    public static record GenericNBTStoredVariable<E extends Entity, V, S>(
-            @Nonnull String key,
-            @Nonnull Function<V, S> serializer,
-            @Nonnull Function<S, V> deserializer,
-            @Nonnull TriConsumer<CompoundTag, String, S> NBTsetter,
-            @Nonnull BiFunction<CompoundTag, String, S> NBTgetter) implements NBTStoredVariable<E, V, V> {
-
-        public void set(@Nonnull E mob, V value) {
-            NBTsetter.accept(mob.getPersistentData(), key, serializer.apply(value));
+            this.KEY = KEY;
+            this.NBTSetter = NBTSetter;
+            this.NBTGetter = NBTGetter;
         }
 
-        public V get(@Nonnull E mob) {
-            return deserializer.apply(NBTgetter.apply(mob.getPersistentData(), key));
-        }
-    }
-
-    public static record FinalNBTStoredVariable<E extends Entity, V, S>(
-            @Nonnull String key,
-            @Nonnull Function<V, S> serializer,
-            @Nonnull Function<S, Optional<V>> deserializer,
-            @Nonnull TriConsumer<CompoundTag, String, S> NBTsetter,
-            @Nonnull BiFunction<CompoundTag, String, S> NBTgetter)
-            implements NBTStoredVariable<E, V, Optional<V>> {
-
-        public void set(@Nonnull E mob, V value) {
-            final var data = mob.getPersistentData();
-            if (get(mob).isPresent()) {
-                PhalanxSmpMod.LOGGER.error(
-                        "Attempted to reassign final NBT variable to " + value + " on mob with existing value "
-                                + get(mob).get() + ", UUID " + mob.getStringUUID());
-                return;
+        public boolean set(@Nonnull E mob, T value) {
+            if (isSet(mob)) {
+                return false;
+            } else {
+                NBTSetter.accept(mob.getPersistentData(), KEY, value);
+                return true;
             }
-            NBTsetter.accept(data, key, serializer.apply(value));
         }
 
-        public Optional<V> get(@Nonnull E mob) {
-            return deserializer.apply(NBTgetter.apply(mob.getPersistentData(), key));
-        }
-    }
-
-    public static <E extends Entity, V> GenericNBTStoredVariable<E, V, String> NBTStringStoredVariable(
-            @Nonnull String key,
-            @Nonnull Function<V, String> serializer,
-            @Nonnull Function<String, V> deserializer) {
-
-        return new GenericNBTStoredVariable<>(key, serializer, deserializer, CompoundTag::putString,
-                CompoundTag::getString);
-    }
-
-    @SuppressWarnings("null")
-    public static <E extends Entity, VS> GenericNBTStoredVariable<E, VS, VS> NBTStoredVariableUnserialized(
-            @Nonnull String key,
-            @Nonnull TriConsumer<CompoundTag, String, VS> NBTsetter,
-            @Nonnull BiFunction<CompoundTag, String, VS> NBTgetter) {
-
-        return new GenericNBTStoredVariable<>(key, Function.identity(), Function.identity(), NBTsetter, NBTgetter);
-    }
-
-    public static <E extends Entity> GenericNBTStoredVariable<E, String, String> NBTStringVariable(
-            @Nonnull String key) {
-        return NBTStoredVariableUnserialized(key, CompoundTag::putString, CompoundTag::getString);
-    }
-
-    public static record NBTIntStoredVariable<E extends Entity, V>(
-            @Nonnull String key,
-            @Nonnull ToIntFunction<V> serializer,
-            @Nonnull IntFunction<V> deserializer)
-            implements NBTStoredVariable<E, V, V> {
-
-        public void set(@Nonnull E mob, V value) {
-            mob.getPersistentData().putInt(key, Objects.requireNonNull(serializer.applyAsInt(value)));
+        public Optional<T> get(@Nonnull E mob) {
+            return isSet(mob) ? Optional.of(NBTGetter.apply(mob.getPersistentData(), KEY)) : Optional.empty();
         }
 
-        public V get(@Nonnull E mob) {
-            return deserializer.apply(mob.getPersistentData().getInt(key));
+        public boolean reset(@Nonnull E mob) {
+            final var result = isSet(mob);
+            mob.getPersistentData().remove(KEY);
+            return result;
+        }
+
+        public boolean isSet(@Nonnull E mob) {
+            return mob.getPersistentData().contains(KEY);
         }
     }
 
