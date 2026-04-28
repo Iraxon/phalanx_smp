@@ -39,28 +39,39 @@ public class SoldierItemInteractions {
             Map.ofEntries(
                     Map.entry(Items.STONE_SWORD, GIVE_INTERACTION)));
 
+
     @SuppressWarnings("null")
-    public static InteractionResult interact(@Nonnull Mob soldier, Player player) {
+    public static InteractionResult interact(@Nonnull Mob soldier, @Nonnull Player player) {
+
+        final var DEFAULT_RESULT = InteractionResult.PASS;
+
+        if (!SoldierState.PlayerLiegeUUID.isSet(soldier)) {
+            SoldierState.PlayerLiegeUUID.set(soldier, player);
+        }
+
+        if (!SoldierState.PlayerLiegeUUID.isLoyalTo(soldier, player)) {
+            return DEFAULT_RESULT;
+        }
 
         final var heldItemstack = player.getItemInHand(InteractionHand.MAIN_HAND);
         final var item = heldItemstack.getItem();
 
-        if (itemBehaviorMap.containsKey(item)) {
-
-            final var desc = itemBehaviorMap.get(item);
-
-            if (!desc.checkPrecondition(soldier)) {
-                return InteractionResult.PASS;
-            }
-
-            desc.execute(soldier, item);
-
-            if (desc.shouldConsumeItem()) {
-                heldItemstack.shrink(1);
-            }
-            return InteractionResult.sidedSuccess(soldier.level().isClientSide());
+        if (!itemBehaviorMap.containsKey(item)) {
+            return DEFAULT_RESULT;
         }
-        return InteractionResult.PASS;
+
+        final var itemInteraction = itemBehaviorMap.get(item);
+
+        if (!itemInteraction.checkPrecondition(soldier)) {
+            return DEFAULT_RESULT;
+        }
+
+        itemInteraction.execute(soldier, item);
+
+        if (itemInteraction.shouldConsumeItem()) {
+            heldItemstack.shrink(1);
+        }
+        return InteractionResult.sidedSuccess(soldier.level().isClientSide());
     }
 
     public static InteractionResult interact(@Nullable Entity soldier, @Nullable Entity player) {
