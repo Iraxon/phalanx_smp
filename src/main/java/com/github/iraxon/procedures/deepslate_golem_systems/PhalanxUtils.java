@@ -281,9 +281,6 @@ public class PhalanxUtils {
         if (entity == null || hand == null || item == null)
             return;
         entity.setItemInHand(hand, new ItemStack(item, count));
-        if (entity instanceof Player p) {
-            p.getInventory().setChanged();
-        }
     }
 
     public static void spawnItem(
