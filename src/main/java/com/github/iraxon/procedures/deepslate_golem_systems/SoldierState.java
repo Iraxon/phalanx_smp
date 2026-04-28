@@ -30,8 +30,8 @@ public class SoldierState {
         private static final String KEY = "phalanx_soldier_player_liege_uuid";
 
         @SuppressWarnings("null")
-        public static boolean set(@Nonnull Mob soldier, @Nonnull Player player) {
-            return set(soldier, player.getStringUUID());
+        public static boolean set(@Nonnull Mob soldier, @Nonnull Player liege) {
+            return set(soldier, liege.getStringUUID());
         }
 
         public static boolean set(@Nonnull Mob soldier, @Nonnull String playerUUID) {
@@ -56,6 +56,15 @@ public class SoldierState {
 
         public static boolean isSet(@Nonnull Mob soldier) {
             return soldier.getPersistentData().contains(KEY);
+        }
+
+        @SuppressWarnings("null")
+        public static boolean isLoyalTo(@Nonnull Mob soldier, @Nonnull Player liege) {
+            return isLoyalTo(soldier, liege.getStringUUID());
+        }
+
+        public static boolean isLoyalTo(@Nonnull Mob soldier, @Nonnull String liegeUUID) {
+            return get(soldier).filter(liegeUUID::equals).isPresent();
         }
     }
 
