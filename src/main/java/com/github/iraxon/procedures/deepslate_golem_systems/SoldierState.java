@@ -26,12 +26,8 @@ import net.minecraft.world.phys.Vec3;
 public class SoldierState {
 
     public static class PlayerLiegeUUID {
+        // Common NBT variable functionality
         private static final String KEY = "phalanx_soldier_player_liege_uuid";
-
-        @SuppressWarnings("null")
-        public static boolean set(@Nonnull Mob soldier, @Nonnull Player liege) {
-            return set(soldier, liege.getStringUUID());
-        }
 
         public static boolean set(@Nonnull Mob soldier, @Nonnull String playerUUID) {
             if (isSet(soldier)) {
@@ -55,6 +51,13 @@ public class SoldierState {
 
         public static boolean isSet(@Nonnull Mob soldier) {
             return soldier.getPersistentData().contains(KEY);
+        }
+
+        // More utilities
+
+        @SuppressWarnings("null")
+        public static boolean set(@Nonnull Mob soldier, @Nonnull Player liege) {
+            return set(soldier, liege.getStringUUID());
         }
 
         @SuppressWarnings("null")
