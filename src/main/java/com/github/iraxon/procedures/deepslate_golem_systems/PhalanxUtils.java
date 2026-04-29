@@ -3,15 +3,12 @@ package com.github.iraxon.procedures.deepslate_golem_systems;
 import java.util.Comparator;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.function.BiFunction;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 import java.util.stream.Stream;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-
-import org.apache.logging.log4j.util.TriConsumer;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.nbt.CompoundTag;
@@ -175,46 +172,6 @@ public class PhalanxUtils {
             return null;
         }
 
-    }
-
-    public static class NBTVariableWrapper<E extends Entity, T> {
-        @Nonnull
-        private final String KEY;
-        private final TriConsumer<CompoundTag, String, T> NBTSetter;
-        private final BiFunction<CompoundTag, String, T> NBTGetter;
-
-        public NBTVariableWrapper(
-                @Nonnull String KEY,
-                TriConsumer<CompoundTag, String, T> NBTSetter,
-                BiFunction<CompoundTag, String, T> NBTGetter) {
-
-            this.KEY = KEY;
-            this.NBTSetter = NBTSetter;
-            this.NBTGetter = NBTGetter;
-        }
-
-        public boolean set(@Nonnull E mob, T value) {
-            if (isSet(mob)) {
-                return false;
-            } else {
-                NBTSetter.accept(mob.getPersistentData(), KEY, value);
-                return true;
-            }
-        }
-
-        public Optional<T> get(@Nonnull E mob) {
-            return isSet(mob) ? Optional.of(NBTGetter.apply(mob.getPersistentData(), KEY)) : Optional.empty();
-        }
-
-        public boolean reset(@Nonnull E mob) {
-            final var result = isSet(mob);
-            mob.getPersistentData().remove(KEY);
-            return result;
-        }
-
-        public boolean isSet(@Nonnull E mob) {
-            return mob.getPersistentData().contains(KEY);
-        }
     }
 
     @SuppressWarnings("null")
