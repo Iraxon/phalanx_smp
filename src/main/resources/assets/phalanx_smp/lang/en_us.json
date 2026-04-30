@@ -9,5 +9,7 @@
   "key.phalanx_smp.issue_orders_confirm": "Issue Orders: Confirm",
   "gui.phalanx_smp.commander_screen.button_recruit": "Add Soldier",
   "gui.phalanx_smp.commander_screen.label_supplies_not_implemented": "Supplies: [NOT IMPLEMENTED]",
-  "gui.phalanx_smp.commander_screen.label_deepslate_golem_commander": "Deepslate Golem Commander"
+  "gui.phalanx_smp.commander_screen.label_deepslate_golem_commander": "Deepslate Golem Commander",
+  "item.phalanx_smp.infantry_spear": "Infantry Spear",
+  "item.phalanx_smp.deepslate_rod": "Deepslate Rod"
 }

@@ -351,6 +351,56 @@
           "src/main/java/com/github/iraxon/procedures/DeepslateGolemRightClickProcedure.java"
         ]
       }
+    },
+    {
+      "name": "InfantrySpear",
+      "type": "item",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "infantry_spear",
+      "metadata": {
+        "files": [
+          "src/main/java/com/github/iraxon/item/InfantrySpearItem.java",
+          "src/main/resources/assets/phalanx_smp/models/item/infantry_spear.json"
+        ]
+      }
+    },
+    {
+      "name": "InfantrySpearMake",
+      "type": "recipe",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "infantry_spear_make",
+      "metadata": {
+        "files": [
+          "src/main/resources/data/phalanx_smp/recipes/infantry_spear_make.json"
+        ]
+      }
+    },
+    {
+      "name": "DeepslateRod",
+      "type": "item",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "deepslate_rod",
+      "metadata": {
+        "files": [
+          "src/main/resources/assets/phalanx_smp/models/item/deepslate_rod.json",
+          "src/main/java/com/github/iraxon/item/DeepslateRodItem.java"
+        ]
+      }
+    },
+    {
+      "name": "DeepslateRodMake",
+      "type": "recipe",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "deepslate_rod_make",
+      "metadata": {
+        "files": [
+          "src/main/resources/data/phalanx_smp/recipes/deepslate_rod_make.json"
+        ]
+      }
     }
   ],
   "variable_elements": [],
@@ -368,6 +418,15 @@
       "Blocks.DEEPSLATE_BRICKS",
       "Blocks.CRACKED_DEEPSLATE_BRICKS",
       "Blocks.CRACKED_DEEPSLATE_TILES"
+    ],
+    "ITEMS:mod:deepslate_blocks": [
+      "Blocks.COBBLED_DEEPSLATE",
+      "Blocks.POLISHED_DEEPSLATE",
+      "Blocks.DEEPSLATE_TILES",
+      "Blocks.DEEPSLATE_BRICKS",
+      "Blocks.CHISELED_DEEPSLATE",
+      "Blocks.CRACKED_DEEPSLATE_BRICKS",
+      "Blocks.CRACKED_DEEPSLATE_TILES"
     ]
   },
   "tab_element_order": {},
@@ -383,7 +442,9 @@
       "key.phalanx_smp.issue_orders_confirm": "Issue Orders: Confirm",
       "gui.phalanx_smp.commander_screen.button_recruit": "Add Soldier",
       "gui.phalanx_smp.commander_screen.label_supplies_not_implemented": "Supplies: [NOT IMPLEMENTED]",
-      "gui.phalanx_smp.commander_screen.label_deepslate_golem_commander": "Deepslate Golem Commander"
+      "gui.phalanx_smp.commander_screen.label_deepslate_golem_commander": "Deepslate Golem Commander",
+      "item.phalanx_smp.infantry_spear": "Infantry Spear",
+      "item.phalanx_smp.deepslate_rod": "Deepslate Rod"
     }
   },
   "metadata": {
@@ -393,9 +454,11 @@
       "src/main/java/com/github/iraxon/init/PhalanxSmpModScreens.java",
       "src/main/java/com/github/iraxon/init/PhalanxSmpModGameRules.java",
       "src/main/java/com/github/iraxon/init/PhalanxSmpModKeyMappings.java",
+      "src/main/java/com/github/iraxon/init/PhalanxSmpModItems.java",
       "src/main/java/com/github/iraxon/init/PhalanxSmpModEntityRenderers.java",
       "src/main/java/com/github/iraxon/init/PhalanxSmpModEntities.java",
       "src/main/resources/pack.mcmeta",
+      "src/main/java/com/github/iraxon/init/PhalanxSmpModTabs.java",
       "src/main/resources/META-INF/mods.toml",
       "src/main/java/com/github/iraxon/PhalanxSmpMod.java"
     ]
