@@ -10,6 +10,8 @@ import net.minecraft.client.model.HumanoidModel;
 import com.github.iraxon.entity.DeepslateGolemEntity;
 
 public class DeepslateGolemRenderer extends HumanoidMobRenderer<DeepslateGolemEntity, HumanoidModel<DeepslateGolemEntity>> {
+	private final ResourceLocation entityTexture = new ResourceLocation("phalanx_smp:textures/entities/deepslate_golem.png");
+
 	public DeepslateGolemRenderer(EntityRendererProvider.Context context) {
 		super(context, new HumanoidModel<DeepslateGolemEntity>(context.bakeLayer(ModelLayers.PLAYER)), 0.7f);
 		this.addLayer(new HumanoidArmorLayer(this, new HumanoidModel(context.bakeLayer(ModelLayers.PLAYER_INNER_ARMOR)), new HumanoidModel(context.bakeLayer(ModelLayers.PLAYER_OUTER_ARMOR)), context.getModelManager()));
@@ -17,6 +19,6 @@ public class DeepslateGolemRenderer extends HumanoidMobRenderer<DeepslateGolemEn
 
 	@Override
 	public ResourceLocation getTextureLocation(DeepslateGolemEntity entity) {
-		return new ResourceLocation("phalanx_smp:textures/entities/deepslate_golem.png");
+		return entityTexture;
 	}
 }

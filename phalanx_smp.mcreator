@@ -401,6 +401,66 @@
           "src/main/resources/data/phalanx_smp/recipes/deepslate_rod_make.json"
         ]
       }
+    },
+    {
+      "name": "PhysicsAttack",
+      "type": "projectile",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "physics_attack",
+      "metadata": {
+        "files": [
+          "src/main/java/com/github/iraxon/entity/PhysicsAttackEntity.java"
+        ]
+      }
+    },
+    {
+      "name": "PhysicsAttackParticles",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "physics_attack_particles",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/com/github/iraxon/procedures/PhysicsAttackParticlesProcedure.java"
+        ]
+      }
+    },
+    {
+      "name": "ShootPhysicsAttack",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "shoot_physics_attack",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ],
+        "files": [
+          "src/main/java/com/github/iraxon/procedures/ShootPhysicsAttackProcedure.java"
+        ]
+      }
     }
   ],
   "variable_elements": [],
@@ -485,5 +545,5 @@
     "credits": "Made with MCreator.",
     "modElementsPackage": "com.github.iraxon"
   },
-  "mcreatorVersion": 202500345720
+  "mcreatorVersion": 202600114619
 }

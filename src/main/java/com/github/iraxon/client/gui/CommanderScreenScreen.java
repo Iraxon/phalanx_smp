@@ -20,6 +20,7 @@ public class CommanderScreenScreen extends AbstractContainerScreen<CommanderScre
 	private final Player entity;
 	private boolean menuStateUpdateActive = false;
 	private Button button_recruit;
+	private static final ResourceLocation BACKGROUND = new ResourceLocation("phalanx_smp:textures/screens/commander_screen.png");
 
 	public CommanderScreenScreen(CommanderScreenMenu container, Inventory inventory, Component text) {
 		super(container, inventory, text);
@@ -43,8 +44,6 @@ public class CommanderScreenScreen extends AbstractContainerScreen<CommanderScre
 		return true;
 	}
 
-	private static final ResourceLocation texture = new ResourceLocation("phalanx_smp:textures/screens/commander_screen.png");
-
 	@Override
 	public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTicks) {
 		this.renderBackground(guiGraphics);
@@ -57,7 +56,7 @@ public class CommanderScreenScreen extends AbstractContainerScreen<CommanderScre
 		RenderSystem.setShaderColor(1, 1, 1, 1);
 		RenderSystem.enableBlend();
 		RenderSystem.defaultBlendFunc();
-		guiGraphics.blit(texture, this.leftPos, this.topPos, 0, 0, this.imageWidth, this.imageHeight, this.imageWidth, this.imageHeight);
+		guiGraphics.blit(BACKGROUND, this.leftPos, this.topPos, 0, 0, this.imageWidth, this.imageHeight, this.imageWidth, this.imageHeight);
 		RenderSystem.disableBlend();
 	}
 

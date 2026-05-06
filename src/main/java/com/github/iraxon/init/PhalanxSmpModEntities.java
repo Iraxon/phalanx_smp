@@ -15,6 +15,7 @@ import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Entity;
 
+import com.github.iraxon.entity.PhysicsAttackEntity;
 import com.github.iraxon.entity.DeepslateGolemEntity;
 import com.github.iraxon.PhalanxSmpMod;
 
@@ -25,6 +26,8 @@ public class PhalanxSmpModEntities {
 			EntityType.Builder.<DeepslateGolemEntity>of(DeepslateGolemEntity::new, MobCategory.MONSTER).setShouldReceiveVelocityUpdates(true).setTrackingRange(128).setUpdateInterval(3).setCustomClientFactory(DeepslateGolemEntity::new)
 
 					.sized(0.6f, 1.8f));
+	public static final RegistryObject<EntityType<PhysicsAttackEntity>> PHYSICS_ATTACK = register("physics_attack",
+			EntityType.Builder.<PhysicsAttackEntity>of(PhysicsAttackEntity::new, MobCategory.MISC).setCustomClientFactory(PhysicsAttackEntity::new).setShouldReceiveVelocityUpdates(true).setTrackingRange(64).setUpdateInterval(1).sized(0.25f, 0.25f));
 
 	// Start of user code block custom entities
 	// End of user code block custom entities
