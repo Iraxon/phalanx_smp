@@ -403,18 +403,6 @@
       }
     },
     {
-      "name": "PhysicsAttack",
-      "type": "projectile",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "physics_attack",
-      "metadata": {
-        "files": [
-          "src/main/java/com/github/iraxon/entity/PhysicsAttackEntity.java"
-        ]
-      }
-    },
-    {
       "name": "PhysicsAttackParticles",
       "type": "procedure",
       "compiles": true,
@@ -455,10 +443,39 @@
           {
             "name": "entity",
             "type": "entity"
+          },
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
           }
         ],
         "files": [
           "src/main/java/com/github/iraxon/procedures/ShootPhysicsAttackProcedure.java"
+        ],
+        "return_type": "logic"
+      }
+    },
+    {
+      "name": "Spear",
+      "type": "damagetype",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "spear",
+      "metadata": {
+        "files": [
+          "src/main/resources/data/phalanx_smp/damage_type/spear.json"
         ]
       }
     }
@@ -504,7 +521,12 @@
       "gui.phalanx_smp.commander_screen.label_supplies_not_implemented": "Supplies: [NOT IMPLEMENTED]",
       "gui.phalanx_smp.commander_screen.label_deepslate_golem_commander": "Deepslate Golem Commander",
       "item.phalanx_smp.infantry_spear": "Infantry Spear",
-      "item.phalanx_smp.deepslate_rod": "Deepslate Rod"
+      "item.phalanx_smp.deepslate_rod": "Deepslate Rod",
+      "death.attack.spear": "%1$s was skewered",
+      "death.attack.spear.item": "%1$s was skewered by %2$s using %3$s",
+      "death.attack.spear.player": "%1$s was skewered by %2$s",
+      "item.phalanx_smp.infantry_spear.description_0": "Use item to thrust with the spear",
+      "item.phalanx_smp.infantry_spear.description_1": "Attack to strike with the haft for less damage, but closer range"
     }
   },
   "metadata": {

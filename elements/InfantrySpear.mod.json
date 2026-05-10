@@ -18,7 +18,7 @@
     ],
     "stackSize": 32,
     "enchantability": 0,
-    "useDuration": 600,
+    "useDuration": 5,
     "toolType": 1.0,
     "damageCount": 0,
     "recipeRemainder": {
@@ -31,10 +31,13 @@
     "stayInGridWhenCrafting": false,
     "damageOnCrafting": false,
     "enableMeleeDamage": true,
-    "damageVsEntity": 5.0,
-    "attackSpeed": 1.6,
+    "damageVsEntity": 3.0,
+    "attackSpeed": 1.0,
     "specialInformation": {
-      "fixedValue": []
+      "fixedValue": [
+        "Use item to thrust with the spear",
+        "Attack to strike with the haft for less damage, but closer range"
+      ]
     },
     "glowCondition": {
       "fixedValue": false
@@ -44,7 +47,7 @@
     },
     "inventorySize": 9,
     "inventoryStackSize": 99,
-    "onEntitySwing": {
+    "onRightClickedInAir": {
       "name": "ShootPhysicsAttack"
     },
     "enableRanged": false,

@@ -8,8 +8,6 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.api.distmarker.Dist;
 
-import net.minecraft.client.renderer.entity.ThrownItemRenderer;
-
 import com.github.iraxon.client.renderer.DeepslateGolemRenderer;
 
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
@@ -17,6 +15,5 @@ public class PhalanxSmpModEntityRenderers {
 	@SubscribeEvent
 	public static void registerEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {
 		event.registerEntityRenderer(PhalanxSmpModEntities.DEEPSLATE_GOLEM.get(), DeepslateGolemRenderer::new);
-		event.registerEntityRenderer(PhalanxSmpModEntities.PHYSICS_ATTACK.get(), ThrownItemRenderer::new);
 	}
 }
