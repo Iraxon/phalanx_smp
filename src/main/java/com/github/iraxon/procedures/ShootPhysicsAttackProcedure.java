@@ -6,6 +6,7 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.tags.BlockTags;
@@ -42,7 +43,7 @@ public class ShootPhysicsAttackProcedure {
 			{
 				final Vec3 _center = new Vec3((stepPosition.x()), (stepPosition.y()), (stepPosition.z()));
 				for (Entity entityiterator : world.getEntitiesOfClass(Entity.class, new AABB(_center, _center).inflate(1 / 2d), e -> true).stream().sorted(Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_center))).toList()) {
-					if (!(entityiterator == entity)) {
+					if (entityiterator instanceof LivingEntity && !(entityiterator == entity)) {
 						entityiterator.hurt(new DamageSource(world.registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(ResourceKey.create(Registries.DAMAGE_TYPE, new ResourceLocation("phalanx_smp:spear"))), entity), 5);
 						if (world instanceof Level _level) {
 							if (!_level.isClientSide()) {
