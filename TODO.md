@@ -4,20 +4,23 @@
 
 - Army standard recognizes its owner
 - Army standard spawns skirmisher soldiers loyal to owner when owner right clicks it
-- Soldiers break down if away from standard
-- Army standard can be moved
+- Army standard has cooldown for being carried
 
 ## Soldiers
 
 - Disable order system for now
 - Soldiers are skirmishers with ranged attack
-- Skirmsihers attack player's enemies
+- Skirmishers attack player's enemies
 - Skirmishers back up when enemies approach
 - Skirmishers recognize when they are idle
+- Idle skirmishers move towards other skirmishers or friendly players that are in combat
 
 ## Logistics system
 
 - Supply crate entity
 - Carrying system (for crates and army standard)
 - Supply crate merging
-- Soldiers have supply stat
+- Supply crate recognizes alignment of last carrier
+- Soldiers have supply "account" stat
+- Soldiers calculate supply "debt" when loaded based on last time loaded
+- Soldiers try to pay "debt" by taking from nearby friendly supply crates
