@@ -45,12 +45,12 @@ public class SoldierItemInteractions {
     @SuppressWarnings("null")
     public static InteractionResult interact(@Nonnull Mob soldier, @Nonnull Player player) {
 
-        if (!SoldierState.PlayerLiegeUUID.isSet(soldier)) {
-            SoldierState.PlayerLiegeUUID.set(soldier, player);
+        if (!PlayerLiegeUUID.isSet(soldier)) {
+            PlayerLiegeUUID.set(soldier, player);
             PhalanxUtils.sendMessage(player, "Loyalty programmed");
         }
 
-        if (!SoldierState.PlayerLiegeUUID.isLoyalTo(soldier, player)) {
+        if (!PlayerLiegeUUID.isLoyalTo(soldier, player)) {
             PhalanxUtils.sendMessage(player, "Not loyal to you");
             return DEFAULT_RESULT;
         }
@@ -87,12 +87,12 @@ public class SoldierItemInteractions {
     @SuppressWarnings("null")
     public static InteractionResult takeAway(@Nonnull Mob soldier, @Nullable Player player) {
 
-        if (!SoldierState.PlayerLiegeUUID.isSet(soldier)) {
-            SoldierState.PlayerLiegeUUID.set(soldier, player);
+        if (!PlayerLiegeUUID.isSet(soldier)) {
+            PlayerLiegeUUID.set(soldier, player);
             PhalanxUtils.sendMessage(player, "Loyalty programmed");
         }
 
-        if (!SoldierState.PlayerLiegeUUID.isLoyalTo(soldier, player)) {
+        if (!PlayerLiegeUUID.isLoyalTo(soldier, player)) {
             PhalanxUtils.sendMessage(player, "Not loyal to you");
             return DEFAULT_RESULT;
         }

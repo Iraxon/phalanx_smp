@@ -114,7 +114,7 @@ public class OrderInputManager {
                 Mob.class,
                 orderIssuer.position(),
                 128,
-                entity -> SoldierState.PlayerLiegeUUID.get(entity).filter(orderIssuer.getStringUUID()::equals)
+                entity -> PlayerLiegeUUID.get(entity).filter(orderIssuer.getStringUUID()::equals)
                         .isPresent());
     }
 }

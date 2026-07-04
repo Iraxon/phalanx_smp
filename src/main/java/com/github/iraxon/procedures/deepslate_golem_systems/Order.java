@@ -34,7 +34,7 @@ public enum Order {
                 if (orderIssuer instanceof LivingEntity l) {
                     SoldierState.soldierFollow(soldier, l);
                 } else {
-                    SoldierState.PlayerLiegeUUID.get(soldier).flatMap(
+                    PlayerLiegeUUID.get(soldier).flatMap(
                             uuid -> PhalanxUtils.getEntityByUUID(
                                     soldier.level(),
                                     Player.class,
