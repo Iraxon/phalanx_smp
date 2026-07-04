@@ -15,5 +15,6 @@ public class PhalanxSmpModEntityRenderers {
 	@SubscribeEvent
 	public static void registerEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {
 		event.registerEntityRenderer(PhalanxSmpModEntities.DEEPSLATE_GOLEM.get(), DeepslateGolemRenderer::new);
+		event.registerEntityRenderer(PhalanxSmpModEntities.ARMY_STANDARD.get(), ArmyStandardRenderer::new);
 	}
 }

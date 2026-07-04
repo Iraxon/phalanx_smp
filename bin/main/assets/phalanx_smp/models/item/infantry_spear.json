@@ -1,0 +1,31 @@
+{
+  "loader": "forge:separate_transforms",
+  "gui_light": "front",
+  "base": {
+    "parent": "phalanx_smp:custom/spear",
+    "textures": {
+      "0": "phalanx_smp:block/spear",
+      "particle": "phalanx_smp:item/spear"
+    }
+  },
+  "perspectives": {
+    "gui": {
+      "parent": "item/generated",
+      "textures": {
+        "layer0": "phalanx_smp:item/golem_spear"
+      }
+    },
+    "fixed": {
+      "parent": "item/generated",
+      "textures": {
+        "layer0": "phalanx_smp:item/golem_spear"
+      }
+    },
+    "ground": {
+      "parent": "item/generated",
+      "textures": {
+        "layer0": "phalanx_smp:item/golem_spear"
+      }
+    }
+  }
+}

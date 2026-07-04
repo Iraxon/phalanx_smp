@@ -478,6 +478,33 @@
           "src/main/resources/data/phalanx_smp/damage_type/spear.json"
         ]
       }
+    },
+    {
+      "name": "ArmyStandardOnEntityTickUpdate",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "army_standard_on_entity_tick_update",
+      "metadata": {
+        "dependencies": [],
+        "files": [
+          "src/main/java/com/github/iraxon/procedures/ArmyStandardOnEntityTickUpdateProcedure.java"
+        ]
+      }
+    },
+    {
+      "name": "ArmyStandard",
+      "type": "livingentity",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "army_standard",
+      "metadata": {
+        "files": [
+          "src/main/resources/data/phalanx_smp/forge/biome_modifier/army_standard_biome_modifier.json",
+          "src/main/java/com/github/iraxon/entity/ArmyStandardEntity.java",
+          "src/main/java/com/github/iraxon/client/renderer/ArmyStandardRenderer.java"
+        ]
+      }
     }
   ],
   "variable_elements": [],
@@ -526,7 +553,8 @@
       "death.attack.spear.item": "%1$s was skewered by %2$s using %3$s",
       "death.attack.spear.player": "%1$s was skewered by %2$s",
       "item.phalanx_smp.infantry_spear.description_0": "Use item to thrust with the spear",
-      "item.phalanx_smp.infantry_spear.description_1": "Attack to strike with the haft for less damage, but closer range"
+      "item.phalanx_smp.infantry_spear.description_1": "Attack to strike with the haft for less damage, but closer range",
+      "entity.phalanx_smp.army_standard": "Army Standard"
     }
   },
   "metadata": {
