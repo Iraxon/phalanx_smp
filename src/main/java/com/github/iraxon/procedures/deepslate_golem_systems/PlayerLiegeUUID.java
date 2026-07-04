@@ -3,7 +3,9 @@ package com.github.iraxon.procedures.deepslate_golem_systems;
 import java.util.Optional;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Player;
 
@@ -49,5 +51,24 @@ public class PlayerLiegeUUID {
 
     public static boolean isLoyalTo(@Nonnull Mob entity, @Nonnull String liegeUUID) {
         return get(entity).filter(liegeUUID::equals).isPresent();
+    }
+
+    public static boolean tryProgramLoyalty(@Nullable Entity entity, @Nullable Entity player) {
+
+        if (entity instanceof Mob m && player instanceof Player p) {
+
+            if (!PlayerLiegeUUID.isSet(m)) {
+                PlayerLiegeUUID.set(m, p);
+                PhalanxUtils.sendMessage(p, "Loyalty programmed");
+                return true;
+            }
+
+            if (!PlayerLiegeUUID.isLoyalTo(m, p)) {
+                PhalanxUtils.sendMessage(p, "Not loyal to you");
+            }
+
+            // No message if already loyal
+        }
+        return false;
     }
 }
