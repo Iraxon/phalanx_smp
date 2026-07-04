@@ -2,7 +2,6 @@
 
 ## Army standard
 
-- Army standard recognizes its owner
 - Army standard spawns skirmisher soldiers loyal to owner when owner right clicks it
 - Army standard has cooldown for being carried
 

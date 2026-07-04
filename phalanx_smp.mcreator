@@ -491,6 +491,32 @@
           "src/main/java/com/github/iraxon/client/renderer/ArmyStandardRenderer.java"
         ]
       }
+    },
+    {
+      "name": "ArmyStandardRightclickedOnEntity",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "army_standard_rightclicked_on_entity",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "sourceentity",
+            "type": "entity"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/com/github/iraxon/procedures/ArmyStandardRightclickedOnEntityProcedure.java"
+        ]
+      }
     }
   ],
   "variable_elements": [],
