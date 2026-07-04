@@ -500,7 +500,6 @@
       "registry_name": "army_standard",
       "metadata": {
         "files": [
-          "src/main/resources/data/phalanx_smp/forge/biome_modifier/army_standard_biome_modifier.json",
           "src/main/java/com/github/iraxon/entity/ArmyStandardEntity.java",
           "src/main/java/com/github/iraxon/client/renderer/ArmyStandardRenderer.java"
         ]
@@ -549,9 +548,9 @@
       "gui.phalanx_smp.commander_screen.label_deepslate_golem_commander": "Deepslate Golem Commander",
       "item.phalanx_smp.infantry_spear": "Infantry Spear",
       "item.phalanx_smp.deepslate_rod": "Deepslate Rod",
-      "death.attack.spear": "%1$s was skewered",
+      "death.attack.spear": "%1$s was skewered by %2$s",
       "death.attack.spear.item": "%1$s was skewered by %2$s using %3$s",
-      "death.attack.spear.player": "%1$s was skewered by %2$s",
+      "death.attack.spear.player": "%1$s was skewered whilst trying to escape %2$s",
       "item.phalanx_smp.infantry_spear.description_0": "Use item to thrust with the spear",
       "item.phalanx_smp.infantry_spear.description_1": "Attack to strike with the haft for less damage, but closer range",
       "entity.phalanx_smp.army_standard": "Army Standard"

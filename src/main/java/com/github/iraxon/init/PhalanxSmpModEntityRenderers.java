@@ -9,6 +9,7 @@ import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.api.distmarker.Dist;
 
 import com.github.iraxon.client.renderer.DeepslateGolemRenderer;
+import com.github.iraxon.client.renderer.ArmyStandardRenderer;
 
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class PhalanxSmpModEntityRenderers {

@@ -13,7 +13,7 @@ public class ArmyStandardRenderer extends HumanoidMobRenderer<ArmyStandardEntity
 	private final ResourceLocation entityTexture = new ResourceLocation("phalanx_smp:textures/entities/deepslate_golem.png");
 
 	public ArmyStandardRenderer(EntityRendererProvider.Context context) {
-		super(context, new HumanoidModel<ArmyStandardEntity>(context.bakeLayer(ModelLayers.PLAYER)), 0.5f);
+		super(context, new HumanoidModel<ArmyStandardEntity>(context.bakeLayer(ModelLayers.PLAYER)), 1.8f);
 		this.addLayer(new HumanoidArmorLayer(this, new HumanoidModel(context.bakeLayer(ModelLayers.PLAYER_INNER_ARMOR)), new HumanoidModel(context.bakeLayer(ModelLayers.PLAYER_OUTER_ARMOR)), context.getModelManager()));
 	}
 
