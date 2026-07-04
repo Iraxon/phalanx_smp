@@ -25,7 +25,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.Packet;
 
-import com.github.iraxon.procedures.ArmyStandardOnEntityTickUpdateProcedure;
 import com.github.iraxon.init.PhalanxSmpModEntities;
 
 public class ArmyStandardEntity extends Monster {
@@ -112,12 +111,6 @@ public class ArmyStandardEntity extends Monster {
 	@Override
 	public boolean ignoreExplosion() {
 		return true;
-	}
-
-	@Override
-	public void baseTick() {
-		super.baseTick();
-		ArmyStandardOnEntityTickUpdateProcedure.execute();
 	}
 
 	@Override
