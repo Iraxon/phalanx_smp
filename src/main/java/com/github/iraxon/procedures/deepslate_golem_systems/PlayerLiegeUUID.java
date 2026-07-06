@@ -71,4 +71,39 @@ public class PlayerLiegeUUID {
         }
         return false;
     }
+
+    /**
+     * Determine if the soldier should attack the target by the following rules:
+     * 1. Never attack teammates.
+     * 2. Attack hostile mobs.
+     * 3. Attack mobs on a different team, if both soldier and target are on teams.
+     *
+     * @param soldier
+     * @param target
+     * @return
+     */
+    public static boolean areEnemies(Entity soldier, Entity target) {
+
+        if (soldier == null || target == null) {
+            return false;
+        }
+
+        if (soldier.isAlliedTo(target)) {
+            return false;
+        }
+        if (PhalanxUtils.isTaggedAs(target, "phalanx:hostile")) {
+            return true;
+        }
+        final Optional<String> soldierTeam = PhalanxUtils.getTeam(soldier);
+        final Optional<String> targetTeam = PhalanxUtils.getTeam(target);
+        if (soldierTeam.isPresent() && targetTeam.isPresent() && !soldierTeam.equals(targetTeam)) {
+            return true;
+        }
+        // Commented out: Attack soldiers under different player
+        // if (soldier instanceof Mob soldier_mob && target instanceof Mob target_mob
+        //         && !PlayerLiegeUUID.get(soldier_mob).equals(PlayerLiegeUUID.get(target_mob))) {
+        //     return true;
+        // }
+        return false;
+    }
 }
