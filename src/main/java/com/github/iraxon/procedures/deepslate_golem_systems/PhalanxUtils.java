@@ -11,10 +11,13 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -222,5 +225,22 @@ public class PhalanxUtils {
                     : Optional.empty();
         }
         return Optional.empty();
+    }
+
+    /**
+     * Check if entity is in given tag. DATA TAGS, NOT SCOREBOARD TAGS!
+     *
+     * @param entity
+     * @param entityTag
+     * @return
+     */
+    public static boolean isTaggedAs(Entity entity, String entityTag) {
+        if (entity == null)
+            return false;
+
+        @SuppressWarnings("null")
+        @Nonnull
+        final var tagKey = TagKey.create(Registries.ENTITY_TYPE, ResourceLocation.parse(entityTag));
+        return entity.getType().is(tagKey);
     }
 }
