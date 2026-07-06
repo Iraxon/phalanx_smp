@@ -4,15 +4,14 @@
 
 - Army standard spawns skirmisher soldiers loyal to owner when owner right clicks it
 - Army standard has cooldown for being carried
+- Army standard has bossbar
 
 ## Soldiers
 
-- Disable order system for now
-- Soldiers are skirmishers with ranged attack
+- Soldiers track their army standard (not just player)
+- Skirmishers with ranged attack as soldier type
 - Skirmishers attack player's enemies
 - Skirmishers back up when enemies approach
-- Skirmishers recognize when they are idle
-- Idle skirmishers move towards other skirmishers or friendly players that are in combat
 
 ## Logistics system
 
