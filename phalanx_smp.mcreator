@@ -614,7 +614,8 @@
       "src/main/resources/pack.mcmeta",
       "src/main/java/com/github/iraxon/init/PhalanxSmpModTabs.java",
       "src/main/resources/META-INF/mods.toml",
-      "src/main/java/com/github/iraxon/PhalanxSmpMod.java"
+      "src/main/java/com/github/iraxon/PhalanxSmpMod.java",
+      "src/main/java/com/github/iraxon/init/PhalanxSmpModModels.java"
     ]
   },
   "foldersRoot": {

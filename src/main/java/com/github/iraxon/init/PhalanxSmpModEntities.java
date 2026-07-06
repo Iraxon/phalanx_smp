@@ -27,7 +27,7 @@ public class PhalanxSmpModEntities {
 
 					.sized(0.6f, 1.8f));
 	public static final RegistryObject<EntityType<ArmyStandardEntity>> ARMY_STANDARD = register("army_standard", EntityType.Builder.<ArmyStandardEntity>of(ArmyStandardEntity::new, MobCategory.MONSTER).setShouldReceiveVelocityUpdates(true)
-			.setTrackingRange(128).setUpdateInterval(3).setCustomClientFactory(ArmyStandardEntity::new).fireImmune().sized(0.6f, 5f));
+			.setTrackingRange(128).setUpdateInterval(3).setCustomClientFactory(ArmyStandardEntity::new).fireImmune().sized(0.6f, 3.5f));
 
 	// Start of user code block custom entities
 	// End of user code block custom entities

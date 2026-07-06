@@ -22,8 +22,6 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.sounds.SoundEvent;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.server.level.ServerBossEvent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.Packet;
@@ -32,8 +30,6 @@ import com.github.iraxon.procedures.ArmyStandardRightclickedOnEntityProcedure;
 import com.github.iraxon.init.PhalanxSmpModEntities;
 
 public class ArmyStandardEntity extends Monster {
-	private final ServerBossEvent bossInfo = new ServerBossEvent(this.getDisplayName(), ServerBossEvent.BossBarColor.YELLOW, ServerBossEvent.BossBarOverlay.NOTCHED_6);
-
 	public ArmyStandardEntity(PlayMessages.SpawnEntity packet, Level world) {
 		this(PhalanxSmpModEntities.ARMY_STANDARD.get(), world);
 	}
@@ -62,13 +58,8 @@ public class ArmyStandardEntity extends Monster {
 	}
 
 	@Override
-	public double getMyRidingOffset() {
-		return -0.35D;
-	}
-
-	@Override
 	public double getPassengersRidingOffset() {
-		return super.getPassengersRidingOffset() + 5;
+		return super.getPassengersRidingOffset() + 3.5;
 	}
 
 	@Override
@@ -140,29 +131,6 @@ public class ArmyStandardEntity extends Monster {
 	@Override
 	public boolean canBeCollidedWith() {
 		return true;
-	}
-
-	@Override
-	public boolean canChangeDimensions() {
-		return false;
-	}
-
-	@Override
-	public void startSeenByPlayer(ServerPlayer player) {
-		super.startSeenByPlayer(player);
-		this.bossInfo.addPlayer(player);
-	}
-
-	@Override
-	public void stopSeenByPlayer(ServerPlayer player) {
-		super.stopSeenByPlayer(player);
-		this.bossInfo.removePlayer(player);
-	}
-
-	@Override
-	public void customServerAiStep() {
-		super.customServerAiStep();
-		this.bossInfo.setProgress(this.getHealth() / this.getMaxHealth());
 	}
 
 	public static void init() {
