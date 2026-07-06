@@ -26,6 +26,7 @@ import net.minecraft.world.level.GameType;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
+import net.minecraft.world.scores.PlayerTeam;
 
 public class PhalanxUtils {
 
@@ -202,5 +203,24 @@ public class PhalanxUtils {
             toSpawn.setPickUpDelay(10);
             serverWorld.addFreshEntity(toSpawn);
         }
+    }
+
+    /**
+     * Minimal wrapper of MCreator generated code for this purpose
+     *
+     * @param entity
+     * @return
+     */
+    public static Optional<String> getTeam(@Nullable Entity entity) {
+        if (entity instanceof LivingEntity _teamEnt) {
+            @SuppressWarnings("null")
+            final PlayerTeam team = _teamEnt.level().getScoreboard()
+                    .getPlayersTeam(_teamEnt instanceof Player _pl ? _pl.getGameProfile().getName()
+                            : _teamEnt.getStringUUID());
+            return team != null
+                    ? Optional.of(team.getName())
+                    : Optional.empty();
+        }
+        return Optional.empty();
     }
 }
