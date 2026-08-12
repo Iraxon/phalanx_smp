@@ -517,6 +517,28 @@
           "src/main/java/com/github/iraxon/procedures/ArmyStandardRightclickedOnEntityProcedure.java"
         ]
       }
+    },
+    {
+      "name": "NoMobMeleeArmyStandard",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "no_mob_melee_army_standard",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "damagesource",
+            "type": "damagesource"
+          },
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ],
+        "files": [
+          "src/main/java/com/github/iraxon/procedures/NoMobMeleeArmyStandardProcedure.java"
+        ]
+      }
     }
   ],
   "variable_elements": [],
