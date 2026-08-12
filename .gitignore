@@ -115,3 +115,4 @@ gradle-app.setting
 *.class.uniqueID*
 /.gradle
 /bin
+.mcreator/userSettings
