@@ -1,0 +1,41 @@
+{
+  "replace": false,
+  "values": [
+    "phantom",
+    {
+      "id": "#minecraft:undead",
+      "required": false
+    },
+    "pufferfish",
+    "ghast",
+    "warden",
+    "zoglin",
+    "piglin_brute",
+    "polar_bear",
+    "wither",
+    "guardian",
+    "witch",
+    {
+      "id": "#minecraft:illager",
+      "required": false
+    },
+    "spider",
+    "ender_dragon",
+    "elder_guardian",
+    "slime",
+    "endermite",
+    {
+      "id": "#minecraft:skeletons",
+      "required": false
+    },
+    "vex",
+    "iron_golem",
+    "piglin",
+    "creeper",
+    "silverfish",
+    "hoglin",
+    "enderman",
+    "shulker",
+    "ravager"
+  ]
+}

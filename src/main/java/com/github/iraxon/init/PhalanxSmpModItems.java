@@ -9,17 +9,17 @@ import net.minecraftforge.registries.DeferredRegister;
 
 import net.minecraft.world.item.Item;
 
-import com.github.iraxon.item.HeavyInfantryGolemShellItem;
-import com.github.iraxon.item.CommanderGolemShellItem;
+import com.github.iraxon.item.InfantrySpearItem;
+import com.github.iraxon.item.DeepslateRodItem;
 import com.github.iraxon.PhalanxSmpMod;
 
 public class PhalanxSmpModItems {
 	public static final DeferredRegister<Item> REGISTRY = DeferredRegister.create(ForgeRegistries.ITEMS, PhalanxSmpMod.MODID);
-	public static final RegistryObject<Item> COMMANDER_GOLEM_SHELL;
-	public static final RegistryObject<Item> HEAVY_INFANTRY_GOLEM_SHELL;
+	public static final RegistryObject<Item> INFANTRY_SPEAR;
+	public static final RegistryObject<Item> DEEPSLATE_ROD;
 	static {
-		COMMANDER_GOLEM_SHELL = REGISTRY.register("commander_golem_shell", CommanderGolemShellItem::new);
-		HEAVY_INFANTRY_GOLEM_SHELL = REGISTRY.register("heavy_infantry_golem_shell", HeavyInfantryGolemShellItem::new);
+		INFANTRY_SPEAR = REGISTRY.register("infantry_spear", InfantrySpearItem::new);
+		DEEPSLATE_ROD = REGISTRY.register("deepslate_rod", DeepslateRodItem::new);
 	}
 	// Start of user code block custom items
 	// End of user code block custom items

@@ -1,11 +1,13 @@
 package com.github.iraxon.procedures;
 
+import com.github.iraxon.procedures.deepslate_golem_systems.OrderInputManager;
+
 import net.minecraft.world.entity.Entity;
 
 public class IssueOrdersDownInputOnKeyPressedProcedure {
 	public static void execute(Entity entity) {
 		if (entity == null)
 			return;
-		OrderManager.inputDown(entity);
+		OrderInputManager.inputDown(entity);
 	}
 }

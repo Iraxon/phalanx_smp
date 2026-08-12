@@ -256,32 +256,6 @@
       }
     },
     {
-      "name": "DeepslateGolemRightclickedOnEntity",
-      "type": "procedure",
-      "compiles": true,
-      "locked_code": true,
-      "registry_name": "deepslate_golem_rightclicked_on_entity",
-      "metadata": {
-        "dependencies": [
-          {
-            "name": "entity",
-            "type": "entity"
-          },
-          {
-            "name": "sourceentity",
-            "type": "entity"
-          },
-          {
-            "name": "world",
-            "type": "world"
-          }
-        ],
-        "files": [
-          "src/main/java/com/github/iraxon/procedures/DeepslateGolemRightclickedOnEntityProcedure.java"
-        ]
-      }
-    },
-    {
       "name": "UpdateLastAttacker",
       "type": "procedure",
       "compiles": true,
@@ -322,54 +296,309 @@
       }
     },
     {
-      "name": "GetNearestCommanderOfPlayer",
+      "name": "DeepslateGolemMake",
       "type": "procedure",
       "compiles": true,
-      "locked_code": true,
-      "registry_name": "get_nearest_commander_of_player",
+      "locked_code": false,
+      "registry_name": "deepslate_golem_make",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "blockstate",
+            "type": "blockstate"
+          },
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/com/github/iraxon/procedures/DeepslateGolemMakeProcedure.java"
+        ]
+      }
+    },
+    {
+      "name": "DeepslateGolemRightClick",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "deepslate_golem_right_click",
       "metadata": {
         "dependencies": [
           {
             "name": "entity",
             "type": "entity"
+          },
+          {
+            "name": "sourceentity",
+            "type": "entity"
           }
         ],
-        "return_type": "entity",
+        "return_type": "actionresulttype",
         "files": [
-          "src/main/java/com/github/iraxon/procedures/GetNearestCommanderOfPlayerProcedure.java"
+          "src/main/java/com/github/iraxon/procedures/DeepslateGolemRightClickProcedure.java"
         ]
       }
     },
     {
-      "name": "CommanderGolemShell",
+      "name": "InfantrySpear",
       "type": "item",
       "compiles": true,
       "locked_code": false,
-      "registry_name": "commander_golem_shell",
+      "registry_name": "infantry_spear",
       "metadata": {
         "files": [
-          "src/main/java/com/github/iraxon/item/CommanderGolemShellItem.java",
-          "src/main/resources/assets/phalanx_smp/models/item/commander_golem_shell.json"
+          "src/main/java/com/github/iraxon/item/InfantrySpearItem.java",
+          "src/main/resources/assets/phalanx_smp/models/item/infantry_spear.json"
         ]
       }
     },
     {
-      "name": "HeavyInfantryGolemShell",
+      "name": "InfantrySpearMake",
+      "type": "recipe",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "infantry_spear_make",
+      "metadata": {
+        "files": [
+          "src/main/resources/data/phalanx_smp/recipes/infantry_spear_make.json"
+        ]
+      }
+    },
+    {
+      "name": "DeepslateRod",
       "type": "item",
       "compiles": true,
       "locked_code": false,
-      "registry_name": "heavy_infantry_golem_shell",
+      "registry_name": "deepslate_rod",
       "metadata": {
         "files": [
-          "src/main/java/com/github/iraxon/item/HeavyInfantryGolemShellItem.java",
-          "src/main/resources/assets/phalanx_smp/models/item/heavy_infantry_golem_shell.json"
+          "src/main/resources/assets/phalanx_smp/models/item/deepslate_rod.json",
+          "src/main/java/com/github/iraxon/item/DeepslateRodItem.java"
+        ]
+      }
+    },
+    {
+      "name": "DeepslateRodMake",
+      "type": "recipe",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "deepslate_rod_make",
+      "metadata": {
+        "files": [
+          "src/main/resources/data/phalanx_smp/recipes/deepslate_rod_make.json"
+        ]
+      }
+    },
+    {
+      "name": "PhysicsAttackParticles",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "physics_attack_particles",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/com/github/iraxon/procedures/PhysicsAttackParticlesProcedure.java"
+        ]
+      }
+    },
+    {
+      "name": "ShootPhysicsAttack",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "shoot_physics_attack",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/com/github/iraxon/procedures/ShootPhysicsAttackProcedure.java"
+        ],
+        "return_type": "logic"
+      }
+    },
+    {
+      "name": "Spear",
+      "type": "damagetype",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "spear",
+      "metadata": {
+        "files": [
+          "src/main/resources/data/phalanx_smp/damage_type/spear.json"
+        ]
+      }
+    },
+    {
+      "name": "ArmyStandard",
+      "type": "livingentity",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "army_standard",
+      "metadata": {
+        "files": [
+          "src/main/java/com/github/iraxon/entity/ArmyStandardEntity.java",
+          "src/main/java/com/github/iraxon/client/renderer/ArmyStandardRenderer.java"
+        ]
+      }
+    },
+    {
+      "name": "ArmyStandardRightclickedOnEntity",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "army_standard_rightclicked_on_entity",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "sourceentity",
+            "type": "entity"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/com/github/iraxon/procedures/ArmyStandardRightclickedOnEntityProcedure.java"
+        ]
+      }
+    },
+    {
+      "name": "NoMobMeleeArmyStandard",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "no_mob_melee_army_standard",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "damagesource",
+            "type": "damagesource"
+          },
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ],
+        "files": [
+          "src/main/java/com/github/iraxon/procedures/NoMobMeleeArmyStandardProcedure.java"
         ]
       }
     }
   ],
   "variable_elements": [],
   "sound_elements": [],
-  "tag_elements": {},
+  "tag_elements": {
+    "BLOCKS:mod:golem_head": [
+      "Blocks.CARVED_PUMPKIN",
+      "Blocks.LIT_PUMPKIN",
+      "Blocks.CHISELED_DEEPSLATE"
+    ],
+    "BLOCKS:mod:deepslate_golem_body": [
+      "Blocks.COBBLED_DEEPSLATE",
+      "Blocks.POLISHED_DEEPSLATE",
+      "Blocks.DEEPSLATE_TILES",
+      "Blocks.DEEPSLATE_BRICKS",
+      "Blocks.CRACKED_DEEPSLATE_BRICKS",
+      "Blocks.CRACKED_DEEPSLATE_TILES"
+    ],
+    "ITEMS:mod:deepslate_blocks": [
+      "Blocks.COBBLED_DEEPSLATE",
+      "Blocks.POLISHED_DEEPSLATE",
+      "Blocks.DEEPSLATE_TILES",
+      "Blocks.DEEPSLATE_BRICKS",
+      "Blocks.CHISELED_DEEPSLATE",
+      "Blocks.CRACKED_DEEPSLATE_BRICKS",
+      "Blocks.CRACKED_DEEPSLATE_TILES"
+    ],
+    "ENTITIES:mod:hostile": [
+      "#minecraft:skeletons",
+      "#minecraft:illager",
+      "#minecraft:undead",
+      "EntityCreeper",
+      "EntityDragon",
+      "EntityElderGuardian",
+      "EntityEnderman",
+      "EntityEndermite",
+      "EntityGhast",
+      "EntityGuardian",
+      "EntityHoglin",
+      "EntityIronGolem",
+      "EntityPhantom",
+      "EntityPiglin",
+      "EntityPiglinBrute",
+      "EntityPolarBear",
+      "EntityPufferfish",
+      "EntityRavager",
+      "EntityShulker",
+      "EntitySilverfish",
+      "EntitySlime",
+      "EntitySpider",
+      "EntityVex",
+      "EntityWarden",
+      "EntityWitch",
+      "EntityWither",
+      "EntityZoglin"
+    ],
+    "ENTITIES:minecraft:skeletons": [],
+    "ENTITIES:minecraft:undead": [],
+    "ENTITIES:minecraft:illager": []
+  },
   "tab_element_order": {},
   "language_map": {
     "en_us": {
@@ -384,8 +613,14 @@
       "gui.phalanx_smp.commander_screen.button_recruit": "Add Soldier",
       "gui.phalanx_smp.commander_screen.label_supplies_not_implemented": "Supplies: [NOT IMPLEMENTED]",
       "gui.phalanx_smp.commander_screen.label_deepslate_golem_commander": "Deepslate Golem Commander",
-      "item.phalanx_smp.commander_golem_shell": "Deepslate Golem Shell: Commander",
-      "item.phalanx_smp.heavy_infantry_golem_shell": "Deepslate Golem Shell: Heavy Infantry"
+      "item.phalanx_smp.infantry_spear": "Infantry Spear",
+      "item.phalanx_smp.deepslate_rod": "Deepslate Rod",
+      "death.attack.spear": "%1$s was skewered by %2$s",
+      "death.attack.spear.item": "%1$s was skewered by %2$s using %3$s",
+      "death.attack.spear.player": "%1$s was skewered whilst trying to escape %2$s",
+      "item.phalanx_smp.infantry_spear.description_0": "Use item to thrust with the spear",
+      "item.phalanx_smp.infantry_spear.description_1": "Attack to strike with the haft for less damage, but closer range",
+      "entity.phalanx_smp.army_standard": "Army Standard"
     }
   },
   "metadata": {
@@ -401,7 +636,8 @@
       "src/main/resources/pack.mcmeta",
       "src/main/java/com/github/iraxon/init/PhalanxSmpModTabs.java",
       "src/main/resources/META-INF/mods.toml",
-      "src/main/java/com/github/iraxon/PhalanxSmpMod.java"
+      "src/main/java/com/github/iraxon/PhalanxSmpMod.java",
+      "src/main/java/com/github/iraxon/init/PhalanxSmpModModels.java"
     ]
   },
   "foldersRoot": {
@@ -426,5 +662,5 @@
     "credits": "Made with MCreator.",
     "modElementsPackage": "com.github.iraxon"
   },
-  "mcreatorVersion": 202500345720
+  "mcreatorVersion": 202600114619
 }

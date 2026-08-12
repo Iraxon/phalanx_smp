@@ -1,6 +1,6 @@
 # File created using '.gitignore Generator' for Visual Studio Code: https://bit.ly/vscode-gig
-# Created by https://www.toptal.com/developers/gitignore/api/windows,visualstudiocode,java,forgegradle
-# Edit at https://www.toptal.com/developers/gitignore?templates=windows,visualstudiocode,java,forgegradle
+# Created by https://www.toptal.com/developers/gitignore/api/windows,visualstudiocode,java,forgegradle,gradle
+# Edit at https://www.toptal.com/developers/gitignore?templates=windows,visualstudiocode,java,forgegradle,gradle
 
 ### ForgeGradle ###
 # Minecraft client/server files
@@ -77,7 +77,34 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
-# End of https://www.toptal.com/developers/gitignore/api/windows,visualstudiocode,java,forgegradle
+### Gradle ###
+.gradle
+**/build/
+!src/**/build/
+
+# Ignore Gradle GUI config
+gradle-app.setting
+
+# Avoid ignoring Gradle wrapper jar file (.jar files are usually ignored)
+!gradle-wrapper.jar
+
+# Avoid ignore Gradle wrappper properties
+!gradle-wrapper.properties
+
+# Cache of project
+.gradletasknamecache
+
+# Eclipse Gradle plugin generated files
+# Eclipse Core
+.project
+# JDT-specific (Eclipse Java Development Tools)
+.classpath
+
+### Gradle Patch ###
+# Java heap dump
+*.hprof
+
+# End of https://www.toptal.com/developers/gitignore/api/windows,visualstudiocode,java,forgegradle,gradle
 
 # Custom rules (everything added below won't be overriden by 'Generate .gitignore File' if you use 'Update' option)
 
@@ -86,3 +113,6 @@ $RECYCLE.BIN/
 
 *.mcreator-backup*
 *.class.uniqueID*
+/.gradle
+/bin
+.mcreator/userSettings

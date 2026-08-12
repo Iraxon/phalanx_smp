@@ -9,7 +9,12 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.monster.Monster;
+import net.minecraft.world.entity.monster.Husk;
+import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
+import net.minecraft.world.entity.ai.goal.RandomStrollGoal;
+import net.minecraft.world.entity.ai.goal.OpenDoorGoal;
 import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
+import net.minecraft.world.entity.ai.goal.FollowMobGoal;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.MobType;
@@ -28,7 +33,7 @@ import net.minecraft.network.protocol.Packet;
 import net.minecraft.core.BlockPos;
 
 import com.github.iraxon.procedures.UpdateLastAttackerProcedure;
-import com.github.iraxon.procedures.DeepslateGolemRightclickedOnEntityProcedure;
+import com.github.iraxon.procedures.DeepslateGolemRightClickProcedure;
 import com.github.iraxon.procedures.DeepslateGolemAIProcedure;
 import com.github.iraxon.init.PhalanxSmpModEntities;
 
@@ -53,12 +58,18 @@ public class DeepslateGolemEntity extends Monster {
 	@Override
 	protected void registerGoals() {
 		super.registerGoals();
+		this.getNavigation().getNodeEvaluator().setCanOpenDoors(true);
 		this.goalSelector.addGoal(1, new MeleeAttackGoal(this, 1, false) {
 			@Override
 			protected double getAttackReachSqr(LivingEntity entity) {
 				return 4;
 			}
 		});
+		this.targetSelector.addGoal(2, new NearestAttackableTargetGoal(this, Husk.class, false, true));
+		this.goalSelector.addGoal(3, new FollowMobGoal(this, 1, (float) 10, (float) 5));
+		this.goalSelector.addGoal(4, new OpenDoorGoal(this, true));
+		this.goalSelector.addGoal(5, new OpenDoorGoal(this, false));
+		this.goalSelector.addGoal(6, new RandomStrollGoal(this, 0.8));
 	}
 
 	@Override
@@ -119,9 +130,7 @@ public class DeepslateGolemEntity extends Monster {
 		double z = this.getZ();
 		Entity entity = this;
 		Level world = this.level();
-
-		DeepslateGolemRightclickedOnEntityProcedure.execute(world, entity, sourceentity);
-		return retval;
+		return DeepslateGolemRightClickProcedure.execute(entity, sourceentity);
 	}
 
 	@Override

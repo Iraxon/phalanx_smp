@@ -16,6 +16,7 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Entity;
 
 import com.github.iraxon.entity.DeepslateGolemEntity;
+import com.github.iraxon.entity.ArmyStandardEntity;
 import com.github.iraxon.PhalanxSmpMod;
 
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
@@ -25,6 +26,8 @@ public class PhalanxSmpModEntities {
 			EntityType.Builder.<DeepslateGolemEntity>of(DeepslateGolemEntity::new, MobCategory.MONSTER).setShouldReceiveVelocityUpdates(true).setTrackingRange(128).setUpdateInterval(3).setCustomClientFactory(DeepslateGolemEntity::new)
 
 					.sized(0.6f, 1.8f));
+	public static final RegistryObject<EntityType<ArmyStandardEntity>> ARMY_STANDARD = register("army_standard", EntityType.Builder.<ArmyStandardEntity>of(ArmyStandardEntity::new, MobCategory.MONSTER).setShouldReceiveVelocityUpdates(true)
+			.setTrackingRange(128).setUpdateInterval(3).setCustomClientFactory(ArmyStandardEntity::new).fireImmune().sized(0.6f, 3.5f));
 
 	// Start of user code block custom entities
 	// End of user code block custom entities
@@ -36,11 +39,13 @@ public class PhalanxSmpModEntities {
 	public static void init(FMLCommonSetupEvent event) {
 		event.enqueueWork(() -> {
 			DeepslateGolemEntity.init();
+			ArmyStandardEntity.init();
 		});
 	}
 
 	@SubscribeEvent
 	public static void registerAttributes(EntityAttributeCreationEvent event) {
 		event.put(DEEPSLATE_GOLEM.get(), DeepslateGolemEntity.createAttributes().build());
+		event.put(ARMY_STANDARD.get(), ArmyStandardEntity.createAttributes().build());
 	}
 }

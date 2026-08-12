@@ -1,0 +1,16 @@
+{
+  "mappings": {
+    "template": {
+      "name": "template",
+      "map": {
+        "0": "spear_template"
+      }
+    },
+    "default": {
+      "name": "default",
+      "map": {
+        "0": "spear"
+      }
+    }
+  }
+}

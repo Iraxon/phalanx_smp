@@ -20,9 +20,8 @@ public class PhalanxSmpModTabs {
 
 	@SubscribeEvent
 	public static void buildTabContentsVanilla(BuildCreativeModeTabContentsEvent tabData) {
-		if (tabData.getTabKey() == CreativeModeTabs.INGREDIENTS) {
-			tabData.accept(PhalanxSmpModItems.COMMANDER_GOLEM_SHELL.get());
-			tabData.accept(PhalanxSmpModItems.HEAVY_INFANTRY_GOLEM_SHELL.get());
+		if (tabData.getTabKey() == CreativeModeTabs.COMBAT) {
+			tabData.accept(PhalanxSmpModItems.INFANTRY_SPEAR.get());
 		}
 	}
 }
