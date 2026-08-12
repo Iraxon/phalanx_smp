@@ -4,8 +4,6 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.entity.Entity;
 
 import com.github.iraxon.entity.DeepslateGolemEntity;
-import com.github.iraxon.procedures.deepslate_golem_systems.SoldierState;
-
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
@@ -17,7 +15,7 @@ public class DeepslateGolemAIProcedure {
 	}
 
 	private static void inner_execute(@Nonnull DeepslateGolemEntity entity) {
-		SoldierState.soldierTick(entity);
+		// SoldierState.soldierTick(entity);
 	}
 }
 
