@@ -11,6 +11,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -20,7 +21,9 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
@@ -209,6 +212,32 @@ public class PhalanxUtils {
     }
 
     /**
+     * Attempt to spawn a mob.
+     *
+     * @param <T>
+     * @param world
+     * @param pos
+     * @param entityTypeSupplier
+     * @return
+     */
+    @SuppressWarnings("null")
+    public static <T extends Entity> void spawnMob(
+            @Nullable LevelAccessor world,
+            @Nullable Vec3 pos,
+            @Nullable Supplier<EntityType<T>> entityTypeSupplier) {
+
+        if (entityTypeSupplier == null || world == null || pos == null) {
+            return;
+        }
+
+        if (world instanceof ServerLevel serverWorld) {
+            entityTypeSupplier.get().spawn(serverWorld,
+                    BlockPos.containing(pos), MobSpawnType.MOB_SUMMONED);
+        }
+
+    }
+
+    /**
      * Minimal wrapper of MCreator generated code for this purpose
      *
      * @param entity
@@ -231,7 +260,7 @@ public class PhalanxUtils {
      * Check if entity is in given tag. DATA TAGS, NOT SCOREBOARD TAGS!
      *
      * @param entity
-     * @param entityTag
+     * @param entityTag Namespaced ID of tag
      * @return
      */
     public static boolean isTaggedAs(Entity entity, String entityTag) {
