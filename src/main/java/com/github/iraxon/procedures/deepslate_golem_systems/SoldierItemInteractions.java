@@ -2,6 +2,7 @@ package com.github.iraxon.procedures.deepslate_golem_systems;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.function.BiConsumer;
 import java.util.function.Predicate;
 
@@ -42,7 +43,6 @@ public class SoldierItemInteractions {
 
     private static final InteractionResult DEFAULT_RESULT = InteractionResult.PASS;
 
-    @SuppressWarnings("null")
     public static InteractionResult interact(@Nonnull Mob soldier, @Nonnull Player player) {
 
         if (!PlayerLiegeUUID.isSet(soldier)) {
@@ -56,7 +56,8 @@ public class SoldierItemInteractions {
         }
 
         final var heldItemstack = player.getItemInHand(InteractionHand.MAIN_HAND);
-        final var item = heldItemstack.getItem();
+        @Nonnull
+        final var item = Objects.requireNonNull(heldItemstack.getItem());
 
         if (!itemBehaviorMap.containsKey(item)) {
             PhalanxUtils.sendMessage(player, "Soldiers cannot use this item");
