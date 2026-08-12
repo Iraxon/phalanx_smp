@@ -2,7 +2,6 @@
 
 ## Army standard
 
-- Army standard spawns skirmisher soldiers loyal to owner when owner right clicks it
 - Army standard has cooldown for being carried
 - Army standard has bossbar
 
